@@ -1853,6 +1853,10 @@ body {
   <button class="sidebar-btn" id="game-mode-btn">
     <span>ကြေးစားဂိမ်း</span>
   </button>
+      <!-- Add this button to the sidebar-buttons section -->
+<button class="sidebar-btn" id="gift-code-btn">
+  <span>Gift Code</span>
+</button>
     </div>
   </div>
 </div>
@@ -1870,6 +1874,23 @@ body {
   <img id="chat-icon" src="https://i.ibb.co/svpY1Hfs/Grid-Art-20251017-100826774.png" alt="Chat Icon">
 </div>
 
+  <!-- Add this Gift Code Screen after the existing screens -->
+<div id="gift-code-screen" style="display: none; width: 100vw; height: 100vh; background-image: url('https://iili.io/K88KWas.jpg'); background-size: cover; background-position: center; position: fixed; top: 0; left: 0; z-index: 1000; overflow-y: auto; color: white; padding: 20px;">
+  <button class="back-btn" id="back-gift-code">Home</button>
+  
+  <div style="text-align: center; margin-top: 50px;">
+    <h2 style="font-size: 28px; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Gift Code</h2>
+    <p style="font-size: 14px; opacity: 0.8; margin-bottom: 30px;">Enter your gift code to receive rewards</p>
+    
+    <div style="background: rgba(0,0,0,0.7); padding: 20px; border-radius: 15px; max-width: 400px; margin: 0 auto;">
+      <input type="text" id="gift-code-input" placeholder="Enter gift code here" style="width: 100%; padding: 12px; border: none; border-radius: 8px; font-size: 16px; text-align: center; margin-bottom: 15px;">
+      <button id="redeem-btn" class="btn" style="width: 100%; padding: 12px; background: #ff6b00; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer;">Redeem Code</button>
+      
+      <div id="gift-code-result" style="margin-top: 15px; padding: 10px; border-radius: 8px; display: none;"></div>
+    </div>
+  </div>
+</div>
+  
 <!-- Add this Winner screen HTML after the Rank screen -->
 <div id="winner-screen" style="display: none; width: 100vw; height: 100vh; background-image: url('https://i.ibb.co/YFCTVMbf/06b058bd50bfe9123427d47145d7aea4.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: fixed; top: 0; left: 0; z-index: 1000; overflow-y: auto; color: white; padding: 20px;">
   <button class="back-btn" id="back-winner">Home</button>
@@ -6550,6 +6571,112 @@ function displayServerStatus() {
 
 // Call this function during initialization
 displayServerStatus();
+
+      // Gift Code System
+const giftCodeBtn = document.getElementById('gift-code-btn');
+const giftCodeScreen = document.getElementById('gift-code-screen');
+const backGiftCode = document.getElementById('back-gift-code');
+const giftCodeInput = document.getElementById('gift-code-input');
+const redeemBtn = document.getElementById('redeem-btn');
+const giftCodeResult = document.getElementById('gift-code-result');
+
+// Track redeemed codes
+let redeemedCodes = JSON.parse(localStorage.getItem('redeemedCodes')) || {};
+
+// Navigation
+giftCodeBtn.addEventListener('click', () => {
+  mainScreen.style.display = 'none';
+  giftCodeScreen.style.display = 'block';
+});
+
+backGiftCode.addEventListener('click', () => {
+  giftCodeScreen.style.display = 'none';
+  mainScreen.style.display = 'block';
+});
+
+// Redeem Code Function
+redeemBtn.addEventListener('click', () => {
+  const code = giftCodeInput.value.trim();
+  
+  if (!code) {
+    showGiftCodeResult('Please enter a gift code', 'error');
+    return;
+  }
+  
+  // Check if code has already been redeemed
+  if (redeemedCodes[code]) {
+    showGiftCodeResult('This code has already been redeemed', 'error');
+    return;
+  }
+  
+  // Check if code is valid
+  if (code.toUpperCase() === 'HALLOWEEN5171') {
+    // Add 800 coins
+    coins += 800;
+    coinCountElem.textContent = coins;
+    
+    // Mark code as redeemed
+    redeemedCodes[code] = true;
+    localStorage.setItem('redeemedCodes', JSON.stringify(redeemedCodes));
+    
+    // Save game state
+    saveGameState();
+    
+    // Show success message
+    showGiftCodeResult('Success! You received 800 coins!', 'success');
+    
+    // Clear input
+    giftCodeInput.value = '';
+  } else {
+    showGiftCodeResult('Invalid gift code', 'error');
+  }
+});
+
+// Show gift code result
+function showGiftCodeResult(message, type) {
+  giftCodeResult.textContent = message;
+  giftCodeResult.style.display = 'block';
+  
+  if (type === 'success') {
+    giftCodeResult.style.background = 'rgba(40, 167, 69, 0.7)';
+    giftCodeResult.style.color = '#90ee90';
+  } else {
+    giftCodeResult.style.background = 'rgba(220, 53, 69, 0.7)';
+    giftCodeResult.style.color = '#ff6b6b';
+  }
+  
+  // Auto hide after 3 seconds
+  setTimeout(() => {
+    giftCodeResult.style.display = 'none';
+  }, 3000);
+}
+
+// Add this to your saveGameState function if it exists
+// This will ensure redeemed codes are saved
+function saveGameState() {
+  localStorage.setItem('tokens', tokens);
+  localStorage.setItem('coins', coins);
+  localStorage.setItem('crystals', crystals);
+  localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+  localStorage.setItem('lastTokenTime', lastTokenTime);
+  localStorage.setItem('redeemedCodes', JSON.stringify(redeemedCodes)); // Add this line
+  
+  // Save to Supabase if user is logged in
+  if (currentUser) {
+    saveUserData();
+  }
+}
+
+// Add this to your initializeGame function if it exists
+// This will load redeemed codes on page load
+function initializeGame() {
+  // Your existing initialization code...
+  
+  // Load redeemed codes
+  redeemedCodes = JSON.parse(localStorage.getItem('redeemedCodes')) || {};
+  
+  // Your existing initialization code...
+}
 </script>
 </body>
 </html>

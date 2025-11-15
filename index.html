@@ -347,6 +347,7 @@
 }
 
 /* Splash Screen Styles - UPDATED WITH RANDOM BACKGROUNDS */
+/* Splash Screen Styles - UPDATED WITH LOADING BAR */
 #splash-screen {
   position: fixed;
   top: 0;
@@ -364,30 +365,40 @@
   transition: background-image 0.5s ease-in-out;
 }
 
-/* လည်နေသော အဝိုင်း (သေး version) */
-.loading-circle {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 4px solid transparent;
-  border-top: 4px solid white;
-  border-right: 4px solid skyblue;
-  border-left: 4px solid lightblue;
-  border-bottom: 4px solid white;
-  animation: spin 1.2s linear infinite;
+/* Loading Bar Container */
+.loading-bar-container {
+  width: 80%;
+  max-width: 300px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
   margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* လည်ပတ် Animation */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Loading Bar */
+.loading-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+  border-radius: 6px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
-/* ဝင်ရန် ခလုတ် (နည်းနည်းသေး version) */
+/* Countdown စာ */
+.countdown-text {
+  color: white;
+  font-size: 15px;
+  margin-top: 8px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* ဝင်ရန် ခလုတ် */
 .enter-btn {
   margin-top: 15px;
-  padding: 8px 22px; /* သေး */
+  padding: 8px 22px;
   font-size: 15px;
   background: linear-gradient(145deg, #00aaff, #0077cc);
   color: white;
@@ -402,17 +413,6 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0, 153, 255, 0.6);
 }
-
-/* Countdown စာ */
-.countdown-text {
-  color: white;
-  font-size: 15px;
-  margin-top: 8px;
-}
-
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:Arial,sans-serif;overflow:hidden;}
-
   /* Main Screen */
   #main-screen{
     width:100vw;height:100vh;
@@ -2398,9 +2398,12 @@ body {
 
 </div>
 
-<!-- Splash Screen -->
+<!-- Splash Screen HTML ကို ပြင်ဆင်ပါ -->
 <div id="splash-screen">
-  <div class="loading-circle"></div>
+  <!-- Loading Bar -->
+  <div class="loading-bar-container">
+    <div class="loading-bar" id="loading-bar"></div>
+  </div>
   <div class="countdown-text" id="countdown-text">Loading...</div>
   <button class="enter-btn" id="enter-btn" style="display:none;">၀င်ရောက်မည်</button>
 </div>
@@ -4706,12 +4709,13 @@ function setRandomSplashBackground() {
   }
 }
 
-// ===== NEW SPLASH SCREEN CODE =====
+// ===== NEW SPLASH SCREEN CODE WITH LOADING BAR =====
 document.addEventListener('DOMContentLoaded', function() {
     const splashScreen = document.getElementById('splash-screen');
     const mainScreen = document.getElementById('main-screen');
     const countdownText = document.getElementById('countdown-text');
     const enterBtn = document.getElementById('enter-btn');
+    const loadingBar = document.getElementById('loading-bar');
     const bgMusic = document.getElementById('bg-music');
 
     // Set random background when page loads
@@ -4722,20 +4726,26 @@ document.addEventListener('DOMContentLoaded', function() {
         mainScreen.style.display = 'none';
     }
 
-    // စက္ကန့်မတွက်တော့ Loading... စာတန်းသာပြမယ်
-    if (countdownText) {
-        countdownText.textContent = "Loading...";
-    }
-
-    // ၃ စက္ကန့်အကြာမှာ Button ပေါ်အောင်လုပ်မယ်
-    setTimeout(() => {
-        if (countdownText) {
-            countdownText.style.display = 'none';
+    // Loading Bar Animation
+    let progress = 0;
+    const loadingInterval = setInterval(() => {
+        progress += 1;
+        if (loadingBar) {
+            loadingBar.style.width = progress + '%';
         }
-        if (enterBtn) {
-            enterBtn.style.display = 'block';
+        
+        if (progress >= 100) {
+            clearInterval(loadingInterval);
+            
+            // Loading Bar ပြည့်သွားရင် Button ပေါ်အောင်လုပ်မယ်
+            if (countdownText) {
+                countdownText.style.display = 'none';
+            }
+            if (enterBtn) {
+                enterBtn.style.display = 'block';
+            }
         }
-    }, 3000); // ၃ စက္ကန့်ကြာ
+    }, 40); // 4 စက္ကန့်အတွင်း ပြည့်မယ် (100 * 40ms = 4000ms)
 
     // Enter Button ကိုနှိပ်ရင်
     if (enterBtn) {
@@ -4759,7 +4769,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
+            
 
 
   

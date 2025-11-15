@@ -347,7 +347,6 @@
 }
 
 /* Splash Screen Styles - UPDATED WITH RANDOM BACKGROUNDS */
-/* Splash Screen Styles - UPDATED WITH LOADING BAR */
 #splash-screen {
   position: fixed;
   top: 0;
@@ -365,48 +364,30 @@
   transition: background-image 0.5s ease-in-out;
 }
 
-/* Loading Bar Container */
-.loading-bar-container {
-    width: 80%;
-    max-width: 300px;
-    height: 12px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(0, 100, 255, 0.3);
+/* လည်နေသော အဝိုင်း (သေး version) */
+.loading-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  border-top: 4px solid white;
+  border-right: 4px solid skyblue;
+  border-left: 4px solid lightblue;
+  border-bottom: 4px solid white;
+  animation: spin 1.2s linear infinite;
+  margin-bottom: 15px;
 }
 
-/* Loading Bar - Blue Glowing Effect */
-.loading-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #0074E4, #00A3FF, #0074E4);
-    border-radius: 6px;
-    transition: width 0.3s ease, box-shadow 0.5s ease;
-    box-shadow: 0 0 20px rgba(0, 150, 255, 0.6);
-    animation: bluePulse 2s infinite;
+/* လည်ပတ် Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-@keyframes bluePulse {
-    0% { box-shadow: 0 0 15px rgba(0, 150, 255, 0.6); }
-    50% { box-shadow: 0 0 25px rgba(0, 150, 255, 0.9); }
-    100% { box-shadow: 0 0 15px rgba(0, 150, 255, 0.6); }
-}
-
-/* Countdown စာ */
-.countdown-text {
-  color: white;
-  font-size: 15px;
-  margin-top: 8px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-/* ဝင်ရန် ခလုတ် */
+/* ဝင်ရန် ခလုတ် (နည်းနည်းသေး version) */
 .enter-btn {
   margin-top: 15px;
-  padding: 8px 22px;
+  padding: 8px 22px; /* သေး */
   font-size: 15px;
   background: linear-gradient(145deg, #00aaff, #0077cc);
   color: white;
@@ -421,6 +402,17 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0, 153, 255, 0.6);
 }
+
+/* Countdown စာ */
+.countdown-text {
+  color: white;
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:Arial,sans-serif;overflow:hidden;}
+
   /* Main Screen */
   #main-screen{
     width:100vw;height:100vh;
@@ -2406,12 +2398,9 @@ body {
 
 </div>
 
-<!-- Splash Screen HTML ကို ပြင်ဆင်ပါ -->
+<!-- Splash Screen -->
 <div id="splash-screen">
-  <!-- Loading Bar -->
-  <div class="loading-bar-container">
-    <div class="loading-bar" id="loading-bar"></div>
-  </div>
+  <div class="loading-circle"></div>
   <div class="countdown-text" id="countdown-text">Loading...</div>
   <button class="enter-btn" id="enter-btn" style="display:none;">၀င်ရောက်မည်</button>
 </div>
@@ -4717,33 +4706,12 @@ function setRandomSplashBackground() {
   }
 }
 
-// ===== RANDOM SPLASH SCREEN BACKGROUNDS =====
-const splashBackgrounds = [
-  'https://i.ibb.co/4nnScKxX/Grid-Art-20251112-135651767.jpg',
-  'https://i.ibb.co/mCHLTZkV/Grid-Art-20251112-140950728.jpg', 
-  'https://i.ibb.co/HfqcCcyQ/Grid-Art-20251112-141037793.jpg',
-  'https://i.ibb.co/HL1LSSs6/Grid-Art-20251112-141111863.jpg',
-  'https://i.ibb.co/pSF568B/Grid-Art-20251112-141142692.jpg',
-  'https://i.ibb.co/0VpVdRnj/Grid-Art-20251112-141507696.jpg'
-];
-
-// Function to set splash background
-function setRandomSplashBackground() {
-  const splashScreen = document.getElementById('splash-screen');
-  if (splashScreen) {
-    const randomIndex = Math.floor(Math.random() * splashBackgrounds.length);
-    splashScreen.style.backgroundImage = `url('${splashBackgrounds[randomIndex]}')`;
-    console.log('Set random splash background:', splashBackgrounds[randomIndex]);
-  }
-}
-
-// ===== NEW SPLASH SCREEN CODE WITH BLUE LOADING BAR =====
+// ===== NEW SPLASH SCREEN CODE =====
 document.addEventListener('DOMContentLoaded', function() {
     const splashScreen = document.getElementById('splash-screen');
     const mainScreen = document.getElementById('main-screen');
     const countdownText = document.getElementById('countdown-text');
     const enterBtn = document.getElementById('enter-btn');
-    const loadingBar = document.getElementById('loading-bar');
     const bgMusic = document.getElementById('bg-music');
 
     // Set random background when page loads
@@ -4754,39 +4722,20 @@ document.addEventListener('DOMContentLoaded', function() {
         mainScreen.style.display = 'none';
     }
 
-    // Loading Bar Animation with glowing blue effect
-    let progress = 0;
-    const loadingInterval = setInterval(() => {
-        progress += 1;
-        if (loadingBar) {
-            loadingBar.style.width = progress + '%';
-            
-            // Add pulsing glow effect
-            if (progress % 10 === 0) {
-                loadingBar.style.boxShadow = '0 0 15px rgba(0, 150, 255, 0.8)';
-                setTimeout(() => {
-                    loadingBar.style.boxShadow = '0 0 25px rgba(0, 150, 255, 1)';
-                }, 200);
-            }
+    // စက္ကန့်မတွက်တော့ Loading... စာတန်းသာပြမယ်
+    if (countdownText) {
+        countdownText.textContent = "Loading...";
+    }
+
+    // ၃ စက္ကန့်အကြာမှာ Button ပေါ်အောင်လုပ်မယ်
+    setTimeout(() => {
+        if (countdownText) {
+            countdownText.style.display = 'none';
         }
-        
-        if (progress >= 100) {
-            clearInterval(loadingInterval);
-            
-            // Final glow effect when complete
-            if (loadingBar) {
-                loadingBar.style.boxShadow = '0 0 30px rgba(0, 150, 255, 1.2)';
-            }
-            
-            // Loading Bar ပြည့်သွားရင် Button ပေါ်အောင်လုပ်မယ်
-            if (countdownText) {
-                countdownText.style.display = 'none';
-            }
-            if (enterBtn) {
-                enterBtn.style.display = 'block';
-            }
+        if (enterBtn) {
+            enterBtn.style.display = 'block';
         }
-    }, 40); // 4 စက္ကန့်အတွင်း ပြည့်မယ် (100 * 40ms = 4000ms)
+    }, 3000); // ၃ စက္ကန့်ကြာ
 
     // Enter Button ကိုနှိပ်ရင်
     if (enterBtn) {
@@ -4810,7 +4759,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-            
+
 
 
   

@@ -4717,7 +4717,27 @@ function setRandomSplashBackground() {
   }
 }
 
-// ===== NEW SPLASH SCREEN CODE WITH LOADING BAR =====
+// ===== RANDOM SPLASH SCREEN BACKGROUNDS =====
+const splashBackgrounds = [
+  'https://i.ibb.co/4nnScKxX/Grid-Art-20251112-135651767.jpg',
+  'https://i.ibb.co/mCHLTZkV/Grid-Art-20251112-140950728.jpg', 
+  'https://i.ibb.co/HfqcCcyQ/Grid-Art-20251112-141037793.jpg',
+  'https://i.ibb.co/HL1LSSs6/Grid-Art-20251112-141111863.jpg',
+  'https://i.ibb.co/pSF568B/Grid-Art-20251112-141142692.jpg',
+  'https://i.ibb.co/0VpVdRnj/Grid-Art-20251112-141507696.jpg'
+];
+
+// Function to set splash background
+function setRandomSplashBackground() {
+  const splashScreen = document.getElementById('splash-screen');
+  if (splashScreen) {
+    const randomIndex = Math.floor(Math.random() * splashBackgrounds.length);
+    splashScreen.style.backgroundImage = `url('${splashBackgrounds[randomIndex]}')`;
+    console.log('Set random splash background:', splashBackgrounds[randomIndex]);
+  }
+}
+
+// ===== NEW SPLASH SCREEN CODE WITH BLUE LOADING BAR =====
 document.addEventListener('DOMContentLoaded', function() {
     const splashScreen = document.getElementById('splash-screen');
     const mainScreen = document.getElementById('main-screen');
@@ -4734,16 +4754,29 @@ document.addEventListener('DOMContentLoaded', function() {
         mainScreen.style.display = 'none';
     }
 
-    // Loading Bar Animation
+    // Loading Bar Animation with glowing blue effect
     let progress = 0;
     const loadingInterval = setInterval(() => {
         progress += 1;
         if (loadingBar) {
             loadingBar.style.width = progress + '%';
+            
+            // Add pulsing glow effect
+            if (progress % 10 === 0) {
+                loadingBar.style.boxShadow = '0 0 15px rgba(0, 150, 255, 0.8)';
+                setTimeout(() => {
+                    loadingBar.style.boxShadow = '0 0 25px rgba(0, 150, 255, 1)';
+                }, 200);
+            }
         }
         
         if (progress >= 100) {
             clearInterval(loadingInterval);
+            
+            // Final glow effect when complete
+            if (loadingBar) {
+                loadingBar.style.boxShadow = '0 0 30px rgba(0, 150, 255, 1.2)';
+            }
             
             // Loading Bar ပြည့်သွားရင် Button ပေါ်အောင်လုပ်မယ်
             if (countdownText) {

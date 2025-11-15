@@ -4697,8 +4697,6 @@ menuButtons.addEventListener('click', (e) => {
   e.stopPropagation();
 });
 
-
-
 // ===== RANDOM SPLASH SCREEN BACKGROUNDS =====
 const splashBackgrounds = [
   'https://i.ibb.co/4nnScKxX/Grid-Art-20251112-135651767.jpg',
@@ -4781,6 +4779,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // တိုက်ရိုက် Main Screen ကိုပြမယ်
             if (mainScreen) {
                 mainScreen.style.display = 'block';
+                
+                // Home Screen ရောက်ရင် Loading Bar ကို ဖျောက်ပစ်မယ်
+                const loadingBarContainer = document.querySelector('.loading-bar-container');
+                if (loadingBarContainer) {
+                    loadingBarContainer.style.display = 'none';
+                }
             }
 
             // သီချင်းဖွင့်
@@ -4792,6 +4796,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+        
 
 
   

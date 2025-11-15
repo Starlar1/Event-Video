@@ -2362,33 +2362,16 @@ body {
   100% { transform: scale(1); }
 }
 
-/* Rules Screen Specific Styles - Fix Bubble Issue */
-#rules-screen {
-  display: none;
-  width: 100vw;
-  height: 100vh;
-  background-image: url('https://i.ibb.co/HTzsRGwb/In-Shot-20251115-104715144.jpg');
-  background-size: cover;
-  background-position: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  overflow-y: auto;
-  color: white;
-  padding: 20px;
-}
 
-/* Rules Chat Container - Fixed Position */
+/* Rules Screen Chat Container - FIXED */
 #rules-chat-container {
-  position: relative; /* ဒီဟာကို relative ပြောင်း */
+  position: relative; /* fixed ကနေ relative ကိုပြောင်း */
   margin-bottom: 30px;
   width: 100%;
   max-width: 400px;
-  z-index: 10; /* z-index ထည့် */
+  z-index: 1; /* z-index လျှော့ */
 }
 
-/* Rules Chat Text - Fixed */
 #rules-chat-text {
   background: rgba(0, 0, 0, 0.6);
   color: #ff8c00;
@@ -2405,25 +2388,24 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  position: relative; /* position ထည့် */
-  z-index: 11; /* z-index ထည့် */
+  position: relative; /* absolute ကနေ relative ကိုပြောင်း */
+  width: 100%;
 }
 
-/* Answer Chat Container - Fixed */
+/* Rules Answer Container - FIXED */
 #rules-answer-container {
-  display: none; /* စကတည်းက none ထား */
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   height: auto;
+  display: none; /* မလိုအပ်ရင် ဖျောက် */
   justify-content: center;
   align-items: flex-end;
   pointer-events: none;
   z-index: 1001;
 }
 
-/* Rules Answer Text - Fixed */
 #rules-answer-text {
   position: absolute;
   bottom: 30px;
@@ -2445,18 +2427,6 @@ body {
   white-space: normal;
   max-height: 150px;
   overflow-y: auto;
-  pointer-events: auto; /* click လုပ်လို့ရအောင် */
-}
-
-/* Questions List - Fixed */
-#questions-list {
-  display: none;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-  max-width: 400px;
-  position: relative; /* position ထည့် */
-  z-index: 10; /* z-index ထည့် */
 }
 
   
@@ -8761,8 +8731,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Periodic check (every 30 seconds) as backup
 setInterval(checkForChanges, 30000);
 
-
-  // Rules System JavaScript - Fixed Version
+// Rules System JavaScript - Updated with Dark Background
 const rulesBtn = document.getElementById('rules-btn');
 const rulesScreen = document.getElementById('rules-screen');
 const backRules = document.getElementById('back-rules');
@@ -8812,13 +8781,13 @@ function typeQuestionsTitle() {
   rulesChatText.innerHTML = "";
   rulesChatText.style.cursor = 'pointer';
   
-  // အောက်နားမှာထားရန် style
-  rulesChatText.style.position = 'absolute';
-  rulesChatText.style.bottom = '80px';
-  rulesChatText.style.left = '50%';
-  rulesChatText.style.transform = 'translateX(-50%)';
-  rulesChatText.style.width = '90%';
-  rulesChatText.style.maxWidth = '400px';
+  // FIXED: အောက်နားမှာထားရန် style ကို ဖယ်ရှား
+  rulesChatText.style.position = '';
+  rulesChatText.style.bottom = '';
+  rulesChatText.style.left = '';
+  rulesChatText.style.transform = '';
+  rulesChatText.style.width = '';
+  rulesChatText.style.maxWidth = '';
   
   function typeChar() {
     if (charIndex < text.length) {
@@ -8836,14 +8805,14 @@ function typeQuestionsTitle() {
 
 // မေးစရာများပြသခြင်း
 function showQuestionsList() {
-  // မေးခွန်းများကိုလည်း အောက်နားမှာထား
+  // FIXED: မေးခွန်းများကိုလည်း အောက်နားမှာထားတာကို ဖယ်ရှား
   questionsList.style.display = 'flex';
-  questionsList.style.position = 'absolute';
-  questionsList.style.bottom = '80px';
-  questionsList.style.left = '50%';
-  questionsList.style.transform = 'translateX(-50%)';
-  questionsList.style.width = '90%';
-  questionsList.style.maxWidth = '400px';
+  questionsList.style.position = '';
+  questionsList.style.bottom = '';
+  questionsList.style.left = '';
+  questionsList.style.transform = '';
+  questionsList.style.width = '';
+  questionsList.style.maxWidth = '';
   
   // အမဲရောင် အခံထည့်ရန်
   questionsList.style.background = 'rgba(0, 0, 0, 0.8)';
@@ -8885,7 +8854,7 @@ ruleItems.forEach(item => {
     // မေးခွန်းစာရင်းကိုဖျောက်
     questionsList.style.display = 'none';
     
-    // Show answer container - အောက်နားမှာပဲထား
+    // Show answer container - FIXED: အောက်နားမှာပဲထားတာကို ဖယ်ရှား
     rulesAnswerContainer.style.display = 'flex';
     rulesAnswerText.textContent = '';
     rulesAnswerText.style.maxHeight = '150px';
@@ -8929,7 +8898,9 @@ function typeRulesMessage(message) {
   
   typeChar();
 }
+
   
+      
     
 
 </script>

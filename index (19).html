@@ -8665,7 +8665,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Periodic check (every 30 seconds) as backup
 setInterval(checkForChanges, 30000);
 
-// Rules System JavaScript - Updated with Dark Background
+
+// Rules System JavaScript - Fixed (No Overlapping on Any Screen)
 const rulesBtn = document.getElementById('rules-btn');
 const rulesScreen = document.getElementById('rules-screen');
 const backRules = document.getElementById('back-rules');
@@ -8675,163 +8676,141 @@ const ruleItems = document.querySelectorAll('.rule-item');
 const rulesAnswerContainer = document.getElementById('rules-answer-container');
 const rulesAnswerText = document.getElementById('rules-answer-text');
 
-// Rules Messages (3 lines format)
+// Rules Messages
 const rulesMessages = {
   diamonds: "တစ်လကို တစ်ခါသာ\nDiamonds ထုတ်ယူနိုင်သည်\nထပ်မံထုတ်ယူလိုပါက နောက်လစောင့်ပါ",
   profile: "Profile Gift သည်ပို့ဖို့\n3/5 ရက်ကြာတက်သည်\nကျေးဇူးပြု၍ စောင့်ဆိုင်းပေးပါ",
   "not-allowed": "Channel Join နဲ့ Share များ\nအမှန်တကယ်မလုပ်ချင်း ပြုလုပ်ပါက\nGift ထုတ်ရင်ရမည်မဟုတ်ပါ",
-  ban: "တရားမ၀င်နည်းလမ်းများသုံးချင်သည်\nသင့်ကို Event မှ\nတစ်သက်တာ ပိတ်ပင်ခံရမည်",
+  ban: "တရားမဝင်နည်းလမ်းများသုံးချင်သည်\nသင့်ကို Event မှ\nတစ်သက်တာ ပိတ်ပင်ခံရမည်",
   help: "အကူအညီများလိုပါက\n@Starlar1 ကိုဆက်သွယ်ပါ\nကျေးဇူးတင်ပါသည်"
 };
 
-// Navigation Event Listeners
+// Safe reset for all rule UI (fix overlapping)
+function hideAllRuleUI() {
+  rulesChatText.style.display = "none";
+  questionsList.style.display = "none";
+  rulesAnswerContainer.style.display = "none";
+}
+
+// Open Rules Screen
 rulesBtn.addEventListener('click', () => {
+  hideAllRuleUI(); 
   mainScreen.style.display = 'none';
   rulesScreen.style.display = 'block';
-  
-  // စာရိုက်သလိုပေါ်အောင်
   resetToInitialState();
 });
 
+// Back Button
 backRules.addEventListener('click', () => {
+  hideAllRuleUI();
   rulesScreen.style.display = 'none';
   mainScreen.style.display = 'block';
-  rulesAnswerContainer.style.display = 'none';
 });
 
-// အစကအတိုင်းပြန်ရောက်အောင်
+// Reset UI
 function resetToInitialState() {
+  hideAllRuleUI();
   rulesChatText.style.display = 'flex';
-  questionsList.style.display = 'none';
-  rulesAnswerContainer.style.display = 'none';
-  
+
+  // Position inside container (NO absolute → NO overlap)
+  rulesChatText.style.margin = "20px auto";
+  rulesChatText.style.textAlign = "center";
+  rulesChatText.style.cursor = "pointer";
+  rulesChatText.innerHTML = "";
+
   typeQuestionsTitle();
 }
 
-// သိထားစရာများမေးမည် စာရိုက်သလိုပေါ်အောင်
+// Type Title
 function typeQuestionsTitle() {
   const text = "မေးမည်ဆိုနှိပ်ပါ သိထားစရာများ";
-  let charIndex = 0;
+  let index = 0;
   rulesChatText.innerHTML = "";
-  rulesChatText.style.cursor = 'pointer';
-  
-  // အောက်နားမှာထားရန် style
-  rulesChatText.style.position = 'absolute';
-  rulesChatText.style.bottom = '80px';
-  rulesChatText.style.left = '50%';
-  rulesChatText.style.transform = 'translateX(-50%)';
-  rulesChatText.style.width = '90%';
-  rulesChatText.style.maxWidth = '400px';
-  
+
   function typeChar() {
-    if (charIndex < text.length) {
-      rulesChatText.innerHTML += text.charAt(charIndex);
-      charIndex++;
-      setTimeout(typeChar, 50);
+    if (index < text.length) {
+      rulesChatText.innerHTML += text.charAt(index);
+      index++;
+      setTimeout(typeChar, 45);
     } else {
-      // စာကိုနှိပ်လို့ရအောင် click event ထည့်
       rulesChatText.onclick = showQuestionsList;
     }
   }
-  
   typeChar();
 }
 
-// မေးစရာများပြသခြင်း
+// Show Questions List
 function showQuestionsList() {
-  // မေးခွန်းများကိုလည်း အောက်နားမှာထား
-  questionsList.style.display = 'flex';
-  questionsList.style.position = 'absolute';
-  questionsList.style.bottom = '80px';
-  questionsList.style.left = '50%';
-  questionsList.style.transform = 'translateX(-50%)';
-  questionsList.style.width = '90%';
-  questionsList.style.maxWidth = '400px';
-  
-  // အမဲရောင် အခံထည့်ရန်
-  questionsList.style.background = 'rgba(0, 0, 0, 0.8)';
-  questionsList.style.padding = '15px';
-  questionsList.style.borderRadius = '12px';
-  questionsList.style.backdropFilter = 'blur(10px)';
-  questionsList.style.border = '1px solid rgba(255, 255, 255, 0.2)';
-  
-  // တစ်မေးခွန်းကို တစ်ကြောင်းစီ အခံထား
+  rulesChatText.style.display = "none";
+
+  questionsList.style.display = "flex";
+  questionsList.style.flexDirection = "column";
+  questionsList.style.width = "90%";
+  questionsList.style.margin = "20px auto";
+  questionsList.style.background = "rgba(0,0,0,0.75)";
+  questionsList.style.borderRadius = "12px";
+  questionsList.style.padding = "15px";
+
   ruleItems.forEach(item => {
-    item.style.background = 'rgba(255, 255, 255, 0.15)';
-    item.style.borderRadius = '8px';
-    item.style.padding = '12px';
-    item.style.marginBottom = '8px';
-    item.style.border = '1px solid rgba(255, 255, 255, 0.3)';
-    item.style.transition = 'all 0.3s ease';
-    
-    // Hover effect
-    item.addEventListener('mouseenter', function() {
-      this.style.background = 'rgba(255, 255, 255, 0.25)';
-      this.style.transform = 'translateY(-2px)';
-    });
-    
-    item.addEventListener('mouseleave', function() {
-      this.style.background = 'rgba(255, 255, 255, 0.15)';
-      this.style.transform = 'translateY(0)';
-    });
+    item.style.background = "rgba(255,255,255,0.15)";
+    item.style.padding = "12px";
+    item.style.marginBottom = "8px";
+    item.style.borderRadius = "8px";
+    item.style.border = "1px solid rgba(255,255,255,0.2)";
+    item.style.transition = "0.3s";
+
+    item.onmouseenter = () => item.style.background = "rgba(255,255,255,0.25)";
+    item.onmouseleave = () => item.style.background = "rgba(255,255,255,0.15)";
   });
-  
-  rulesChatText.style.display = 'none';
 }
 
-// Rule Items Click Events
+// Click Rule Item
 ruleItems.forEach(item => {
-  item.addEventListener('click', function() {
-    const ruleType = this.getAttribute('data-type');
-    const message = rulesMessages[ruleType];
-    
-    // မေးခွန်းစာရင်းကိုဖျောက်
-    questionsList.style.display = 'none';
-    
-    // Show answer container - အောက်နားမှာပဲထား
-    rulesAnswerContainer.style.display = 'flex';
-    rulesAnswerText.textContent = '';
-    rulesAnswerText.style.maxHeight = '150px';
-    rulesAnswerText.style.overflowY = 'auto';
-    
-    // Type effect
+  item.addEventListener("click", () => {
+    const type = item.getAttribute("data-type");
+    const message = rulesMessages[type];
+
+    questionsList.style.display = "none";
+
+    rulesAnswerContainer.style.display = "flex";
+    rulesAnswerText.textContent = "";
+    rulesAnswerContainer.style.margin = "20px auto";
+    rulesAnswerText.style.whiteSpace = "pre-line";
+
     typeRulesMessage(message);
-    
-    // 5 စက္ကန့်ကြာပြီးနောက် အစကအတိုင်းပြန်ရောက်
+
     setTimeout(() => {
-      rulesAnswerContainer.style.display = 'none';
+      rulesAnswerContainer.style.display = "none";
       resetToInitialState();
     }, 5000);
   });
 });
 
-// Type effect function for rules (3 lines)
+// Type 3-line message
 function typeRulesMessage(message) {
-  const lines = message.split('\n');
-  let currentLine = 0;
-  let charIndex = 0;
-  rulesAnswerText.textContent = '';
-  
+  const lines = message.split("\n");
+  let line = 0, index = 0;
+  rulesAnswerText.textContent = "";
+
   function typeChar() {
-    if (currentLine < lines.length) {
-      if (charIndex < lines[currentLine].length) {
-        rulesAnswerText.textContent += lines[currentLine].charAt(charIndex);
-        charIndex++;
-        setTimeout(typeChar, 50);
+    if (line < lines.length) {
+      if (index < lines[line].length) {
+        rulesAnswerText.textContent += lines[line].charAt(index);
+        index++;
+        setTimeout(typeChar, 45);
       } else {
-        // နောက်တစ်ကြောင်းဆက်ရိုက်
-        currentLine++;
-        charIndex = 0;
-        if (currentLine < lines.length) {
-          rulesAnswerText.textContent += '\n';
-          setTimeout(typeChar, 100);
+        index = 0;
+        line++;
+        if (line < lines.length) {
+          rulesAnswerText.textContent += "\n";
+          setTimeout(typeChar, 120);
         }
       }
     }
   }
-  
   typeChar();
 }
+
 </script>
 </body>
 </html>

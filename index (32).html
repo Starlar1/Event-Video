@@ -2362,7 +2362,18 @@ body {
   100% { transform: scale(1); }
 }
 
+/* Local Account Button Styles */
+#local-account-btn {
+  background: rgba(255, 193, 7, 0.9);
+  color: #333;
+  font-weight: bold;
+  margin-top: 10px;
+}
 
+#local-account-btn:hover {
+  background: rgba(255, 193, 7, 1);
+  transform: translateY(-2px);
+       }
 
 </style>
 </head>
@@ -2390,9 +2401,12 @@ body {
       အကောင့်ဖွင့်မည်
     </button>
     
-    <p class="login-note">အကောင့်ဖွင့်ပြီးမှ Event ကိုဝင်ရောက်နိုင်မည်</p>
+  <button class="login-btn secondary-btn" id="local-account-btn">
+    My Local Acc ဝင်မည်
+  </button>
+  
+  <p class="login-note">အကောင့်ဖွင့်ပြီးမှ Event ကိုဝင်ရောက်နိုင်မည်</p>
   </div>
-</div>
 
 <!-- User Profile Display (will be shown after login) -->
 <div class="user-profile" id="user-profile" style="display: none;">
@@ -10304,6 +10318,223 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeInviteSystem();
     }, 2000);
 });
+
+
+// ===== LOCAL ACCOUNT SYSTEM =====
+
+// DOM Elements for Local Account
+const localAccountBtn = document.getElementById('local-account-btn');
+
+// Local Account Button Click Event
+localAccountBtn.addEventListener('click', function() {
+  // Check if there's a local account
+  const savedUser = localStorage.getItem('currentUser');
+  
+  if (savedUser) {
+    // Load existing local account
+    try {
+      currentUser = JSON.parse(savedUser);
+      
+      // Set current server from saved data or default
+      currentServer = currentUser.server || 'server2';
+      localStorage.setItem('currentServer', currentServer);
+      
+      // Switch to appropriate Supabase client
+      if (SUPABASE_SERVERS[currentServer] && SUPABASE_SERVERS[currentServer].enabled) {
+        switchSupabaseClient(currentServer);
+      } else {
+        // If saved server is disabled, use default
+        switchSupabaseClient('server2');
+      }
+      
+      // Hide login screen
+      loginScreen.style.display = 'none';
+      
+      // Update profile circle
+      updateProfileCircle();
+      
+      // Initialize game with user data
+      initializeGameWithUser(currentUser);
+      
+      // Show main screen
+      const mainScreen = document.getElementById('main-screen');
+      if (mainScreen) {
+        mainScreen.style.display = 'block';
+      }
+      
+      console.log('Loaded local account:', currentUser.uid);
+      
+    } catch (error) {
+      console.error('Error loading local account:', error);
+      alert('Local account ဖတ်ရာတွင် အမှားတစ်ခုဖြစ်နေပါသည်။');
+    }
+  } else {
+    // No local account found, create one
+    createLocalAccount();
+  }
+});
+
+// Function to create local account (without Supabase)
+function createLocalAccount() {
+  const userName = "Local User " + Math.floor(Math.random() * 10000);
+  const userId = generate10DigitId();
+  
+  const userData = {
+    uid: userId,
+    displayName: userName,
+    photoURL: null,
+    createdAt: new Date().toISOString(),
+    lastLogin: new Date().toISOString(),
+    tokens: 5, // Starting tokens
+    coins: 100, // Starting coins
+    crystals: 0,
+    completedTasks: {
+      '3hour': false,
+      'channel1': false,
+      'channel2': false,
+      'channel3': false,
+      'channel4': false,
+      'youtube': false,
+      'share': false,
+      'moonton': false,
+      'share10': false,
+      'lily': false,
+      'maxdiamond': false,
+      'diablo': false,
+      'pot': false,
+      'starlar-studio': false
+    },
+    lastTokenTime: 0,
+    battleTry: 0,
+    lastBattleTime: Date.now(),
+    shareCount: 0,
+    share10Count: 0,
+    frameId: 'default',
+    server: 'server2',
+    isLocalAccount: true // Mark as local account
+  };
+  
+  // Save to localStorage only
+  localStorage.setItem('currentUser', JSON.stringify(userData));
+  localStorage.setItem('userServer', 'server2');
+  
+  // Set current user
+  currentUser = userData;
+  
+  // Switch to default server
+  switchSupabaseClient('server2');
+  
+  // Hide login screen
+  loginScreen.style.display = 'none';
+  
+  // Update profile circle
+  updateProfileCircle();
+  
+  // Initialize game
+  initializeGameWithUser(currentUser);
+  
+  // Show main screen
+  const mainScreen = document.getElementById('main-screen');
+  if (mainScreen) {
+    mainScreen.style.display = 'block';
+  }
+  
+  alert(`Local account created!\nUser ID: ${userId}\nYou can play offline.`);
+}
+
+// Modified save function to handle local accounts
+async function saveUserData() {
+  if (currentUser) {
+    // Update user data with current game state
+    currentUser.tokens = typeof tokens !== 'undefined' ? tokens : currentUser.tokens;
+    currentUser.coins = typeof coins !== 'undefined' ? coins : currentUser.coins;
+    currentUser.crystals = typeof crystals !== 'undefined' ? crystals : currentUser.crystals;
+    currentUser.completedTasks = typeof completedTasks !== 'undefined' ? completedTasks : currentUser.completedTasks;
+    currentUser.lastTokenTime = typeof lastTokenTime !== 'undefined' ? lastTokenTime : currentUser.lastTokenTime;
+    currentUser.battleTry = typeof battleTry !== 'undefined' ? battleTry : currentUser.battleTry;
+    currentUser.lastBattleTime = typeof lastBattleTime !== 'undefined' ? lastBattleTime : currentUser.lastBattleTime;
+    currentUser.shareCount = typeof shareCount !== 'undefined' ? shareCount : currentUser.shareCount;
+    currentUser.share10Count = typeof share10Count !== 'undefined' ? share10Count : currentUser.share10Count;
+    currentUser.frameId = currentUserFrame;
+    currentUser.lastLogin = new Date().toISOString();
+
+    // Always save to localStorage
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    
+    // Only save to Supabase if NOT a local account
+    if (!currentUser.isLocalAccount) {
+      try {
+        await saveUserToSupabase(currentUser);
+      } catch (error) {
+        console.error('Error saving to Supabase:', error);
+      }
+    }
+  }
+}
+
+// Modified user loading to handle both account types
+document.addEventListener('DOMContentLoaded', async function() {
+  const savedUser = localStorage.getItem('currentUser');
+  const userServer = localStorage.getItem('userServer');
+
+  if (savedUser && userServer) {
+    try {
+      currentUser = JSON.parse(savedUser);
+      
+      // Check if this is a local account
+      if (currentUser.isLocalAccount) {
+        // For local accounts, always show login screen with local option
+        loginScreen.style.display = 'flex';
+        console.log('Local account detected, showing login options');
+      } else {
+        // For Supabase accounts, proceed with normal loading
+        if (SUPABASE_SERVERS[userServer] && SUPABASE_SERVERS[userServer].enabled) {
+          switchSupabaseClient(userServer);
+          console.log('Loaded Supabase user from:', userServer);
+        } else {
+          console.log('Original server disabled, migrating user...');
+          await migrateUserToNewServer(currentUser);
+        }
+        
+        // Try to sync with Supabase
+        try {
+          const supabaseUser = await getUserFromSupabase(currentUser.uid);
+          if (supabaseUser) {
+            currentUser = {
+              ...currentUser,
+              ...supabaseUser
+            };
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            if (supabaseUser.frameId && supabaseUser.frameId !== 'default') {
+              currentUserFrame = supabaseUser.frameId;
+              localStorage.setItem('currentUserFrame', currentUserFrame);
+            }
+          }
+        } catch (supabaseError) {
+          console.log('Using local data, Supabase sync failed:', supabaseError);
+        }
+        
+        updateProfileCircle();
+        initializeGameWithUser(currentUser);
+      }
+      
+    } catch (error) {
+      console.error('Error loading user data:', error);
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('userServer');
+      loginScreen.style.display = 'flex';
+    }
+  } else {
+    // No saved user, show login screen
+    loginScreen.style.display = 'flex';
+  }
+});
+
+
+
+
+  
 </script>
 </body>
 </html>

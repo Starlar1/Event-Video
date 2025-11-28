@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SC Event Season 2</title>
-<!-- Supabase Integration -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Firebase SDK ထည့်ပါ -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
 
 <style>
 /* NEW: Login Screen Styles - MODIFIED TO CIRCLE */
@@ -4773,68 +4775,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   
-
-// ===== SUPABASE CONFIGURATION =====
-const SUPABASE_SERVERS = {
+// ===== FIREBASE CONFIGURATION =====
+const FIREBASE_SERVERS = {
   server1: {
-    url: 'https://pedmvcvwqvqmfgdbureu.supabase.co',
-    key: 'sb_publishable_Ie9Dyjmrw9R740q4kzWAqQ_-pT0otPJ',
-    maxUsers: 100,
-    enabled: true,
-    newUsers: true
-  },
+    apiKey: "AIzaSyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    authDomain: "sc-server-1.firebaseapp.com",
+    projectId: "sc-server-1",
+    storageBucket: "sc-server-1.firebasestorage.app",
+    messagingSenderId: "964668973412",
+    appId: "1:964668973412:web:b1c997884f6c0e77e5da71"
+  }
+  // ============================================
+  // ADD MORE SERVERS LATER - နောက်မှထည့်ရန်
+  // ============================================
+  /*
   server2: {
-    url: 'https://bfhmhojuthlhnltxffvn.supabase.co',
-    key: 'sb_publishable_HheQVatckhWYmxdKunMBbg_nyPvi6Ts',
-    maxUsers: 100,
-    enabled: true,
-    newUsers: true
+    apiKey: "AIzaSyBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    authDomain: "sc-server-2.firebaseapp.com",
+    projectId: "sc-server-2",
+    storageBucket: "sc-server-2.firebasestorage.app", 
+    messagingSenderId: "964668973413",
+    appId: "1:964668973413:web:c2d108995g7d1e88f6eb82"
   },
   server3: {
-    url: 'https://dbuatkhuhtmlqfdhytit.supabase.co',
-    key: 'sb_publishable_NUTgDtCZcEf1a31USYwcVQ_I57TV_q-',
-    maxUsers: 100,
-    enabled: true,
-    newUsers: true
-  },
-  server4: {
-    url: 'https://rxazguzipzxtxlwjgrlt.supabase.co',
-    key: 'sb_publishable_WzbHlnVmZ9i71X8V4esglA_FZGEMNej',
-    maxUsers: 100,
-    enabled: true,
-    newUsers: true
-  },
-  server5: {
-    url: 'https://qhymuppxnbzioryulfwg.supabase.co',
-    key: 'sb_publishable_a2DTXqjYGF3UgIJZju5OoA_yBCd5Ql3',
-    maxUsers: 100,
-    enabled: true,
-    newUsers: true
-  },
-  server6: {
-    url: 'https://nqhzlwwqkhzdxzsaitcf.supabase.co',
-    key: 'sb_publishable_6lntFGpP7rvFbsUre53-PQ_CL4wX5dJ',
-    maxUsers: 100,
-    enabled: true,
-    newUsers: true
-  },
-  server7: {
-    url: 'https://nqirdqpcimzoconxsoec.supabase.co',
-    key: 'sb_publishable_-63sDDT7cy1O5qQmk5RTpA_8b3lqgNd',
-    maxUsers: 100,
-    enabled: true,
-    newUsers: true
-  },
-  server8: {
-    url: 'https://soywfpdsdutdcxzwmtqj.supabase.co',
-    key: 'sb_publishable_UEr_SlOHDuxLWIiHpp8LGA_Lk3-OVB-',
-    maxUsers: 100,
-    enabled: true,
-    newUsers: true
+    apiKey: "AIzaSyCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+    authDomain: "sc-server-3.firebaseapp.com",
+    projectId: "sc-server-3",
+    storageBucket: "sc-server-3.firebasestorage.app",
+    messagingSenderId: "964668973414",
+    appId: "1:964668973414:web:d3e219aa6h8e2f99g7fc93"
   }
+  */
 };
+
 // Server selection variables
-let currentServer = localStorage.getItem('currentServer') || 'server2';
+let currentServer = localStorage.getItem('currentServer') || 'server1';
 let userCounts = JSON.parse(localStorage.getItem('userCounts')) || {
   server1: 0,
   server2: 0,
@@ -4842,21 +4817,26 @@ let userCounts = JSON.parse(localStorage.getItem('userCounts')) || {
   server4: 0,
   server5: 0,
   server6: 0,
-  server7: 0,  // ✅ NEW
-  server8: 0   // ✅ NEW
+  server7: 0,
+  server8: 0
 };
 
-// Initialize current Supabase client
-let supabase = window.supabase.createClient(
-  SUPABASE_SERVERS[currentServer].url, 
-  SUPABASE_SERVERS[currentServer].key
-);
+// Initialize current Firebase client
+let db = firebase.firestore();
+let storage = firebase.storage();
+
 // Function to check server capacity and select appropriate server
 async function selectServerForNewUser() {
   try {
-    // Check enabled servers that allow new users only
-    const availableServers = Object.keys(SUPABASE_SERVERS).filter(server => 
-      SUPABASE_SERVERS[server].enabled && SUPABASE_SERVERS[server].newUsers
+    // For now, always use server1 - single server implementation
+    return 'server1';
+    
+    // ============================================
+    // MULTI-SERVER LOGIC - နောက်မှထည့်ရန်
+    // ============================================
+    /*
+    const availableServers = Object.keys(FIREBASE_SERVERS).filter(server => 
+      FIREBASE_SERVERS[server].enabled && FIREBASE_SERVERS[server].newUsers
     );
     
     if (availableServers.length === 0) {
@@ -4868,12 +4848,10 @@ async function selectServerForNewUser() {
     
     for (const server of availableServers) {
       try {
-        const { count, error } = await window.supabase
-          .createClient(SUPABASE_SERVERS[server].url, SUPABASE_SERVERS[server].key)
-          .from('users')
-          .select('*', { count: 'exact', head: true });
-        
-        serverCounts[server] = error ? userCounts[server] : (count || 0);
+        const usersSnapshot = await firebase.firestore()
+          .collection('users')
+          .get();
+        serverCounts[server] = usersSnapshot.size;
       } catch (error) {
         console.error(`Error checking ${server}:`, error);
         serverCounts[server] = userCounts[server];
@@ -4884,18 +4862,13 @@ async function selectServerForNewUser() {
     Object.assign(userCounts, serverCounts);
     localStorage.setItem('userCounts', JSON.stringify(userCounts));
     
-    console.log('Available servers for new users:');
-    availableServers.forEach(server => {
-      console.log(`${server}: ${userCounts[server]}/${SUPABASE_SERVERS[server].maxUsers} users`);
-    });
-    
     // Find server with lowest usage that has capacity
     const serversWithCapacity = availableServers.filter(server => 
-      userCounts[server] < SUPABASE_SERVERS[server].maxUsers
+      userCounts[server] < FIREBASE_SERVERS[server].maxUsers
     );
     
     if (serversWithCapacity.length === 0) {
-      throw new Error('All available servers are full (300 users each)');
+      throw new Error('All available servers are full');
     }
     
     // Select server with lowest current usage
@@ -4904,6 +4877,7 @@ async function selectServerForNewUser() {
     );
     
     return selectedServer;
+    */
     
   } catch (error) {
     console.error('Error selecting server for new user:', error);
@@ -4911,17 +4885,25 @@ async function selectServerForNewUser() {
   }
 }
 
-// Function to switch Supabase client
-function switchSupabaseClient(server) {
+// Function to switch Firebase client
+function switchFirebaseClient(server) {
   currentServer = server;
-  supabase = window.supabase.createClient(
-    SUPABASE_SERVERS[server].url, 
-    SUPABASE_SERVERS[server].key
-  );
+  
+  // ============================================
+  // MULTI-SERVER SWITCHING - နောက်မှထည့်ရန်
+  // ============================================
+  /*
+  const config = FIREBASE_SERVERS[server];
+  const newApp = firebase.initializeApp(config, server);
+  db = newApp.firestore();
+  storage = newApp.storage();
+  */
+  
   localStorage.setItem('currentServer', server);
   console.log('Switched to server:', server);
 }
-// ===== SUPABASE DATABASE FUNCTIONS =====
+
+// ===== FIREBASE DATABASE FUNCTIONS =====
 
 // Function to migrate user to a new server if original server is disabled
 async function migrateUserToNewServer(user) {
@@ -4929,8 +4911,8 @@ async function migrateUserToNewServer(user) {
     const newServer = await selectServerForNewUser();
     
     // Save user to new server
-    switchSupabaseClient(newServer);
-    await saveUserToSupabase(user);
+    switchFirebaseClient(newServer);
+    await saveUserToFirebase(user);
     
     // Update user's server info
     user.server = newServer;
@@ -4949,66 +4931,55 @@ async function migrateUserToNewServer(user) {
   }
 }
 
-// Update the saveUserToSupabase function to include server info
-async function saveUserToSupabase(userData) {
+// Save User to Firebase
+async function saveUserToFirebase(userData) {
   try {
-    const { data, error } = await supabase
-      .from('users')
-      .upsert({
-        user_id: userData.uid,
-        display_name: userData.displayName,
-        photo_url: userData.photoURL,
-        tokens: userData.tokens,
-        coins: userData.coins,
-        crystals: userData.crystals,
-        completed_tasks: userData.completedTasks,
-        last_token_time: userData.lastTokenTime,
-        battle_try: userData.battleTry,
-        last_battle_time: userData.lastBattleTime,
-        share_count: userData.shareCount,
-        share10_count: userData.share10Count,
-        frame_id: currentUserFrame,
-        server: userData.server || currentServer, // Include server info
-        last_login: userData.lastLogin,
-        updated_at: new Date().toISOString()
-      }, {
-        onConflict: 'user_id'
-      });
-
-    if (error) throw error;
-    console.log('User saved to Supabase Server:', currentServer);
-    return data;
+    await db.collection('users').doc(userData.userId.toString()).set({
+      user_id: userData.userId,
+      display_name: userData.displayName,
+      photo_url: userData.photoURL,
+      tokens: userData.tokens,
+      coins: userData.coins,
+      crystals: userData.crystals,
+      completed_tasks: userData.completedTasks,
+      last_token_time: userData.lastTokenTime,
+      battle_try: userData.battleTry,
+      last_battle_time: userData.lastBattleTime,
+      share_count: userData.shareCount,
+      share10_count: userData.share10Count,
+      frame_id: currentUserFrame,
+      server: userData.server || currentServer,
+      last_login: userData.lastLogin,
+      updated_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    console.log('User saved to Firebase Server:', currentServer);
+    return true;
   } catch (error) {
-    console.error('Error saving user to Supabase:', error);
+    console.error('Error saving user to Firebase:', error);
     throw error;
   }
 }
-// Get user from Supabase - UPDATED WITH FRAME SUPPORT
-async function getUserFromSupabase(userId) {
-  try {
-    const { data, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('user_id', userId)
-      .single();
 
-    if (error && error.code !== 'PGRST116') throw error;
-    
-    if (data) {
+// Get user from Firebase
+async function getUserFromFirebase(userId) {
+  try {
+    const doc = await db.collection('users').doc(userId.toString()).get();
+    if (doc.exists) {
+      const data = doc.data();
       return {
         uid: data.user_id,
         displayName: data.display_name,
         photoURL: data.photo_url,
         tokens: data.tokens,
         coins: data.coins,
-        crystals: data.crystals || 0, // ✅ NEW
+        crystals: data.crystals || 0,
         completedTasks: data.completed_tasks,
         lastTokenTime: data.last_token_time,
         battleTry: data.battle_try,
         lastBattleTime: data.last_battle_time,
         shareCount: data.share_count,
         share10Count: data.share10_count,
-        frameId: data.frame_id || 'default', // ✅ NEW: Include frame_id
+        frameId: data.frame_id || 'default',
         lastLogin: data.last_login,
         createdAt: data.created_at,
         updatedAt: data.updated_at
@@ -5016,7 +4987,7 @@ async function getUserFromSupabase(userId) {
     }
     return null;
   } catch (error) {
-    console.error('Error getting user from Supabase:', error);
+    console.error('Error getting user from Firebase:', error);
     return null;
   }
 }
@@ -5087,8 +5058,8 @@ createAccountBtn.addEventListener('click', async function() {
       currentUser.displayName = userName;
       currentUser.photoURL = profilePicPreview.style.display !== 'none' ? profilePicPreview.src : null;
 
-      // Save to current Supabase server
-      await saveUserToSupabase(currentUser);
+      // Save to current Firebase server
+      await saveUserToFirebase(currentUser);
       
       // Save to localStorage
       localStorage.setItem('currentUser', JSON.stringify(currentUser));
@@ -5110,10 +5081,10 @@ createAccountBtn.addEventListener('click', async function() {
       
       // Select appropriate server for new user
       const selectedServer = await selectServerForNewUser();
-      switchSupabaseClient(selectedServer);
+      switchFirebaseClient(selectedServer);
       
       const userId = generate10DigitId();
-      
+
       const userData = {
         uid: userId,
         displayName: userName,
@@ -5124,21 +5095,21 @@ createAccountBtn.addEventListener('click', async function() {
         coins: 0,
         crystals: 0,
         completedTasks: {
-      '3hour': false,
-      'channel1': false,
-      'channel2': false,
-      'channel3': false,
-      'channel4': false,
-      'youtube': false,
-      'share': false,
-      'moonton': false,
-      'share10': false,
-      'lily': false,
-      'maxdiamond': false,
-      'diablo': false,        // ✅ NEW
-      'pot': false,           // ✅ NEW
-      'starlar-studio': false // ✅ NEW
-  },
+          '3hour': false,
+          'channel1': false,
+          'channel2': false,
+          'channel3': false,
+          'channel4': false,
+          'youtube': false,
+          'share': false,
+          'moonton': false,
+          'share10': false,
+          'lily': false,
+          'maxdiamond': false,
+          'diablo': false,
+          'pot': false,
+          'starlar-studio': false
+        },
         lastTokenTime: 0,
         battleTry: 0,
         lastBattleTime: Date.now(),
@@ -5148,8 +5119,8 @@ createAccountBtn.addEventListener('click', async function() {
         server: selectedServer
       };
       
-      // Save to selected Supabase server
-      await saveUserToSupabase(userData);
+      // Save to selected Firebase server
+      await saveUserToFirebase(userData);
       
       // Update user count for selected server
       userCounts[selectedServer]++;
@@ -5184,7 +5155,7 @@ createAccountBtn.addEventListener('click', async function() {
     createAccountBtn.textContent = 'အကောင့်ဖွင့်မည်';
     
     if (error.message.includes('full')) {
-      alert('❌ ဆာဗာများ ပြည့်သွားပါပြီ! (တစ်ဆာဗာလျှင် 100 ယောက်သာ)\nကျေးဇူးပြု၍ နောက်မှထပ်ကြိုးစားပါ။');
+      alert('❌ ဆာဗာများ ပြည့်သွားပါပြီ!\nကျေးဇူးပြု၍ နောက်မှထပ်ကြိုးစားပါ။');
     } else if (error.message.includes('No servers available')) {
       alert('❌ ယခုအချိန်တွင် အကောင့်အသစ်ဖွင့်ခွင့် မရှိပါ။\nကျေးဇူးပြု၍ နောက်မှထပ်ကြိုးစားပါ။');
     } else {
@@ -5192,6 +5163,7 @@ createAccountBtn.addEventListener('click', async function() {
     }
   }
 });
+
 // Generate 10-digit ID function
 function generate10DigitId() {
   const min = 1000000000;
@@ -5212,7 +5184,7 @@ closeAccountBtn.addEventListener('click', () => {
   accountScreen.style.display = 'none';
 });
 
-// Show Account Screen Function ကို Update လုပ်ပါ
+// Show Account Screen Function
 function showAccountScreen() {
   if (currentUser) {
     if (currentUser.photoURL) {
@@ -5227,7 +5199,7 @@ function showAccountScreen() {
     accountNameDisplay.textContent = currentUser.displayName;
     accountIdDisplay.textContent = `ID: ${currentUser.uid}`;
     
-    // ✅ NEW: Server နံပါတ်ပြသခြင်း
+    // Server နံပါတ်ပြသခြင်း
     const serverDisplay = document.getElementById('account-server-display');
     if (serverDisplay) {
       const serverNumber = currentServer.replace('server', '');
@@ -5240,6 +5212,7 @@ function showAccountScreen() {
     accountScreen.style.display = 'flex';
   }
 }
+
 // Update Profile Circle
 function updateProfileCircle() {
   if (currentUser) {
@@ -5278,35 +5251,35 @@ editProfileBtn.addEventListener('click', () => {
   }
 });
 
-// Save User Data Function - UPDATED
+// Save User Data Function
 async function saveUserData() {
   if (currentUser) {
     // Make sure these variables are defined in your global scope
     currentUser.tokens = typeof tokens !== 'undefined' ? tokens : currentUser.tokens;
     currentUser.coins = typeof coins !== 'undefined' ? coins : currentUser.coins;
-    currentUser.crystals = typeof crystals !== 'undefined' ? crystals : currentUser.crystals; // ✅ NEW
+    currentUser.crystals = typeof crystals !== 'undefined' ? crystals : currentUser.crystals;
     currentUser.completedTasks = typeof completedTasks !== 'undefined' ? completedTasks : currentUser.completedTasks;
     currentUser.lastTokenTime = typeof lastTokenTime !== 'undefined' ? lastTokenTime : currentUser.lastTokenTime;
     currentUser.battleTry = typeof battleTry !== 'undefined' ? battleTry : currentUser.battleTry;
     currentUser.lastBattleTime = typeof lastBattleTime !== 'undefined' ? lastBattleTime : currentUser.lastBattleTime;
     currentUser.shareCount = typeof shareCount !== 'undefined' ? shareCount : currentUser.shareCount;
     currentUser.share10Count = typeof share10Count !== 'undefined' ? share10Count : currentUser.share10Count;
-    currentUser.frameId = currentUserFrame; // ✅ NEW: Save current frame
+    currentUser.frameId = currentUserFrame;
     currentUser.lastLogin = new Date().toISOString();
 
     // Save to localStorage
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
     
-    // Save to Supabase
+    // Save to Firebase
     try {
-      await saveUserToSupabase(currentUser);
+      await saveUserToFirebase(currentUser);
     } catch (error) {
-      console.error('Error saving to Supabase:', error);
+      console.error('Error saving to Firebase:', error);
     }
   }
 }
 
-// Modified user loading function to handle existing Server 1 users
+// Modified user loading function
 document.addEventListener('DOMContentLoaded', async function() {
   const savedUser = localStorage.getItem('currentUser');
   const userServer = localStorage.getItem('userServer');
@@ -5315,34 +5288,27 @@ document.addEventListener('DOMContentLoaded', async function() {
     try {
       currentUser = JSON.parse(savedUser);
       
-      // Check if the saved server is still enabled
-      if (SUPABASE_SERVERS[userServer] && SUPABASE_SERVERS[userServer].enabled) {
-        // Switch to the user's original server (even if it's Server 1)
-        switchSupabaseClient(userServer);
-        console.log('Loaded existing user from:', userServer);
-      } else {
-        // If original server is disabled, try to migrate user
-        console.log('Original server disabled, migrating user...');
-        await migrateUserToNewServer(currentUser);
-      }
+      // For now, always use the saved server
+      switchFirebaseClient(userServer);
+      console.log('Loaded existing user from:', userServer);
       
-      // Try to sync with Supabase
+      // Try to sync with Firebase
       try {
-        const supabaseUser = await getUserFromSupabase(currentUser.uid);
-        if (supabaseUser) {
+        const firebaseUser = await getUserFromFirebase(currentUser.uid);
+        if (firebaseUser) {
           currentUser = {
             ...currentUser,
-            ...supabaseUser
+            ...firebaseUser
           };
           localStorage.setItem('currentUser', JSON.stringify(currentUser));
           
-          if (supabaseUser.frameId && supabaseUser.frameId !== 'default') {
-            currentUserFrame = supabaseUser.frameId;
+          if (firebaseUser.frameId && firebaseUser.frameId !== 'default') {
+            currentUserFrame = firebaseUser.frameId;
             localStorage.setItem('currentUserFrame', currentUserFrame);
           }
         }
-      } catch (supabaseError) {
-        console.log('Using local data, Supabase sync failed:', supabaseError);
+      } catch (firebaseError) {
+        console.log('Using local data, Firebase sync failed:', firebaseError);
       }
       
       updateProfileCircle();
@@ -5358,12 +5324,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     loginScreen.style.display = 'flex';
   }
 });
-// Initialize Game with User Data - UPDATED
+
+// Initialize Game with User Data
 function initializeGameWithUser(userData) {
   // Initialize your game variables here
   if (typeof tokens !== 'undefined') tokens = userData.tokens || 0;
   if (typeof coins !== 'undefined') coins = userData.coins || 0;
-  if (typeof crystals !== 'undefined') crystals = userData.crystals || 0; // ✅ NEW
+  if (typeof crystals !== 'undefined') crystals = userData.crystals || 0;
   if (typeof completedTasks !== 'undefined') completedTasks = userData.completedTasks || {
     '3hour': false,
     'channel1': false,
@@ -5375,7 +5342,10 @@ function initializeGameWithUser(userData) {
     'moonton': false,
     'share10': false,
     'lily': false,
-    'maxdiamond': false // ✅ NEW
+    'maxdiamond': false,
+    'diablo': false,
+    'pot': false,
+    'starlar-studio': false
   };
   if (typeof lastTokenTime !== 'undefined') lastTokenTime = userData.lastTokenTime || 0;
   if (typeof battleTry !== 'undefined') battleTry = userData.battleTry || 0;
@@ -5383,7 +5353,7 @@ function initializeGameWithUser(userData) {
   if (typeof shareCount !== 'undefined') shareCount = userData.shareCount || 0;
   if (typeof share10Count !== 'undefined') share10Count = userData.share10Count || 0;
   
-  // ✅ NEW: Load frame from user data
+  // Load frame from user data
   if (userData.frameId && userData.frameId !== 'default') {
     currentUserFrame = userData.frameId;
     localStorage.setItem('currentUserFrame', currentUserFrame);
@@ -5396,7 +5366,7 @@ function initializeGameWithUser(userData) {
   if (tokenCountElem) tokenCountElem.textContent = tokens;
   if (coinCountElem) coinCountElem.textContent = coins;
   
-  // ✅ NEW: Crystal display update
+  // Crystal display update
   const crystalCountElem = document.querySelector('.token-card .crystal + .count');
   if (crystalCountElem) {
     crystalCountElem.textContent = crystals;
@@ -5412,17 +5382,18 @@ function initializeGameWithUser(userData) {
     updateTaskTimer();
   }
   
-  // ✅ NEW: Update profile with frame
+  // Update profile with frame
   setTimeout(() => {
     updateProfileWithFrame();
   }, 500);
 }
+
 // Sync function for periodic data sync
-async function syncWithSupabase() {
+async function syncWithFirebase() {
   if (currentUser) {
     try {
-      await saveUserToSupabase(currentUser);
-      console.log('Data synced with Supabase');
+      await saveUserToFirebase(currentUser);
+      console.log('Data synced with Firebase');
     } catch (error) {
       console.error('Sync failed:', error);
     }
@@ -5430,7 +5401,7 @@ async function syncWithSupabase() {
 }
 
 // Sync every 5 minutes
-setInterval(syncWithSupabase, 5 * 60 * 1000);
+setInterval(syncWithFirebase, 5 * 60 * 1000);
 
 // Override saveGameState if it exists
 if (typeof saveGameState !== 'undefined') {
@@ -5440,6 +5411,12 @@ if (typeof saveGameState !== 'undefined') {
     saveUserData();
   };
 }
+
+
+
+
+
+    
 // This is completely separate from existing code
 // Create Rank Button and add to sidebar
 const rankBtn = document.createElement('button');

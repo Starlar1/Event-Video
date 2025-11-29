@@ -2618,22 +2618,6 @@ body {
         <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server4-count">Loading...</span></div>
       </div>
 
-      <!-- Server 5 -->
-      <div class="server-card" data-server="server5" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
-        <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
-        <h3 style="font-size: 18px; margin-bottom: 8px; color: #90ee90;">Server 5</h3>
-        <p style="font-size: 12px; opacity: 0.8; margin-bottom: 10px;">Rank ကြည့်မည်</p>
-        <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server5-count">Loading...</span></div>
-      </div>
-
-      <!-- Server 6 -->
-      <div class="server-card" data-server="server6" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
-        <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
-        <h3 style="font-size: 18px; margin-bottom: 8px; color: #ff6b6b;">Server 6</h3>
-        <p style="font-size: 12px; opacity: 0.8; margin-bottom: 10px;">Rank ကြည့်မည်</p>
-        <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server6-count">Loading...</span></div>
-      </div>
-
 <!-- Server 7 -->
 <div class="server-card" data-server="server7" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
   <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
@@ -5503,12 +5487,6 @@ if (typeof saveGameState !== 'undefined') {
 
     
 
-
-
-
-
-
-    
 // This is completely separate from existing code
 // Create Rank Button and add to sidebar
 const rankBtn = document.createElement('button');
@@ -5583,19 +5561,15 @@ function clearRankData() {
   console.log('Rank data cleared completely');
 }
 
-// Load server user counts - FIXED VERSION
+// Load server user counts - FIXED VERSION FOR FIREBASE
 async function loadServerUserCounts() {
   try {
     const serverElements = {
-  'server1': document.getElementById('server1-count'),
-  'server2': document.getElementById('server2-count'),
-  'server3': document.getElementById('server3-count'),
-  'server4': document.getElementById('server4-count'),
-  'server5': document.getElementById('server5-count'),
-  'server6': document.getElementById('server6-count'),
-  'server7': document.getElementById('server7-count'),  // ✅ NEW
-  'server8': document.getElementById('server8-count')   // ✅ NEW
-};
+      'server1': document.getElementById('server1-count'),
+      'server2': document.getElementById('server2-count'),
+      'server3': document.getElementById('server3-count'),
+      'server4': document.getElementById('server4-count')
+    };
 
     for (const [serverId, element] of Object.entries(serverElements)) {
       // Check if element exists
@@ -5605,23 +5579,17 @@ async function loadServerUserCounts() {
       }
       
       try {
-        const tempSupabase = window.supabase.createClient(
-          SUPABASE_SERVERS[serverId].url, 
-          SUPABASE_SERVERS[serverId].key
-        );
+        // Switch to this server temporarily to check count
+        const tempConfig = FIREBASE_SERVERS[serverId];
+        const tempApp = firebase.initializeApp(tempConfig, `count_${serverId}`);
+        const tempDb = tempApp.firestore();
         
-        const { count, error } = await tempSupabase
-          .from('users')
-          .select('*', { count: 'exact', head: true });
+        const usersSnapshot = await tempDb.collection('users').get();
+        const userCount = usersSnapshot.size;
+        const maxUsers = 1000; // Default max users for Firebase servers
         
-        if (error) throw error;
-        
-        const userCount = count || 0;
-        const maxUsers = SUPABASE_SERVERS[serverId].maxUsers;
-        const isFull = userCount >= maxUsers;
-        
-        element.textContent = `${userCount}/${maxUsers}`;
-        element.style.color = isFull ? '#ff6b6b' : '#90ee90';
+        element.textContent = `${userCount}`;
+        element.style.color = '#90ee90';
         
         // Update server card status
         const serverCard = document.querySelector(`[data-server="${serverId}"]`);
@@ -5629,14 +5597,12 @@ async function loadServerUserCounts() {
           const statusIcon = serverCard.querySelector('div:first-child');
           const statusText = serverCard.querySelector('p');
           
-          if (isFull) {
-            statusIcon.textContent = '🔴'; // Full server - red
-            statusText.innerHTML = '<span style="color: #ff6b6b;">Full</span>';
-          } else {
-            statusIcon.textContent = '🟢'; // Available server - green
-            statusText.innerHTML = '<span style="color: #90ee90;">Rank ကြည့်မည်</span>';
-          }
+          statusIcon.textContent = '🟢'; // Firebase servers are always available
+          statusText.innerHTML = '<span style="color: #90ee90;">Rank ကြည့်မည်</span>';
         }
+        
+        // Clean up temporary app
+        tempApp.delete();
         
       } catch (error) {
         console.error(`Error loading count for ${serverId}:`, error);
@@ -5653,16 +5619,6 @@ async function loadServerUserCounts() {
 document.querySelectorAll('.server-card').forEach(card => {
   card.addEventListener('click', function() {
     const selectedServer = this.getAttribute('data-server');
-    
-    // Check if server is full and doesn't allow new users
-    const userCount = parseInt(this.querySelector('div:last-child span').textContent.split('/')[0]);
-    const maxUsers = SUPABASE_SERVERS[selectedServer].maxUsers;
-    const allowsNewUsers = SUPABASE_SERVERS[selectedServer].newUsers;
-    
-    if (userCount >= maxUsers && !allowsNewUsers) {
-      alert('❌ This server is full and not accepting new users. Please select another server.');
-      return;
-    }
     
     // Clear any previous rank data before switching
     clearRankData();
@@ -5742,7 +5698,7 @@ function switchRankTab(type) {
   }, 100);
 }
 
-// Load Rankings from Selected Server - UPDATED WITH BETTER CANCELLATION
+// Load Rankings from Selected Server - UPDATED FOR FIREBASE
 async function loadRankings() {
   const loadingController = { cancel: false };
   currentLoading = loadingController;
@@ -5757,67 +5713,63 @@ async function loadRankings() {
     let allUsers = [];
     const MAX_USERS = 100;
     
-    // Create temporary Supabase client for selected server
-    const tempSupabase = window.supabase.createClient(
-      SUPABASE_SERVERS[currentSelectedServer].url, 
-      SUPABASE_SERVERS[currentSelectedServer].key
-    );
+    // Create temporary Firebase client for selected server
+    const tempConfig = FIREBASE_SERVERS[currentSelectedServer];
+    const tempApp = firebase.initializeApp(tempConfig, `rank_${currentSelectedServer}`);
+    const tempDb = tempApp.firestore();
     
-    // Get total user count from selected server
-    const { count, error: countError } = await tempSupabase
-      .from('users')
-      .select('*', { count: 'exact', head: true });
+    // Get users from Firebase with ordering
+    let query;
+    if (currentRankType === 'coins') {
+      query = tempDb.collection('users')
+        .orderBy('coins', 'desc')
+        .orderBy('user_id') // Secondary sort for consistency
+        .limit(MAX_USERS);
+    } else {
+      query = tempDb.collection('users')
+        .orderBy('tokens', 'desc')
+        .orderBy('user_id') // Secondary sort for consistency
+        .limit(MAX_USERS);
+    }
     
-    if (countError) throw countError;
+    const usersSnapshot = await query.get();
     
-    const totalUsers = Math.min(count, MAX_USERS);
+    // Check cancellation after API call
+    if (loadingController.cancel) {
+      console.log('Rank loading cancelled after API call');
+      tempApp.delete();
+      rankList.innerHTML = '<div style="text-align: center; padding: 20px; color: #ffcc00;">Loading cancelled - switching rank type</div>';
+      return;
+    }
     
-    // Show initial progress - ensure this is the only content
+    const totalUsers = Math.min(usersSnapshot.size, MAX_USERS);
+    
+    // Show initial progress
     rankList.innerHTML = '<div style="text-align: center; padding: 20px; color: white;">Loading ' + currentRankType + ' rankings from ' + getServerDisplayName(currentSelectedServer) + '... 0/' + totalUsers + '</div>';
     
-    // Load users one by one with frequent cancellation checks
-    for (let i = 0; i < totalUsers; i++) {
-      // Check cancellation at the start of each iteration
+    // Process users one by one for progressive loading
+    let processedCount = 0;
+    usersSnapshot.forEach((doc) => {
+      // Check cancellation for each user
       if (loadingController.cancel) {
-        console.log('Rank loading cancelled at iteration', i);
-        // Clear the list to show cancellation
-        rankList.innerHTML = '<div style="text-align: center; padding: 20px; color: #ffcc00;">Loading cancelled - switching rank type</div>';
+        console.log('Rank loading cancelled during processing');
         return;
       }
       
-      let userData;
+      const userData = doc.data();
+      allUsers.push({
+        user_id: userData.user_id || doc.id,
+        display_name: userData.display_name,
+        coins: userData.coins || 0,
+        tokens: userData.tokens || 0,
+        photo_url: userData.photo_url,
+        frame_id: userData.frame_id || 'default'
+      });
       
-      if (currentRankType === 'coins') {
-        const { data: coinsData, error: coinsError } = await tempSupabase
-          .from('users')
-          .select('user_id, display_name, coins, tokens, photo_url, frame_id')
-          .order('coins', { ascending: false })
-          .range(i, i);
-
-        if (coinsError) throw coinsError;
-        userData = coinsData;
-      } else {
-        const { data: tokensData, error: tokensError } = await tempSupabase
-          .from('users')
-          .select('user_id, display_name, coins, tokens, photo_url, frame_id')
-          .order('tokens', { ascending: false })
-          .range(i, i);
-
-        if (tokensError) throw tokensError;
-        userData = tokensData;
-      }
+      processedCount++;
       
-      // Check cancellation again after API call
-      if (loadingController.cancel) {
-        console.log('Rank loading cancelled after API call', i);
-        rankList.innerHTML = '<div style="text-align: center; padding: 20px; color: #ffcc00;">Loading cancelled - switching rank type</div>';
-        return;
-      }
-      
-      if (userData && userData.length > 0) {
-        allUsers.push(userData[0]);
-        
-        // Update progress - completely replace content
+      // Update progress every 10 users or for the first few
+      if (processedCount <= 10 || processedCount % 10 === 0) {
         const progressElement = document.createElement('div');
         progressElement.style.textAlign = 'center';
         progressElement.style.marginBottom = '15px';
@@ -5826,7 +5778,7 @@ async function loadRankings() {
         progressElement.style.background = 'rgba(0,0,0,0.5)';
         progressElement.style.padding = '8px';
         progressElement.style.borderRadius = '8px';
-        progressElement.textContent = `Loading ${currentRankType} rankings from ${getServerDisplayName(currentSelectedServer)}... ${i + 1}/${totalUsers}`;
+        progressElement.textContent = `Loading ${currentRankType} rankings from ${getServerDisplayName(currentSelectedServer)}... ${processedCount}/${totalUsers}`;
         
         // Clear everything and show only progress
         rankList.innerHTML = '';
@@ -5834,20 +5786,18 @@ async function loadRankings() {
         
         // Display current rankings
         displayRankings(allUsers);
-        
-        // Small delay for progressive loading effect
-        await new Promise(resolve => setTimeout(resolve, 30));
       }
-    }
+    });
     
     // Final cancellation check before displaying results
     if (loadingController.cancel) {
       console.log('Rank loading cancelled before final display');
+      tempApp.delete();
       rankList.innerHTML = '<div style="text-align: center; padding: 20px; color: #ffcc00;">Loading cancelled</div>';
       return;
     }
     
-    // Final display - completely clear and show results
+    // Final display
     const finalProgress = document.createElement('div');
     finalProgress.style.textAlign = 'center';
     finalProgress.style.marginBottom = '15px';
@@ -5861,6 +5811,9 @@ async function loadRankings() {
     rankList.innerHTML = '';
     rankList.appendChild(finalProgress);
     displayRankings(allUsers);
+    
+    // Clean up temporary Firebase app
+    tempApp.delete();
     
   } catch (error) {
     // Only show error if not cancelled
@@ -5951,39 +5904,30 @@ function getServerDisplayName(serverId) {
   return serverNames[serverId] || serverId;
 }
 
-// Real-time updates for rankings - UPDATED WITH CANCELLATION SUPPORT
+// Real-time updates for rankings - UPDATED FOR FIREBASE
 function setupRealTimeRankings() {
   try {
-    Object.keys(SUPABASE_SERVERS).forEach(server => {
-      if (SUPABASE_SERVERS[server].enabled) {
-        const serverSupabase = window.supabase.createClient(
-          SUPABASE_SERVERS[server].url, 
-          SUPABASE_SERVERS[server].key
-        );
-        
-        serverSupabase
-          .channel(`rank-updates-${server}`)
-          .on('postgres_changes', 
-            { 
-              event: '*', 
-              schema: 'public', 
-              table: 'users' 
-            }, 
-            (payload) => {
-              // Only reload if this is the current selected server and no loading is in progress
-              if (rankScreen.style.display === 'block' && 
-                  server === currentSelectedServer && 
-                  !currentLoading) {
-                console.log('Real-time update detected, reloading rankings...');
-                loadRankings();
-              }
-            }
-          )
-          .subscribe();
-      }
+    Object.keys(FIREBASE_SERVERS).forEach(server => {
+      const tempConfig = FIREBASE_SERVERS[server];
+      const tempApp = firebase.initializeApp(tempConfig, `realtime_${server}`);
+      const tempDb = tempApp.firestore();
+      
+      // Listen for changes in users collection
+      tempDb.collection('users')
+        .onSnapshot((snapshot) => {
+          // Only reload if this is the current selected server and no loading is in progress
+          if (rankScreen.style.display === 'block' && 
+              server === currentSelectedServer && 
+              !currentLoading) {
+            console.log('Real-time update detected, reloading rankings...');
+            loadRankings();
+          }
+        }, (error) => {
+          console.error(`Firebase real-time error for ${server}:`, error);
+        });
     });
 
-    console.log('Real-time rankings setup complete for all servers');
+    console.log('Real-time rankings setup complete for all Firebase servers');
   } catch (error) {
     console.log('Real-time rankings not available:', error);
   }
@@ -6001,7 +5945,7 @@ function initializeRankSystem() {
     }
   }, 30000);
   
-  console.log('Rank system initialized with data clearing');
+  console.log('Rank system initialized with Firebase');
 }
 
 // Start Rank System when page loads
@@ -6024,12 +5968,24 @@ window.refreshRankings = function() {
   }, 200);
 };
 
-console.log('Rank System loaded successfully!');
+console.log('Firebase Rank System loaded successfully!');
+
+
+
+
+    
 
 
 
 
 
+      
+      
+    
+
+
+
+  
 
 // 🎨 FRAME SYSTEM FULL SCRIPT (UPDATED)
 // ===============================

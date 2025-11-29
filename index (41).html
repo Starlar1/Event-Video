@@ -2603,7 +2603,21 @@ body {
         <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server4-count">Loading...</span></div>
       </div>
 
+<!-- Server 5 -->
+<div class="server-card" data-server="server5" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
+  <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
+  <h3 style="font-size: 18px; margin-bottom: 8px; color: #90ee90;">Server 5</h3>
+  <p style="font-size: 12px; opacity: 0.8; margin-bottom: 10px;">Rank ကြည့်မည်</p>
+  <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server5-count">Loading...</span></div>
+</div>
 
+<!-- Server 6 -->
+<div class="server-card" data-server="server6" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
+  <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
+  <h3 style="font-size: 18px; margin-bottom: 8px; color: #ff6b6b;">Server 6</h3>
+  <p style="font-size: 12px; opacity: 0.8; margin-bottom: 10px;">Rank ကြည့်မည်</p>
+  <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server6-count">Loading...</span></div>
+</div>
       
     </div>
 
@@ -4731,15 +4745,16 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===== FIREBASE CONFIGURATION =====
 const FIREBASE_SERVERS = {
   server1: {
-    apiKey: "AIzaSyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    apiKey: "AIzaSyB1TOCB2vld44WsV1q7x0POHkhQZwA0TnE",
     authDomain: "sc-server-1.firebaseapp.com",
     projectId: "sc-server-1",
     storageBucket: "sc-server-1.firebasestorage.app",
     messagingSenderId: "964668973412",
-    appId: "1:964668973412:web:b1c997884f6c0e77e5da71"
+    appId: "1:964668973412:web:b1c997884f6c0e77e5da71",
+    measurementId: "G-6YMJHDXT6H"
   },
   
-  // ✅ NEW: Server 2 Configuration
+  // Server 2 Configuration
   server2: {
     apiKey: "AIzaSyDqwYr7TXAFHEvBXGToUorojMiSyYDBUs8",
     authDomain: "sc-server-2.firebaseapp.com",
@@ -4750,7 +4765,7 @@ const FIREBASE_SERVERS = {
     measurementId: "G-3JB1BP7JWS"
   },
   
-  // ✅ NEW: Server 3 Configuration
+  // Server 3 Configuration
   server3: {
     apiKey: "AIzaSyAJHjU3cx-h9DfkJnzha1GKpuQcLrSIva4",
     authDomain: "sc-server-3.firebaseapp.com",
@@ -4761,7 +4776,7 @@ const FIREBASE_SERVERS = {
     measurementId: "G-5QYSPJ1P5Q"
   },
   
-  // ✅ NEW: Server 4 Configuration
+  // Server 4 Configuration
   server4: {
     apiKey: "AIzaSyAP08t4FeGA5k7Em_SEBu6lNGyQ7WaynC8",
     authDomain: "sc-server-4.firebaseapp.com",
@@ -4770,16 +4785,39 @@ const FIREBASE_SERVERS = {
     messagingSenderId: "623281764102",
     appId: "1:623281764102:web:7bbda8a47b9f9dc81e5087",
     measurementId: "G-62124393TQ"
+  },
+
+  // ✅ NEW: Server 5 Configuration
+  server5: {
+    apiKey: "AIzaSyDUjulF6VR5oEqvI-58QmL9P_mLoQwYKLc",
+    authDomain: "sc-server-5.firebaseapp.com",
+    projectId: "sc-server-5",
+    storageBucket: "sc-server-5.firebasestorage.app",
+    messagingSenderId: "905854295570",
+    appId: "1:905854295570:web:38f736ec0295b0b88ec2cb",
+    measurementId: "G-7MRGQ9FV5Z"
+  },
+
+  // ✅ NEW: Server 6 Configuration
+  server6: {
+    apiKey: "AIzaSyCf2LBPX-SWBpmMF1c84YHLYq19lSCUHoM",
+    authDomain: "sc-server-6.firebaseapp.com",
+    projectId: "sc-server-6",
+    storageBucket: "sc-server-6.firebasestorage.app",
+    messagingSenderId: "930975760376",
+    appId: "1:930975760376:web:5a23ee6d1205197df0600d",
+    measurementId: "G-55Z3EN899J"
   }
 };
-
 // Server selection variables
 let currentServer = localStorage.getItem('currentServer') || 'server1';
 let userCounts = JSON.parse(localStorage.getItem('userCounts')) || {
   server1: 0,
   server2: 0,
   server3: 0,
-  server4: 0
+  server4: 0,
+  server5: 0,  // ✅ NEW
+  server6: 0   // ✅ NEW
 };
 
 // Initialize current Firebase client
@@ -4956,7 +4994,7 @@ async function getUserFromFirebase(userId) {
 // Function to update server user counts display
 async function updateServerUserCounts() {
   try {
-    for (const server of ['server1', 'server2', 'server3', 'server4']) {
+    for (const server of ['server1', 'server2', 'server3', 'server4', 'server5', 'server6']) { // ✅ server5, server6 ထည့်
       try {
         const tempConfig = FIREBASE_SERVERS[server];
         const tempApp = firebase.initializeApp(tempConfig, `count_${server}`);

@@ -4773,8 +4773,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
-  
 // ===== FIREBASE CONFIGURATION =====
 const FIREBASE_SERVERS = {
   server1: {
@@ -4784,28 +4782,40 @@ const FIREBASE_SERVERS = {
     storageBucket: "sc-server-1.firebasestorage.app",
     messagingSenderId: "964668973412",
     appId: "1:964668973412:web:b1c997884f6c0e77e5da71"
-  }
-  // ============================================
-  // ADD MORE SERVERS LATER - နောက်မှထည့်ရန်
-  // ============================================
-  /*
+  },
+  
+  // ✅ NEW: Server 2 Configuration
   server2: {
-    apiKey: "AIzaSyBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    apiKey: "AIzaSyDqwYr7TXAFHEvBXGToUorojMiSyYDBUs8",
     authDomain: "sc-server-2.firebaseapp.com",
     projectId: "sc-server-2",
-    storageBucket: "sc-server-2.firebasestorage.app", 
-    messagingSenderId: "964668973413",
-    appId: "1:964668973413:web:c2d108995g7d1e88f6eb82"
+    storageBucket: "sc-server-2.firebasestorage.app",
+    messagingSenderId: "84063310238",
+    appId: "1:84063310238:web:97e763abfe960c5562068f",
+    measurementId: "G-3JB1BP7JWS"
   },
+  
+  // ✅ NEW: Server 3 Configuration
   server3: {
-    apiKey: "AIzaSyCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+    apiKey: "AIzaSyAJHjU3cx-h9DfkJnzha1GKpuQcLrSIva4",
     authDomain: "sc-server-3.firebaseapp.com",
     projectId: "sc-server-3",
     storageBucket: "sc-server-3.firebasestorage.app",
-    messagingSenderId: "964668973414",
-    appId: "1:964668973414:web:d3e219aa6h8e2f99g7fc93"
+    messagingSenderId: "140160091682",
+    appId: "1:140160091682:web:4bb9a2d4006597eecdec7b",
+    measurementId: "G-5QYSPJ1P5Q"
+  },
+  
+  // ✅ NEW: Server 4 Configuration
+  server4: {
+    apiKey: "AIzaSyAP08t4FeGA5k7Em_SEBu6lNGyQ7WaynC8",
+    authDomain: "sc-server-4.firebaseapp.com",
+    projectId: "sc-server-4",
+    storageBucket: "sc-server-4.firebasestorage.app",
+    messagingSenderId: "623281764102",
+    appId: "1:623281764102:web:7bbda8a47b9f9dc81e5087",
+    measurementId: "G-62124393TQ"
   }
-  */
 };
 
 // Server selection variables
@@ -4814,11 +4824,7 @@ let userCounts = JSON.parse(localStorage.getItem('userCounts')) || {
   server1: 0,
   server2: 0,
   server3: 0,
-  server4: 0,
-  server5: 0,
-  server6: 0,
-  server7: 0,
-  server8: 0
+  server4: 0
 };
 
 // Initialize current Firebase client
@@ -4828,16 +4834,8 @@ let storage = firebase.storage();
 // Function to check server capacity and select appropriate server
 async function selectServerForNewUser() {
   try {
-    // For now, always use server1 - single server implementation
-    return 'server1';
-    
-    // ============================================
-    // MULTI-SERVER LOGIC - နောက်မှထည့်ရန်
-    // ============================================
-    /*
-    const availableServers = Object.keys(FIREBASE_SERVERS).filter(server => 
-      FIREBASE_SERVERS[server].enabled && FIREBASE_SERVERS[server].newUsers
-    );
+    // ✅ UPDATED: Multi-server logic enabled
+    const availableServers = Object.keys(FIREBASE_SERVERS);
     
     if (availableServers.length === 0) {
       throw new Error('No servers available for new users');
@@ -4848,13 +4846,19 @@ async function selectServerForNewUser() {
     
     for (const server of availableServers) {
       try {
-        const usersSnapshot = await firebase.firestore()
-          .collection('users')
-          .get();
+        // Switch to this server temporarily to check count
+        const tempConfig = FIREBASE_SERVERS[server];
+        const tempApp = firebase.initializeApp(tempConfig, `temp_${server}`);
+        const tempDb = tempApp.firestore();
+        
+        const usersSnapshot = await tempDb.collection('users').get();
         serverCounts[server] = usersSnapshot.size;
+        
+        // Clean up temporary app
+        tempApp.delete();
       } catch (error) {
         console.error(`Error checking ${server}:`, error);
-        serverCounts[server] = userCounts[server];
+        serverCounts[server] = userCounts[server] || 0;
       }
     }
     
@@ -4862,26 +4866,18 @@ async function selectServerForNewUser() {
     Object.assign(userCounts, serverCounts);
     localStorage.setItem('userCounts', JSON.stringify(userCounts));
     
-    // Find server with lowest usage that has capacity
-    const serversWithCapacity = availableServers.filter(server => 
-      userCounts[server] < FIREBASE_SERVERS[server].maxUsers
-    );
-    
-    if (serversWithCapacity.length === 0) {
-      throw new Error('All available servers are full');
-    }
-    
-    // Select server with lowest current usage
-    const selectedServer = serversWithCapacity.reduce((lowest, server) => 
+    // Find server with lowest usage
+    const selectedServer = availableServers.reduce((lowest, server) => 
       userCounts[server] < userCounts[lowest] ? server : lowest
     );
     
+    console.log('Selected server for new user:', selectedServer, 'with count:', userCounts[selectedServer]);
     return selectedServer;
-    */
     
   } catch (error) {
     console.error('Error selecting server for new user:', error);
-    throw error;
+    // Fallback to server1 if selection fails
+    return 'server1';
   }
 }
 
@@ -4889,15 +4885,23 @@ async function selectServerForNewUser() {
 function switchFirebaseClient(server) {
   currentServer = server;
   
-  // ============================================
-  // MULTI-SERVER SWITCHING - နောက်မှထည့်ရန်
-  // ============================================
-  /*
+  // ✅ UPDATED: Multi-server switching enabled
   const config = FIREBASE_SERVERS[server];
+  
+  // Close previous Firebase app if exists
+  try {
+    const existingApp = firebase.app(server);
+    if (existingApp) {
+      existingApp.delete();
+    }
+  } catch (error) {
+    // App doesn't exist, continue
+  }
+  
+  // Initialize new Firebase app for this server
   const newApp = firebase.initializeApp(config, server);
   db = newApp.firestore();
   storage = newApp.storage();
-  */
   
   localStorage.setItem('currentServer', server);
   console.log('Switched to server:', server);
@@ -4934,8 +4938,8 @@ async function migrateUserToNewServer(user) {
 // Save User to Firebase
 async function saveUserToFirebase(userData) {
   try {
-    await db.collection('users').doc(userData.userId.toString()).set({
-      user_id: userData.userId,
+    await db.collection('users').doc(userData.uid.toString()).set({
+      user_id: userData.uid,
       display_name: userData.displayName,
       photo_url: userData.photoURL,
       tokens: userData.tokens,
@@ -4950,6 +4954,7 @@ async function saveUserToFirebase(userData) {
       frame_id: currentUserFrame,
       server: userData.server || currentServer,
       last_login: userData.lastLogin,
+      created_at: userData.createdAt || firebase.firestore.FieldValue.serverTimestamp(),
       updated_at: firebase.firestore.FieldValue.serverTimestamp()
     });
     console.log('User saved to Firebase Server:', currentServer);
@@ -4982,7 +4987,8 @@ async function getUserFromFirebase(userId) {
         frameId: data.frame_id || 'default',
         lastLogin: data.last_login,
         createdAt: data.created_at,
-        updatedAt: data.updated_at
+        updatedAt: data.updated_at,
+        server: data.server || 'server1'
       };
     }
     return null;
@@ -4991,6 +4997,86 @@ async function getUserFromFirebase(userId) {
     return null;
   }
 }
+
+// Function to update server user counts display
+async function updateServerUserCounts() {
+  try {
+    for (const server of ['server1', 'server2', 'server3', 'server4']) {
+      try {
+        const tempConfig = FIREBASE_SERVERS[server];
+        const tempApp = firebase.initializeApp(tempConfig, `count_${server}`);
+        const tempDb = tempApp.firestore();
+        
+        const usersSnapshot = await tempDb.collection('users').get();
+        const count = usersSnapshot.size;
+        userCounts[server] = count;
+        
+        // Update display
+        const countElement = document.getElementById(`${server}-count`);
+        if (countElement) {
+          countElement.textContent = count;
+        }
+        
+        // Clean up temporary app
+        tempApp.delete();
+      } catch (error) {
+        console.error(`Error updating count for ${server}:`, error);
+        // Use cached count if available
+        const countElement = document.getElementById(`${server}-count`);
+        if (countElement) {
+          countElement.textContent = userCounts[server] || 'Error';
+        }
+      }
+    }
+    
+    localStorage.setItem('userCounts', JSON.stringify(userCounts));
+  } catch (error) {
+    console.error('Error updating server counts:', error);
+  }
+}
+
+// Server selection functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const serverCards = document.querySelectorAll('.server-card');
+  serverCards.forEach(card => {
+    card.addEventListener('click', function() {
+      const selectedServer = this.getAttribute('data-server');
+      if (FIREBASE_SERVERS[selectedServer]) {
+        switchFirebaseClient(selectedServer);
+        alert(`Server ${selectedServer.replace('server', '')} ကို ရွေးချယ်ပြီးပါပြီ။`);
+        
+        // Server selection screen ကိုပိတ်
+        document.getElementById('server-selection-screen').style.display = 'none';
+        document.getElementById('main-screen').style.display = 'block';
+      }
+    });
+  });
+
+  // Server selection screen ဝင်ရင် counts update လုပ်မယ်
+  const serverSelectionScreen = document.getElementById('server-selection-screen');
+  if (serverSelectionScreen) {
+    const backServerBtn = document.getElementById('back-server-selection');
+    if (backServerBtn) {
+      backServerBtn.addEventListener('click', function() {
+        serverSelectionScreen.style.display = 'none';
+        document.getElementById('main-screen').style.display = 'block';
+      });
+    }
+    
+    // Server screen ပေါ်လာတိုင်း counts update
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+          if (serverSelectionScreen.style.display !== 'none') {
+            setTimeout(updateServerUserCounts, 1000);
+          }
+        }
+      });
+    });
+    
+    observer.observe(serverSelectionScreen, { attributes: true, attributeFilter: ['style'] });
+  }
+});
 
 // ===== PROFILE CIRCLE SYSTEM ===== //
 
@@ -5288,7 +5374,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     try {
       currentUser = JSON.parse(savedUser);
       
-      // For now, always use the saved server
+      // Use the saved server
       switchFirebaseClient(userServer);
       console.log('Loaded existing user from:', userServer);
       
@@ -5384,7 +5470,9 @@ function initializeGameWithUser(userData) {
   
   // Update profile with frame
   setTimeout(() => {
-    updateProfileWithFrame();
+    if (typeof updateProfileWithFrame === 'function') {
+      updateProfileWithFrame();
+    }
   }, 500);
 }
 
@@ -5411,6 +5499,10 @@ if (typeof saveGameState !== 'undefined') {
     saveUserData();
   };
 }
+  
+
+    
+
 
 
 

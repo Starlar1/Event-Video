@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="my">
 <head>
 <meta charset="UTF-8">
@@ -2362,74 +2362,19 @@ body {
   100% { transform: scale(1); }
 }
 
-
-/* Rules Screen Chat Container - FIXED */
-#rules-chat-container {
-  position: relative; /* fixed ကနေ relative ကိုပြောင်း */
-  margin-bottom: 30px;
-  width: 100%;
-  max-width: 400px;
-  z-index: 1; /* z-index လျှော့ */
-}
-
-#rules-chat-text {
-  background: rgba(0, 0, 0, 0.6);
-  color: #ff8c00;
-  padding: 15px 20px;
-  border-radius: 20px;
-  font-size: 18px;
+/* Local Account Button Styles */
+#local-account-btn {
+  background: rgba(255, 193, 7, 0.9);
+  color: #333;
   font-weight: bold;
-  text-align: center;
-  box-shadow: 0 0 12px rgba(0,0,0,0.6);
-  line-height: 1.4em;
-  white-space: normal;
-  min-height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  position: relative; /* absolute ကနေ relative ကိုပြောင်း */
-  width: 100%;
+  margin-top: 10px;
 }
 
-/* Rules Answer Container - FIXED */
-#rules-answer-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  display: none; /* မလိုအပ်ရင် ဖျောက် */
-  justify-content: center;
-  align-items: flex-end;
-  pointer-events: none;
-  z-index: 1001;
-}
+#local-account-btn:hover {
+  background: rgba(255, 193, 7, 1);
+  transform: translateY(-2px);
+       }
 
-#rules-answer-text {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 12px 24px;
-  border-radius: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  box-shadow: 0 0 12px rgba(0,0,0,0.6);
-  z-index: 999;
-  transition: opacity 0.5s ease;
-  width: 90%;
-  max-width: 380px;
-  line-height: 1.4em;
-  white-space: normal;
-  max-height: 150px;
-  overflow-y: auto;
-}
-
-  
 </style>
 </head>
 <body>
@@ -2456,10 +2401,13 @@ body {
       အကောင့်ဖွင့်မည်
     </button>
     
-    <p class="login-note">အကောင့်ဖွင့်ပြီးမှ Event ကိုဝင်ရောက်နိုင်မည်</p>
+  <button class="login-btn secondary-btn" id="local-account-btn">
+    My Local Acc ဝင်မည်
+  </button>
+  
+  <p class="login-note">အကောင့်ဖွင့်ပြီးမှ Event ကိုဝင်ရောက်နိုင်မည်</p>
   </div>
-</div>
-
+  </div>
 <!-- User Profile Display (will be shown after login) -->
 <div class="user-profile" id="user-profile" style="display: none;">
   <img class="user-avatar" id="user-avatar" src="">
@@ -2525,9 +2473,7 @@ body {
   <button class="sidebar-btn" id="game-mode-btn">
     <span>ကြေးစားဂိမ်း</span>
   </button>
-  <button class="sidebar-btn" id="rules-btn" style="background: linear-gradient(145deg, rgba(255,0,0,0.85), rgba(180,0,0,0.8));">
-  <span>စည်းကမ်းများ</span>
-</button>
+
     </div>
   </div>
 </div>
@@ -2562,50 +2508,6 @@ body {
     </div>
   </div>
 </div>
-
-<!-- Rules Screen HTML - Simple Version -->
-<div id="rules-screen" style="display: none; width: 100vw; height: 100vh; background-image: url('https://i.ibb.co/HTzsRGwb/In-Shot-20251115-104715144.jpg'); background-size: cover; background-position: center; position: fixed; top: 0; left: 0; z-index: 1000; overflow-y: auto; color: white; padding: 20px;">
-  <button class="back-btn" id="back-rules">Home</button>
-  
-  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 20px;">
-    
-    <!-- Chat Container Only (No Anime Girl) -->
-    <div id="rules-chat-container" style="margin-bottom: 30px; width: 100%; max-width: 400px;">
-      <div id="rules-chat-text" style="background: rgba(0, 0, 0, 0.6); color: #ff8c00; padding: 15px 20px; border-radius: 20px; font-size: 18px; font-weight: bold; text-align: center; box-shadow: 0 0 12px rgba(0,0,0,0.6); line-height: 1.4em; white-space: normal; min-height: 80px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-        <!-- စာရိုက်သလိုပေါ်မယ့်နေရာ -->
-      </div>
-    </div>
-    
-    <!-- မေးခွန်းများ (အစကဖျောက်ထား) -->
-    <div id="questions-list" style="display: none; flex-direction: column; gap: 10px; width: 100%; max-width: 400px;">
-      <div class="rule-item" data-type="diamonds" style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
-        <span style="color: #ff8c00; font-size: 14px;">Diamonds ထုတ်ယူချင်းအကန့်သက်</span>
-      </div>
-      
-      <div class="rule-item" data-type="profile" style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
-        <span style="color: #ff8c00; font-size: 14px;">Profile Gift ထုတ်ယူချင်းကြာချိန်</span>
-      </div>
-      
-      <div class="rule-item" data-type="not-allowed" style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
-        <span style="color: #ff8c00; font-size: 14px;">မလုပ်သင့်သောအရာများ</span>
-      </div>
-      
-      <div class="rule-item" data-type="ban" style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
-        <span style="color: #ff8c00; font-size: 14px;">Account Ban ခံရနိုင်သောအရာများ</span>
-      </div>
-      
-      <div class="rule-item" data-type="help" style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
-        <span style="color: #ff8c00; font-size: 14px;">အကူအညီ</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Answer Chat Container -->
-<div id="rules-answer-container" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; height: auto; display: flex; justify-content: center; align-items: flex-end; pointer-events: none; z-index: 1001;">
-  <div id="rules-answer-text" style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.6); color: white; padding: 12px 24px; border-radius: 20px; font-size: 18px; font-weight: bold; text-align: center; box-shadow: 0 0 12px rgba(0,0,0,0.6); z-index: 999; transition: opacity 0.5s ease; width: 90%; max-width: 380px; line-height: 1.4em; white-space: normal; max-height: 150px; overflow-y: auto;"></div>
-</div>
-
 
 
 
@@ -2668,49 +2570,88 @@ body {
 
 
 
-<!-- Server Selection Screen (Rank ကိုနှိပ်ရင် ဒီ Screen ကိုအရင်ပြမယ်) -->
+<!-- Server Selection Screen - UPDATED LAYOUT -->
 <div id="server-selection-screen" style="display: none; width: 100vw; height: 100vh; background-image: url('https://iili.io/KOZNH0J.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: fixed; top: 0; left: 0; z-index: 1000; overflow-y: auto; color: white; padding: 20px;">
   <button class="back-btn" id="back-server-selection">Home</button>
   
-  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center;">
-    <h2 style="font-size: 32px; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Select Server</h2>
-    <p style="font-size: 16px; opacity: 0.8; margin-bottom: 40px;">သင်ကြည့်မဲ့ Server ရွေးပါ</p>
+  <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; text-align: center;">
     
-    <div class="server-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 400px; width: 100%;">
+    <!-- Header Section (အပေါ်မှာအသေထား) -->
+    <div style="margin-top: 40px; margin-bottom: 20px;">
+      <h2 style="font-size: 28px; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Select Server</h2>
+      <p style="font-size: 14px; opacity: 0.8;">သင်ကြည့်မဲ့ Server ရွေးပါ</p>
+    </div>
+
+    <!-- Server Grid (အောက်ကိုရွေ့) -->
+    <div class="server-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 400px; width: 100%; margin-top: 20px;">
       <!-- Server 1 -->
-      <div class="server-card" data-server="server1" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 25px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
+      <div class="server-card" data-server="server1" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
         <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
-        <h3 style="font-size: 20px; margin-bottom: 8px; color: #90ee90;">Server 1</h3>
+        <h3 style="font-size: 18px; margin-bottom: 8px; color: #90ee90;">Server 1</h3>
         <p style="font-size: 12px; opacity: 0.8; margin-bottom: 10px;">Rank ကြည့်မည်</p>
         <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server1-count">Loading...</span></div>
       </div>
       
       <!-- Server 2 -->
-      <div class="server-card" data-server="server2" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 25px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
+      <div class="server-card" data-server="server2" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
         <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
-        <h3 style="font-size: 20px; margin-bottom: 8px; color: #ff6b6b;">Server 2</h3>
+        <h3 style="font-size: 18px; margin-bottom: 8px; color: #ff6b6b;">Server 2</h3>
         <p style="font-size: 12px; opacity: 0.8; margin-bottom: 10px;">Rank ကြည့်မည်</p>
         <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server2-count">Loading...</span></div>
       </div>
       
       <!-- Server 3 -->
-      <div class="server-card" data-server="server3" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 25px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
+      <div class="server-card" data-server="server3" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
         <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
-        <h3 style="font-size: 20px; margin-bottom: 8px; color: #ff6b6b;">Server 3</h3>
+        <h3 style="font-size: 18px; margin-bottom: 8px; color: #ff6b6b;">Server 3</h3>
         <p style="font-size: 12px; opacity: 0.8; margin-bottom: 10px;">Rank ကြည့်မည်</p>
         <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server3-count">Loading...</span></div>
       </div>
       
       <!-- Server 4 -->
-      <div class="server-card" data-server="server4" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 25px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
+      <div class="server-card" data-server="server4" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
         <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
-        <h3 style="font-size: 20px; margin-bottom: 8px; color: #90ee90;">Server 4</h3>
+        <h3 style="font-size: 18px; margin-bottom: 8px; color: #90ee90;">Server 4</h3>
         <p style="font-size: 12px; opacity: 0.8; margin-bottom: 10px;">Rank ကြည့်မည်</p>
         <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server4-count">Loading...</span></div>
       </div>
+
+      <!-- Server 5 -->
+      <div class="server-card" data-server="server5" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
+        <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
+        <h3 style="font-size: 18px; margin-bottom: 8px; color: #90ee90;">Server 5</h3>
+        <p style="font-size: 12px; opacity: 0.8; margin-bottom: 10px;">Rank ကြည့်မည်</p>
+        <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server5-count">Loading...</span></div>
+      </div>
+
+      <!-- Server 6 -->
+      <div class="server-card" data-server="server6" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
+        <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
+        <h3 style="font-size: 18px; margin-bottom: 8px; color: #ff6b6b;">Server 6</h3>
+        <p style="font-size: 12px; opacity: 0.8; margin-bottom: 10px;">Rank ကြည့်မည်</p>
+        <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server6-count">Loading...</span></div>
+      </div>
+
+<!-- Server 7 -->
+<div class="server-card" data-server="server7" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
+  <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
+  <h3 style="font-size: 18px; margin-bottom: 8px; color: #90ee90;">Server 7</h3>
+  <p style="font-size: 12px; opacity: 0.8; margin-bottom: 10px;">Rank ကြည့်မည်</p>
+  <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server7-count">Loading...</span></div>
+</div>
+
+<!-- Server 8 -->
+<div class="server-card" data-server="server8" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); text-align: center;">
+  <div style="font-size: 24px; margin-bottom: 10px;">🟢</div>
+  <h3 style="font-size: 18px; margin-bottom: 8px; color: #ff6b6b;">Server 8</h3>
+  <p style="font-size: 12px; opacity: 0.8; margin-bottom: 10px;">Rank ကြည့်မည်</p>
+  <div style="font-size: 11px; color: #ffcc00;">Users: <span id="server8-count">Loading...</span></div>
+</div>
+      
     </div>
-    
-    <div style="margin-top: 30px; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 10px; max-width: 400px;">
+
+    <!-- Note Section (အောက်ဆုံးမှာ) -->
+    <div style="background: rgba(0,0,0,0.5); padding: 12px; border-radius: 10px; max-width: 400px; margin-top: 20px; margin-bottom: 30px;">
       <p style="font-size: 12px; color: #ffcc00; margin: 0;">
         💡 <strong>Note:</strong> သင့် Server ကိုသိရန် Account Profile ထဲကြည့်ပါ.
       </p>
@@ -3579,13 +3520,13 @@ body {
         <!-- Existing items -->
         <div class="exchange-card">
           <img src="https://iili.io/KGldYUG.jpg">
-          <p>5 Diamond - 4500 Coin - 16 ယောက်သာလဲနိုင်</p>
-          <button class="btn exchange-item" data-diamond="5" data-coins="4500">လဲမည်</button>
+          <p>5 Diamond - 5000 Coin - လဲမရတော့ပါ</p>
+          <button class="btn exchange-item" data-diamond="5" data-coins="50000">လဲမရသေးပါ</button>
         </div>
         <div class="exchange-card">
           <img src="https://iili.io/KGlFqle.jpg">
-          <p>11 Diamond - 8000 Coin - 11 ယောက်သာလဲနိုင်</p>
-          <button class="btn exchange-item" data-diamond="11" data-coins="8000">လဲမည်</button>
+          <p>11 Diamond - 8500 Coin - 8 ယောက်သာလဲနိုင်</p>
+          <button class="btn exchange-item" data-diamond="11" data-coins="8500">လဲမည်</button>
         </div>
         <div class="exchange-card">
           <img src="https://iili.io/KGlfSK7.jpg">
@@ -3625,8 +3566,8 @@ body {
         </div>
         <div class="exchange-card">
           <img src="https://iili.io/KhdB1Gn.jpg">
-          <p>PKJ 1000 Coins - 3 ယောက်သာလဲနိုင်</p>
-          <button class="btn exchange-item" data-diamond="0" data-coins="1000">လဲမည်</button>
+          <p>PKJ 1000 Coins - လဲမရတော့ပါ</p>
+          <button class="btn exchange-item" data-diamond="0" data-coins="1000">လဲမရသေးပါ</button>
         </div>
         <div class="exchange-card">
           <img src="https://iili.io/KhdC0NV.jpg">
@@ -4832,33 +4773,62 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   
+
 // ===== SUPABASE CONFIGURATION =====
 const SUPABASE_SERVERS = {
   server1: {
     url: 'https://pedmvcvwqvqmfgdbureu.supabase.co',
-    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBlZG12Y3Z3cXZxbWZnZGJ1cmV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxMDczNzQsImV4cCI6MjA3ODY4MzM3NH0.zpZOlBOrxN1QfVKu9IrMf0ZqUzppYdZ9Q2pn0euEY2g',
-    maxUsers: 100,  // ✅ 300 ကနေ 100 ပြောင်း
+    key: 'sb_publishable_Ie9Dyjmrw9R740q4kzWAqQ_-pT0otPJ',
+    maxUsers: 100,
     enabled: true,
     newUsers: true
   },
   server2: {
     url: 'https://bfhmhojuthlhnltxffvn.supabase.co',
-    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJmaG1ob2p1dGhsaG5sdHhmZnZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxMDc2MTksImV4cCI6MjA3ODY4MzYxOX0.lWu3Q_X1Y06tWTRhCjQDDo3m8QWqek-QU-bs2t1mo1w',
-    maxUsers: 100,  // ✅ 300 ကနေ 100 ပြောင်း
+    key: 'sb_publishable_HheQVatckhWYmxdKunMBbg_nyPvi6Ts',
+    maxUsers: 100,
     enabled: true,
     newUsers: true
   },
   server3: {
     url: 'https://dbuatkhuhtmlqfdhytit.supabase.co',
-    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRidWF0a2h1aHRtbHFmZGh5dGl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxMDgxMzIsImV4cCI6MjA3ODY4NDEzMn0.Pm4Li-jpf15d9jb35R4wonvKPnkezWvkm47j6L1q0IQ',
-    maxUsers: 100,  // ✅ 300 ကနေ 100 ပြောင်း
+    key: 'sb_publishable_NUTgDtCZcEf1a31USYwcVQ_I57TV_q-',
+    maxUsers: 100,
     enabled: true,
     newUsers: true
   },
   server4: {
     url: 'https://rxazguzipzxtxlwjgrlt.supabase.co',
-    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4YXpndXppcHp4dHhsd2pncmx0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxMDgxODcsImV4cCI6MjA3ODY4NDE4N30.ylEMCYhUzvM0UR4KjKGiNQF54SVEOmK5r3ng7oeu_nc',
-    maxUsers: 100,  // ✅ 300 ကနေ 100 ပြောင်း
+    key: 'sb_publishable_WzbHlnVmZ9i71X8V4esglA_FZGEMNej',
+    maxUsers: 100,
+    enabled: true,
+    newUsers: true
+  },
+  server5: {
+    url: 'https://qhymuppxnbzioryulfwg.supabase.co',
+    key: 'sb_publishable_a2DTXqjYGF3UgIJZju5OoA_yBCd5Ql3',
+    maxUsers: 100,
+    enabled: true,
+    newUsers: true
+  },
+  server6: {
+    url: 'https://nqhzlwwqkhzdxzsaitcf.supabase.co',
+    key: 'sb_publishable_6lntFGpP7rvFbsUre53-PQ_CL4wX5dJ',
+    maxUsers: 100,
+    enabled: true,
+    newUsers: true
+  },
+  server7: {
+    url: 'https://nqirdqpcimzoconxsoec.supabase.co',
+    key: 'sb_publishable_-63sDDT7cy1O5qQmk5RTpA_8b3lqgNd',
+    maxUsers: 100,
+    enabled: true,
+    newUsers: true
+  },
+  server8: {
+    url: 'https://soywfpdsdutdcxzwmtqj.supabase.co',
+    key: 'sb_publishable_UEr_SlOHDuxLWIiHpp8LGA_Lk3-OVB-',
+    maxUsers: 100,
     enabled: true,
     newUsers: true
   }
@@ -4869,7 +4839,11 @@ let userCounts = JSON.parse(localStorage.getItem('userCounts')) || {
   server1: 0,
   server2: 0,
   server3: 0,
-  server4: 0  // ✅ NEW
+  server4: 0,
+  server5: 0,
+  server6: 0,
+  server7: 0,  // ✅ NEW
+  server8: 0   // ✅ NEW
 };
 
 // Initialize current Supabase client
@@ -5540,17 +5514,27 @@ function clearRankData() {
   console.log('Rank data cleared completely');
 }
 
-// Load server user counts
+// Load server user counts - FIXED VERSION
 async function loadServerUserCounts() {
   try {
     const serverElements = {
-      'server1': document.getElementById('server1-count'),
-      'server2': document.getElementById('server2-count'),
-      'server3': document.getElementById('server3-count'),
-      'server4': document.getElementById('server4-count')
-    };
+  'server1': document.getElementById('server1-count'),
+  'server2': document.getElementById('server2-count'),
+  'server3': document.getElementById('server3-count'),
+  'server4': document.getElementById('server4-count'),
+  'server5': document.getElementById('server5-count'),
+  'server6': document.getElementById('server6-count'),
+  'server7': document.getElementById('server7-count'),  // ✅ NEW
+  'server8': document.getElementById('server8-count')   // ✅ NEW
+};
 
     for (const [serverId, element] of Object.entries(serverElements)) {
+      // Check if element exists
+      if (!element) {
+        console.error(`Element not found for ${serverId}`);
+        continue;
+      }
+      
       try {
         const tempSupabase = window.supabase.createClient(
           SUPABASE_SERVERS[serverId].url, 
@@ -5577,10 +5561,10 @@ async function loadServerUserCounts() {
           const statusText = serverCard.querySelector('p');
           
           if (isFull) {
-            statusIcon.textContent = '🟢';
-            statusText.innerHTML = '<span style="color: #ff6b6b;">Rank ကြည့်မည်</span>';
+            statusIcon.textContent = '🔴'; // Full server - red
+            statusText.innerHTML = '<span style="color: #ff6b6b;">Full</span>';
           } else {
-            statusIcon.textContent = '🟢';
+            statusIcon.textContent = '🟢'; // Available server - green
             statusText.innerHTML = '<span style="color: #90ee90;">Rank ကြည့်မည်</span>';
           }
         }
@@ -7348,26 +7332,35 @@ class DownloadManager {
     }
 
     loadImageList() {
-        // NEW: Loading Photo တွေကို ပြောင်းလိုက်ပါပြီ
-        this.downloadQueue = [
-            { url: 'https://iili.io/KOZgBK7.jpg', name: 'Login BG' },
-            { url: 'https://i.ibb.co/VcSpHZt2/Grid-Art-20251112-104128310.jpg', name: 'Main BG' },
-            { url: 'https://i.ibb.co/sdtSK7r9/Grid-Art-20251112-103216085.jpg', name: 'Event BG' },
-            { url: 'https://i.ibb.co/0HXNx0D/Grid-Art-20251112-104341468.jpg', name: 'Exchange BG' },
-            { url: 'https://iili.io/KOZNH0J.jpg', name: 'Rank BG' },
-            { url: 'https://i.ibb.co/spwHMt08/Grid-Art-20251023-165052122.jpg', name: 'Game BG' },
-            { url: 'https://i.ibb.co/7d0ZQwSQ/26af0e228da2cdf8b5af4425313603a8.jpg', name: 'Pumpkin BG' },
-            { url: 'https://i.ibb.co/xSpvxSdk/6bad88b1274536d836ea63a329b7fc33.jpg', name: 'Lucky Draw BG' },
-            { url: 'https://i.ibb.co/ynDJrr2m/Grid-Art-20251112-102809041.jpg', name: 'Token Box BG' },
-            
-            // NEW: Loading Background Photos (သင့်ပေးတဲ့ link တွေ)
-            { url: 'https://i.ibb.co/4nnScKxX/Grid-Art-20251112-135651767.jpg', name: 'Loading BG 1' },
-            { url: 'https://i.ibb.co/mCHLTZkV/Grid-Art-20251112-140950728.jpg', name: 'Loading BG 2' },
-            { url: 'https://i.ibb.co/HfqcCcyQ/Grid-Art-20251112-141037793.jpg', name: 'Loading BG 3' },
-            { url: 'https://i.ibb.co/HL1LSSs6/Grid-Art-20251112-141111863.jpg', name: 'Loading BG 4' },
-            { url: 'https://i.ibb.co/pSF568B/Grid-Art-20251112-141142692.jpg', name: 'Loading BG 5' },
-            { url: 'https://i.ibb.co/0VpVdRnj/Grid-Art-20251112-141507696.jpg', name: 'Loading BG 6' }
-        ];
+    // NEW: Loading Photo တွေကို ပြောင်းလိုက်ပါပြီ
+    this.downloadQueue = [
+    { url: 'https://iili.io/KOZgBK7.jpg', name: 'Login BG' },
+    { url: 'https://i.ibb.co/VcSpHZt2/Grid-Art-20251112-104128310.jpg', name: 'Main BG' },
+    { url: 'https://i.ibb.co/sdtSK7r9/Grid-Art-20251112-103216085.jpg', name: 'Event BG' },
+    { url: 'https://i.ibb.co/0HXNx0D/Grid-Art-20251112-104341468.jpg', name: 'Exchange BG' },
+    { url: 'https://iili.io/KOZNH0J.jpg', name: 'Rank BG' },
+    { url: 'https://i.ibb.co/spwHMt08/Grid-Art-20251023-165052122.jpg', name: 'Game BG' },
+    { url: 'https://i.ibb.co/7d0ZQwSQ/26af0e228da2cdf8b5af4425313603a8.jpg', name: 'Pumpkin BG' },
+    { url: 'https://i.ibb.co/xSpvxSdk/6bad88b1274536d836ea63a329b7fc33.jpg', name: 'Lucky Draw BG' },
+    { url: 'https://i.ibb.co/ynDJrr2m/Grid-Art-20251112-102809041.jpg', name: 'Token Box BG' },
+    
+    // ✅ NEW: FAQ Rules Screen BG ဒီမှာထည့်ပါ
+    { url: 'https://i.ibb.co/HTzsRGwb/In-Shot-20251115-104715144.jpg', name: 'FAQ Rules BG' },
+    
+    // ✅ Shop Backgrounds ဒီမှာထည့်ပါ
+    { url: 'https://i.ibb.co/B57cS361/9cb5045d08833e1b96b4f5d77583c65e.jpg', name: 'Shop BG 1' },
+    { url: 'https://i.ibb.co/9kNgm1FT/Grid-Art-20251118-102957932.jpg', name: 'Shop BG 2' },
+    
+    // Loading Background Photos
+    { url: 'https://i.ibb.co/4nnScKxX/Grid-Art-20251112-135651767.jpg', name: 'Loading BG 1' },
+    { url: 'https://i.ibb.co/mCHLTZkV/Grid-Art-20251112-140950728.jpg', name: 'Loading BG 2' },
+    { url: 'https://i.ibb.co/HfqcCcyQ/Grid-Art-20251112-141037793.jpg', name: 'Loading BG 3' },
+    { url: 'https://i.ibb.co/HL1LSSs6/Grid-Art-20251112-141111863.jpg', name: 'Loading BG 4' },
+    { url: 'https://i.ibb.co/pSF568B/Grid-Art-20251112-141142692.jpg', name: 'Loading BG 5' },
+    { url: 'https://i.ibb.co/0VpVdRnj/Grid-Art-20251112-141507696.jpg', name: 'Loading BG 6' }
+];
+
+
 
         this.totalImages = this.downloadQueue.length;
         if (this.elements.totalImages) {
@@ -8731,178 +8724,1817 @@ document.addEventListener('DOMContentLoaded', function() {
 // Periodic check (every 30 seconds) as backup
 setInterval(checkForChanges, 30000);
 
-// Rules System JavaScript - Updated with Dark Background
-const rulesBtn = document.getElementById('rules-btn');
-const rulesScreen = document.getElementById('rules-screen');
-const backRules = document.getElementById('back-rules');
-const rulesChatText = document.getElementById('rules-chat-text');
-const questionsList = document.getElementById('questions-list');
-const ruleItems = document.querySelectorAll('.rule-item');
-const rulesAnswerContainer = document.getElementById('rules-answer-container');
-const rulesAnswerText = document.getElementById('rules-answer-text');
+// ===== RULES SCREEN SYSTEM (Exchange Style) =====
+// Add this to your existing JavaScript file
 
-// Rules Messages (3 lines format)
-const rulesMessages = {
-  diamonds: "တစ်လကို တစ်ခါသာ\nDiamonds ထုတ်ယူနိုင်သည်\nထပ်မံထုတ်ယူလိုပါက နောက်လစောင့်ပါ",
-  profile: "Profile Gift သည်ပို့ဖို့\n3/5 ရက်ကြာတက်သည်\nကျေးဇူးပြု၍ စောင့်ဆိုင်းပေးပါ",
-  "not-allowed": "Channel နဲ့ Share များ\nအမှန်တကယ်မလုပ်ချင်း ပြုလုပ်ပါက\nGift ထုတ်ရင်ရမည်မဟုတ်ပါ",
-  ban: "တရားမ၀င်နည်းလမ်းများသုံးချင်သည်\nသင့်ကို Event မှ\nတစ်သက်တာ ပိတ်ပင်ခံရမည်",
-  help: "အကူအညီများလိုပါက\n@Starlar1 ကိုဆက်သွယ်ပါ\nကျေးဇူးတင်ပါသည်"
+// Rules Screen Elements
+let rulesBtn, rulesScreen, backRules, rulesChatText, rulesChatIcon;
+
+// Rules data with typing effect and buttons
+const rulesData = {
+    diamonds: {
+        text: "တစ်လကိုတစ်ခါသာ Diamonds ထုတ်ယူနိုင်သည်",
+        hasButton: false
+    },
+    profile: {
+        text: "Profile Gift သည်ပို့ဖို့ 3/5 ရက်ကြာတက်သည်",
+        hasButton: false
+    },
+    "not-allowed": {
+        text: "Channel Join နှင့် Share များတစ်ကယ်မလုပ်ပါက Gift ထုတ်ရင်ရမည်မဟုတ်ပါ",
+        hasButton: false
+    },
+    "account-ban": {
+        text: "တရားမ၀င်နည်းလမ်းများသုံးပါက သင့်ကို Event မှတစ်သက်တာပိတ်ပင်ခံရမည်",
+        hasButton: false
+    },
+    channel: {
+        text: "ထုတ်လုပ်သည့် Channel: https://t.me/StarlarCompany",
+        hasButton: true,
+        buttonText: "Channel သို့သွားရန်",
+        buttonAction: () => window.open('https://t.me/StarlarCompany', '_blank')
+    },
+    help: {
+        text: "အကူအညီလိုပါက @Starlar1 ကိုဆက်သွယ်ပေးပါ",
+        hasButton: true,
+        buttonText: "Message ပို့ရန်",
+        buttonAction: () => window.open('https://t.me/Starlar1', '_blank')
+    }
 };
 
-// Navigation Event Listeners
-rulesBtn.addEventListener('click', () => {
-  mainScreen.style.display = 'none';
-  rulesScreen.style.display = 'block';
-  
-  // စာရိုက်သလိုပေါ်အောင်
-  resetToInitialState();
-});
+let resetTimer = null;
+let currentQuestion = null;
 
-backRules.addEventListener('click', () => {
-  rulesScreen.style.display = 'none';
-  mainScreen.style.display = 'block';
-  rulesAnswerContainer.style.display = 'none';
-});
-
-// အစကအတိုင်းပြန်ရောက်အောင်
-function resetToInitialState() {
-  rulesChatText.style.display = 'flex';
-  questionsList.style.display = 'none';
-  rulesAnswerContainer.style.display = 'none';
-  
-  typeQuestionsTitle();
-}
-
-// သိထားစရာများမေးမည် စာရိုက်သလိုပေါ်အောင်
-function typeQuestionsTitle() {
-  const text = "မေးမည်ဆိုနှိပ်ပါ သိထားစရာများ";
-  let charIndex = 0;
-  rulesChatText.innerHTML = "";
-  rulesChatText.style.cursor = 'pointer';
-  
-  // FIXED: အောက်နားမှာထားရန် style ကို ဖယ်ရှား
-  rulesChatText.style.position = '';
-  rulesChatText.style.bottom = '';
-  rulesChatText.style.left = '';
-  rulesChatText.style.transform = '';
-  rulesChatText.style.width = '';
-  rulesChatText.style.maxWidth = '';
-  
-  function typeChar() {
-    if (charIndex < text.length) {
-      rulesChatText.innerHTML += text.charAt(charIndex);
-      charIndex++;
-      setTimeout(typeChar, 50);
-    } else {
-      // စာကိုနှိပ်လို့ရအောင် click event ထည့်
-      rulesChatText.onclick = showQuestionsList;
+// Initialize Rules Screen
+function initializeRulesScreen() {
+    // Create rules screen if it doesn't exist
+    if (!document.getElementById('rules-screen')) {
+        createRulesScreen();
     }
-  }
-
-  typeChar();
+    
+    // Add event listeners
+    setupRulesEventListeners();
 }
 
-// မေးစရာများပြသခြင်း
-function showQuestionsList() {
-  // FIXED: မေးခွန်းများကိုလည်း အောက်နားမှာထားတာကို ဖယ်ရှား
-  questionsList.style.display = 'flex';
-  questionsList.style.position = '';
-  questionsList.style.bottom = '';
-  questionsList.style.left = '';
-  questionsList.style.transform = '';
-  questionsList.style.width = '';
-  questionsList.style.maxWidth = '';
-  
-  // အမဲရောင် အခံထည့်ရန်
-  questionsList.style.background = 'rgba(0, 0, 0, 0.8)';
-  questionsList.style.padding = '15px';
-  questionsList.style.borderRadius = '12px';
-  questionsList.style.backdropFilter = 'blur(10px)';
-  questionsList.style.border = '1px solid rgba(255, 255, 255, 0.2)';
-  
-  // တစ်မေးခွန်းကို တစ်ကြောင်းစီ အခံထား
-  ruleItems.forEach(item => {
-    item.style.background = 'rgba(255, 255, 255, 0.15)';
-    item.style.borderRadius = '8px';
-    item.style.padding = '12px';
-    item.style.marginBottom = '8px';
-    item.style.border = '1px solid rgba(255, 255, 255, 0.3)';
-    item.style.transition = 'all 0.3s ease';
+// Create Rules Screen HTML (Exchange Style)
+function createRulesScreen() {
+    const rulesScreenHTML = `
+        <div id="rules-screen" style="display: none; width: 100vw; height: 100vh; background-image: url('https://i.ibb.co/HTzsRGwb/In-Shot-20251115-104715144.jpg'); background-size: cover; background-position: center; position: fixed; top: 0; left: 0; z-index: 1000; overflow-y: auto; color: white; padding: 20px;">
+            <button class="back-btn" id="back-rules">Home</button>
+            
+            <!-- Exchange Style Chat Container -->
+            <div id="rules-chat-container" style="position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); width: 200%; display: flex; justify-content: center; align-items: flex-end; z-index: 10; pointer-events: none;">
+                <div id="rules-chat-text" style="position: absolute; top: 250px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.6); color: white; padding: 12px 24px; border-radius: 20px; font-size: 17px; font-weight: bold; text-align: center; box-shadow: 0 0 12px rgba(0,0,0,0.6); max-width: 360px; width: 90%; line-height: 1.4em; overflow: hidden; white-space: normal; transition: opacity 0.3s ease; pointer-events: auto; z-index: 20; cursor: pointer;">
+                    <!-- Chat text will appear here -->
+                </div>
+                <img id="rules-chat-icon" src="https://i.ibb.co/v6hnd4xz/Grid-Art-20251112-173607698.png" alt="Rules Helper" style="width: 400px; height: auto; border-radius: 3px; pointer-events: none; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); transition: transform 0.3s ease;">
+            </div>
+
+            <!-- Rules Selection Buttons (Initially Hidden) -->
+            <div class="rules-buttons" id="rules-buttons" style="display: none; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; max-width: 600px; margin: 100px auto 0;">
+                <button class="rules-btn" data-rule="diamonds">Diamonds ထုတ်ယူချင်းအကန့်သက်</button>
+                <button class="rules-btn" data-rule="profile">Profile Gift ထုတ်ယူချင်းကြာချိန်</button>
+                <button class="rules-btn" data-rule="not-allowed">မလုပ်သင့်သောအရာများ</button>
+                <button class="rules-btn" data-rule="account-ban">Account အပိတ်ခံရနိုင်သောအရာများ</button>
+                <button class="rules-btn" data-rule="channel">ထုတ်လုပ်သည့် Channel</button>
+                <button class="rules-btn" data-rule="help">အကူအညီ</button>
+            </div>
+        </div>
+
+        <style>
+            .rules-btn {
+                padding: 15px 10px;
+                background: rgba(0, 123, 255, 0.8);
+                border: none;
+                border-radius: 10px;
+                color: white;
+                font-size: 14px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-align: center;
+                min-height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                word-break: break-word;
+            }
+
+            .rules-btn:hover {
+                background: rgba(0, 123, 255, 1);
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+            }
+
+            .rules-btn:active {
+                transform: translateY(0);
+            }
+
+            .rules-btn.selected {
+                background: rgba(255, 193, 7, 0.9);
+                border: 2px solid gold;
+            }
+
+            .action-btn {
+                padding: 8px 16px;
+                background: rgba(40, 167, 69, 0.9);
+                border: none;
+                border-radius: 20px;
+                color: white;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-top: 10px;
+                display: inline-block;
+            }
+
+            .action-btn:hover {
+                background: rgba(40, 167, 69, 1);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+            }
+
+            #rules-chat-text:hover {
+                background: rgba(0, 0, 0, 0.7);
+                transform: translateY(-2px);
+            }
+
+            #rules-chat-text:active {
+                transform: translateY(0);
+            }
+        </style>
+    `;
     
-    // Hover effect
-    item.addEventListener('mouseenter', function() {
-      this.style.background = 'rgba(255, 255, 255, 0.25)';
-      this.style.transform = 'translateY(-2px)';
-    });
-    
-    item.addEventListener('mouseleave', function() {
-      this.style.background = 'rgba(255, 255, 255, 0.15)';
-      this.style.transform = 'translateY(0)';
-    });
-  });
-  
-  rulesChatText.style.display = 'none';
+    document.body.insertAdjacentHTML('beforeend', rulesScreenHTML);
 }
 
-// Rule Items Click Events
-ruleItems.forEach(item => {
-  item.addEventListener('click', function() {
-    const ruleType = this.getAttribute('data-type');
-    const message = rulesMessages[ruleType];
-    
-    // မေးခွန်းစာရင်းကိုဖျောက်
-    questionsList.style.display = 'none';
-    
-    // Show answer container - FIXED: အောက်နားမှာပဲထားတာကို ဖယ်ရှား
-    rulesAnswerContainer.style.display = 'flex';
-    rulesAnswerText.textContent = '';
-    rulesAnswerText.style.maxHeight = '150px';
-    rulesAnswerText.style.overflowY = 'auto';
-    
-    // Type effect
-    typeRulesMessage(message);
+// Setup Event Listeners
+function setupRulesEventListeners() {
+    rulesBtn = document.getElementById('rules-btn');
+    rulesScreen = document.getElementById('rules-screen');
+    backRules = document.getElementById('back-rules');
+    rulesChatText = document.getElementById('rules-chat-text');
+    rulesChatIcon = document.getElementById('rules-chat-icon');
+    const ruleButtons = document.querySelectorAll('.rules-btn');
 
-    // 5 စက္ကန့်ကြာပြီးနောက် အစကအတိုင်းပြန်ရောက်
+    // Navigation - Open Rules Screen
+    if (rulesBtn && rulesScreen) {
+        rulesBtn.addEventListener('click', () => {
+            document.getElementById('main-screen').style.display = 'none';
+            rulesScreen.style.display = 'block';
+            // Start with initial message
+            showInitialMessage();
+        });
+    }
+
+    // Navigation - Close Rules Screen
+    if (backRules && rulesScreen) {
+        backRules.addEventListener('click', () => {
+            rulesScreen.style.display = 'none';
+            document.getElementById('main-screen').style.display = 'block';
+            // Reset to initial state
+            resetRulesScreen();
+            // Clear any existing timer
+            clearTimeout(resetTimer);
+        });
+    }
+
+    // Chat Text Click Handler - Show Questions
+    if (rulesChatText) {
+        rulesChatText.addEventListener('click', function() {
+            // If showing initial message, show questions
+            if (rulesChatText.textContent === "သိထားစရာများကို ကြည့်ရန် နှိပ်ပါ") {
+                showQuestions();
+            }
+        });
+    }
+
+    // Rules button click handlers
+    ruleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const ruleType = this.getAttribute('data-rule');
+            showRuleAnswer(ruleType);
+        });
+    });
+
+    // Chat icon hover effect
+    if (rulesChatIcon) {
+        rulesChatIcon.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+        });
+        
+        rulesChatIcon.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    }
+}
+
+// Show initial message
+function showInitialMessage() {
+    const initialText = "သိထားစရာများကို ကြည့်ရန် နှိပ်ပါ";
+    typeTextWithButton(rulesChatText, initialText);
+    
+    // Hide questions initially
+    document.getElementById('rules-buttons').style.display = 'none';
+    
+    // Clear any existing timer
+    clearTimeout(resetTimer);
+}
+
+// Show questions
+function showQuestions() {
+    // Hide the chat text temporarily
+    rulesChatText.style.display = 'none';
+    
+    // Show the rules selection buttons
+    document.getElementById('rules-buttons').style.display = 'grid';
+}
+
+// Show rule answer with typing effect
+function showRuleAnswer(ruleType) {
+    currentQuestion = ruleType;
+    const rule = rulesData[ruleType];
+    
+    if (!rule) return;
+    
+    // Hide questions
+    document.getElementById('rules-buttons').style.display = 'none';
+    
+    // Show chat text again
+    rulesChatText.style.display = 'block';
+    
+    // Clear any existing timer
+    clearTimeout(resetTimer);
+    
+    // Type the answer
+    typeTextWithButton(rulesChatText, rule.text, () => {
+        // After typing complete, add button if needed
+        if (rule.hasButton && rule.buttonText) {
+            addActionButton(rule.buttonText, rule.buttonAction);
+        }
+        
+        // Set timer to reset after 4 seconds
+        resetTimer = setTimeout(() => {
+            resetToInitial();
+        }, 4000);
+    });
+}
+
+// Type text with callback and optional button
+function typeTextWithButton(element, text, callback = null, speed = 50) {
+    if (!element) return;
+    
+    element.innerHTML = '';
+    let i = 0;
+    
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        } else {
+            // Remove any existing action buttons
+            const existingButton = element.querySelector('.action-btn');
+            if (existingButton) {
+                existingButton.remove();
+            }
+            
+            if (callback) callback();
+        }
+    }
+    
+    type();
+}
+
+// Add action button to chat text
+function addActionButton(buttonText, buttonAction) {
+    if (!rulesChatText) return;
+    
+    const button = document.createElement('button');
+    button.className = 'action-btn';
+    button.textContent = buttonText;
+    button.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (buttonAction) buttonAction();
+    });
+    
+    rulesChatText.appendChild(button);
+}
+
+// Reset to initial state
+function resetToInitial() {
+    // Show initial message
+    showInitialMessage();
+    currentQuestion = null;
+}
+
+// Reset rules screen to initial state
+function resetRulesScreen() {
+    if (rulesChatText) {
+        rulesChatText.innerHTML = '';
+        rulesChatText.style.display = 'block';
+    }
+    
+    // Hide questions
+    document.getElementById('rules-buttons').style.display = 'none';
+    
+    currentQuestion = null;
+    // Clear any existing timer
+    clearTimeout(resetTimer);
+}
+
+// Add Rules Button to Sidebar
+function addRulesButtonToSidebar() {
+    // Check if rules button already exists
+    if (!document.getElementById('rules-btn')) {
+        const rulesButtonHTML = `
+            <button class="sidebar-btn" id="rules-btn" style="background: linear-gradient(145deg, rgba(255,0,0,0.85), rgba(180,0,0,0.8));">
+                <span>စည်းကမ်းများ</span>
+            </button>
+        `;
+        
+        // Add to sidebar buttons
+        const sidebarButtons = document.getElementById('sidebar-buttons');
+        if (sidebarButtons) {
+            sidebarButtons.insertAdjacentHTML('beforeend', rulesButtonHTML);
+        }
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Add rules button to sidebar
+    addRulesButtonToSidebar();
+    
+    // Initialize rules screen
     setTimeout(() => {
-      rulesAnswerContainer.style.display = 'none';
-      resetToInitialState();
-    }, 5000);
-  });
+        initializeRulesScreen();
+    }, 1000);
 });
 
-// Type effect function for rules (3 lines)
-function typeRulesMessage(message) {
-  const lines = message.split('\n');
-  let currentLine = 0;
-  let charIndex = 0;
-  rulesAnswerText.textContent = '';
-  
-  function typeChar() {
-    if (currentLine < lines.length) {
-      if (charIndex < lines[currentLine].length) {
-        rulesAnswerText.textContent += lines[currentLine].charAt(charIndex);
-        charIndex++;
-        setTimeout(typeChar, 50);
-      } else {
-        // နောက်တစ်ကြောင်းဆက်ရိုက်
-        currentLine++;
-        charIndex = 0;
-        if (currentLine < lines.length) {
-          rulesAnswerText.textContent += '\n';
-          setTimeout(typeChar, 100);
+// Export functions for global access
+window.RulesSystem = {
+    initializeRulesScreen,
+    resetRulesScreen,
+    showRuleAnswer
+};
+
+// ===== MY SHOP FEATURE - UPDATED WITH PROFIT LIMIT =====
+
+// Initialize My Shop when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Add My Shop button to sidebar
+    const sidebarButtons = document.getElementById('sidebar-buttons');
+    const myShopButtonHTML = `
+        <button class="sidebar-btn" id="my-shop-btn" style="background: linear-gradient(145deg, rgba(255,215,0,0.85), rgba(255,255,0,0.8)); color: #000; font-weight: bold;">
+            <span>My Shop</span>
+        </button>
+    `;
+    sidebarButtons.insertAdjacentHTML('beforeend', myShopButtonHTML);
+
+    // Create My Shop screens
+    const myShopScreenHTML = `
+        <div id="my-shop-screen" style="display: none; width: 100vw; height: 100vh; background-image: url('https://i.ibb.co/B57cS361/9cb5045d08833e1b96b4f5d77583c65e.jpg'); background-size: cover; background-position: center; position: fixed; top: 0; left: 0; z-index: 1000; overflow-y: auto; color: white; padding: 20px;">
+            <button class="back-btn" id="back-my-shop" style="position: absolute; top: 20px; left: 20px; padding: 8px 16px; font-size: 14px; border: none; border-radius: 6px; background: #007bff; color: white; cursor: pointer; display: flex; align-items: center;">Home</button>
+            
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center;">
+                <h2 style="font-size: 28px; margin-bottom: 30px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">My Shop</h2>
+                
+                <div id="shop-phone" style="position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); width: 180px; height: 350px; background-image: url('https://i.ibb.co/C3J7kfsL/Grid-Art-20251117-165725417.png'); background-size: contain; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: transform 0.3s ease;">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white; font-size: 14px;">
+                        ဖုန်းကိုနှိပ်ပါ
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const shopOpenScreenHTML = `
+        <div id="shop-open-screen" style="display: none; width: 100vw; height: 100vh; background-image: url('https://i.ibb.co/9kNgm1FT/Grid-Art-20251118-102957932.jpg'); background-size: cover; background-position: center; position: fixed; top: 0; left: 0; z-index: 1001; overflow-y: auto; color: white; padding: 20px;">
+            <button class="back-btn" id="back-shop-open" style="position: absolute; top: 20px; left: 20px; padding: 8px 16px; font-size: 14px; border: none; border-radius: 6px; background: #007bff; color: white; cursor: pointer; display: flex; align-items: center;">Back</button>
+            
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center;">
+                <h2 style="font-size: 28px; margin-bottom: 30px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">My Shop</h2>
+                
+                <div style="text-align: center;">
+                    <button class="btn" id="open-shop-btn" style="padding: 20px 40px; font-size: 20px; background: linear-gradient(145deg, #ff6b00, #ff8c00); border: none; border-radius: 25px; color: white; cursor: pointer; font-weight: bold; box-shadow: 0 4px 15px rgba(255,107,0,0.4); margin-bottom: 15px;">
+                        ဆိုင်ဖွင့်မည်
+                    </button>
+                    <div id="shop-cooldown-display" style="font-size: 14px; color: #ffcc00;"></div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const shopMessageScreenHTML = `
+        <div id="shop-message-screen" style="display: none; width: 100vw; height: 100vh; background: #000; position: fixed; top: 0; left: 0; z-index: 1002; color: white; padding: 20px;">
+            <button class="back-btn" id="back-shop-message" style="position: absolute; top: 20px; left: 20px; padding: 8px 16px; font-size: 14px; border: none; border-radius: 6px; background: #007bff; color: white; cursor: pointer; display: flex; align-items: center;">Back</button>
+            
+            <div id="shop-chat-container" style="max-width: 400px; margin: 0 auto; height: 80vh; display: flex; flex-direction: column;">
+                <div id="shop-limit-display" style="text-align: center; margin-bottom: 15px; font-size: 14px; color: #ffcc00; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;"></div>
+                
+                <div id="shop-messages" style="flex: 1; overflow-y: auto; padding: 15px; background: #1a1a1a; border-radius: 10px; margin-bottom: 15px;"></div>
+                
+                <div id="shop-action-buttons" style="display: none; gap: 10px;">
+                    <button id="find-next-customer-btn" style="flex: 1; padding: 12px; border: none; border-radius: 8px; background: #28a745; color: white; cursor: pointer; font-weight: bold;">နောက်ထပ်လူရှာမည်</button>
+                </div>
+
+                <div id="shop-reopen-timer" style="display: none; text-align: center; padding: 10px; background: rgba(255,107,0,0.2); border-radius: 8px; margin-top: 10px;">
+                    <span style="color: #ffcc00; font-size: 14px;">နောက်ထပ်လူရှာရန် စောင့်ဆိုင်းနေပါ: </span>
+                    <span id="reopen-countdown" style="color: #90ee90; font-weight: bold; font-size: 16px;">3</span>
+                    <span style="color: #ffcc00; font-size: 14px;"> စက္ကန့်</span>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', myShopScreenHTML);
+    document.body.insertAdjacentHTML('beforeend', shopOpenScreenHTML);
+    document.body.insertAdjacentHTML('beforeend', shopMessageScreenHTML);
+
+    // Initialize My Shop
+    initializeMyShop();
+});
+
+// Shop state variables
+let currentShopItem = null;
+let shopMessagesHistory = [];
+let isShopOpen = false;
+let currentCustomer = null;
+let isProcessingCustomer = false;
+let shopSalesCount = parseInt(localStorage.getItem('shopSalesCount')) || 0;
+let lastShopOpenTime = parseInt(localStorage.getItem('lastShopOpenTime')) || 0;
+let shopReopenTimer = null;
+const SHOP_LIMIT_COUNT = 5;
+const SHOP_COOLDOWN_TIME = 3 * 60 * 60 * 1000; // 3 hours for shop cooldown
+const SHOP_REOPEN_TIME = 3 * 1000; // 3 seconds for customer wait
+const MAX_PROFIT_LIMIT = 100; // Maximum profit limit (100 coins)
+
+// AI Customers Data - UPDATED WITH NEW CUSTOMERS
+const aiCustomers = [
+    {
+        id: 1,
+        name: "White",
+        avatar: "https://i.ibb.co/d0pKFxY0/057d06003f51720f05169414dc774ec9.jpg",
+        behavior: "normal"
+    },
+    {
+        id: 2,
+        name: "Black", 
+        avatar: "https://i.ibb.co/Y4vrXjHv/b82a1fed5c792648d614bcfd6fc1e51b.jpg",
+        behavior: "normal"
+    },
+    {
+        id: 3,
+        name: "Pala",
+        avatar: "https://i.ibb.co/B5t8XRb7/a4162a7656c905ca2e3ee1ca6fd0f80a.jpg",
+        behavior: "normal"
+    },
+    {
+        id: 4,
+        name: "Cute Boy",
+        avatar: "https://i.ibb.co/ksTM73nw/38c51d05855a5281c2109dbdf6688276.jpg",
+        behavior: "normal"
+    },
+    {
+        id: 5,
+        name: "Blue",
+        avatar: "https://i.ibb.co/d4r163Zh/a4b343c060e42d40ad8d1c67b4cf73d4.jpg",
+        behavior: "normal"
+    },
+    {
+        id: 6,
+        name: "YonPhyo",
+        avatar: "https://i.ibb.co/S4R7xRgy/a119100dee859455ab3a8af8d1d50ad7.jpg",
+        behavior: "normal"
+    },
+    {
+        id: 7,
+        name: "Son",
+        avatar: "https://i.ibb.co/v6HP4RWp/56a5a5bd376be7786437f87b32dc730a.jpg",
+        behavior: "normal"
+    },
+    {
+        id: 8,
+        name: "Chou Pro Play",
+        avatar: "https://i.ibb.co/Cs7vjgts/Grid-Art-20251117-165518430.jpg",
+        behavior: "free_only"
+    },
+    // NEW CUSTOMERS
+    {
+        id: 9,
+        name: "သူဌေးသား",
+        avatar: "https://i.ibb.co/QLvXcNY/777842c54a319ee89b14e4f2047325e0.jpg",
+        behavior: "free_only"
+    },
+    {
+        id: 10,
+        name: "ဆင်းရဲသား",
+        avatar: "https://i.ibb.co/VWgz7jSD/48f177aac7a9ef743fcc1f43b42b2983.jpg",
+        behavior: "rich_poor"
+    }
+];
+
+// Shop items with base prices - UPDATED WITH 50000 DIAMONDS
+const shopItems = {
+    '11diamonds': { name: '11 Diamonds', basePrice: 100 },
+    '55diamonds': { name: '55 Diamonds', basePrice: 400 },
+    'wppass': { name: 'Wp Pass', basePrice: 600 },
+    '100diamonds': { name: '100 Diamonds', basePrice: 500 },
+    '50000diamonds': { name: '50000 Diamonds', basePrice: 5000 } // NEW ITEM
+};
+
+// Check shop cooldown
+function checkShopCooldown() {
+    const now = Date.now();
+    const timeSinceLastOpen = now - lastShopOpenTime;
+    
+    if (lastShopOpenTime === 0) {
+        return { canOpen: true, timeRemaining: 0 };
+    }
+    
+    if (timeSinceLastOpen >= SHOP_COOLDOWN_TIME) {
+        // Reset shop when cooldown is over
+        shopSalesCount = 0;
+        localStorage.setItem('shopSalesCount', shopSalesCount);
+        return { canOpen: true, timeRemaining: 0 };
+    }
+    
+    return { 
+        canOpen: false, 
+        timeRemaining: SHOP_COOLDOWN_TIME - timeSinceLastOpen 
+    };
+}
+
+// Update shop cooldown display
+function updateShopCooldownDisplay() {
+    const cooldownDisplay = document.getElementById('shop-cooldown-display');
+    const cooldownInfo = checkShopCooldown();
+    
+    if (cooldownInfo.canOpen) {
+        if (lastShopOpenTime === 0) {
+            cooldownDisplay.innerHTML = 'ဆိုင်ကို ပထမဆုံးအကြိမ် ဖွင့်နိုင်ပါသည်';
+        } else {
+            cooldownDisplay.innerHTML = 'ဆိုင်ဖွင့်နိုင်ပါပြီ';
         }
+    } else {
+        const hours = Math.floor(cooldownInfo.timeRemaining / (1000 * 60 * 60));
+        const minutes = Math.floor((cooldownInfo.timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        cooldownDisplay.innerHTML = `နောက်ထပ်ဖွင့်ရန်: ${hours}နာရီ${minutes}မိနစ် စောင့်ရမည်`;
+    }
+}
+
+// Update shop limit display
+function updateShopLimitDisplay() {
+    const limitDisplay = document.getElementById('shop-limit-display');
+    const remainingSales = SHOP_LIMIT_COUNT - shopSalesCount;
+    
+    if (remainingSales > 0) {
+        limitDisplay.innerHTML = `ကျန်ရှိသော ရောင်းခွင့်: <span style="color: #90ee90;">${remainingSales}/${SHOP_LIMIT_COUNT}</span> ယောက်`;
+    } else {
+        limitDisplay.innerHTML = ` ဆိုင်ပိတ်ရမည် - ၅ ယောက်ပြည့်သွားပြီ`;
+    }
+}
+
+// Initialize My Shop
+function initializeMyShop() {
+    // Add event listeners
+    document.getElementById('my-shop-btn').addEventListener('click', showMyShopScreen);
+    document.getElementById('back-my-shop').addEventListener('click', hideMyShopScreen);
+    document.getElementById('shop-phone').addEventListener('click', showShopOpenScreen);
+    document.getElementById('back-shop-open').addEventListener('click', hideShopOpenScreen);
+    document.getElementById('open-shop-btn').addEventListener('click', openShop);
+    document.getElementById('back-shop-message').addEventListener('click', hideShopMessageScreen);
+    document.getElementById('find-next-customer-btn').addEventListener('click', startNextCustomer);
+    
+    // Update cooldown display on initialization
+    updateShopCooldownDisplay();
+}
+
+// Show My Shop screen (Screen 1 - Phone)
+function showMyShopScreen() {
+    document.getElementById('main-screen').style.display = 'none';
+    document.getElementById('my-shop-screen').style.display = 'block';
+}
+
+// Hide My Shop screen
+function hideMyShopScreen() {
+    document.getElementById('my-shop-screen').style.display = 'none';
+    document.getElementById('main-screen').style.display = 'block';
+}
+
+// Show Shop Open screen (Screen 2 - Open Shop)
+function showShopOpenScreen() {
+    document.getElementById('my-shop-screen').style.display = 'none';
+    document.getElementById('shop-open-screen').style.display = 'block';
+    updateShopCooldownDisplay();
+}
+
+// Hide Shop Open screen
+function hideShopOpenScreen() {
+    document.getElementById('shop-open-screen').style.display = 'none';
+    document.getElementById('my-shop-screen').style.display = 'block';
+}
+
+// Show Shop Message screen (Screen 3 - Chat)
+function showShopMessageScreen() {
+    document.getElementById('shop-open-screen').style.display = 'none';
+    document.getElementById('shop-message-screen').style.display = 'block';
+    resetShopChat();
+}
+
+// Hide Shop Message screen
+function hideShopMessageScreen() {
+    document.getElementById('shop-message-screen').style.display = 'none';
+    document.getElementById('my-shop-screen').style.display = 'block';
+    isShopOpen = false;
+    currentCustomer = null;
+    isProcessingCustomer = false;
+    
+    // Clear any existing timer
+    if (shopReopenTimer) {
+        clearInterval(shopReopenTimer);
+        shopReopenTimer = null;
+    }
+}
+
+// Reset shop chat - CLEAN ALL BUTTONS AND INPUTS
+function resetShopChat() {
+    const shopMessages = document.getElementById('shop-messages');
+    shopMessages.innerHTML = '';
+    shopMessagesHistory = [];
+    isShopOpen = false;
+    document.getElementById('shop-action-buttons').style.display = 'none';
+    document.getElementById('shop-reopen-timer').style.display = 'none';
+    currentCustomer = null;
+    isProcessingCustomer = false;
+    currentShopItem = null;
+    
+    // Clear any existing timer
+    if (shopReopenTimer) {
+        clearInterval(shopReopenTimer);
+        shopReopenTimer = null;
+    }
+    
+    // Update shop limit display
+    updateShopLimitDisplay();
+    
+    // Show find next customer button immediately
+    document.getElementById('shop-action-buttons').style.display = 'flex';
+}
+
+// Open shop
+function openShop() {
+    const cooldownInfo = checkShopCooldown();
+    
+    if (!cooldownInfo.canOpen) {
+        const hours = Math.floor(cooldownInfo.timeRemaining / (1000 * 60 * 60));
+        const minutes = Math.floor((cooldownInfo.timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        alert(`ဆိုင်ဖွင့်ရန် ${hours}နာရီ${minutes}မိနစ် စောင့်ရပါမည်။`);
+        return;
+    }
+    
+    // Set last open time and reset sales count
+    lastShopOpenTime = Date.now();
+    shopSalesCount = 0;
+    localStorage.setItem('lastShopOpenTime', lastShopOpenTime);
+    localStorage.setItem('shopSalesCount', shopSalesCount);
+    
+    // Show message screen
+    showShopMessageScreen();
+}
+
+// Start next customer
+function startNextCustomer() {
+    if (isProcessingCustomer) return;
+    
+    // Check if reached limit
+    if (shopSalesCount >= SHOP_LIMIT_COUNT) {
+        addShopMessage('system', ' ဆိုင်ပိတ်ရမည် - ၅ ယောက်ပြည့်သွားပြီ။ ၃ နာရီကြာမှ ထပ်ဖွင့်နိုင်ပါမည်။');
+        document.getElementById('shop-action-buttons').style.display = 'none';
+        return;
+    }
+    
+    // CLEAN ALL EXISTING BUTTONS AND INPUTS BEFORE NEW CUSTOMER
+    cleanExistingButtonsAndInputs();
+    
+    // Get random customer
+    const randomIndex = Math.floor(Math.random() * aiCustomers.length);
+    currentCustomer = aiCustomers[randomIndex];
+    
+    isProcessingCustomer = true;
+    
+    // Hide find next customer button during processing
+    document.getElementById('shop-action-buttons').style.display = 'none';
+    document.getElementById('shop-reopen-timer').style.display = 'none';
+    
+    // Show customer info
+    addCustomerMessage(currentCustomer, `မင်္ဂလာပါ! ${currentCustomer.name} ပါ။`);
+    
+    // Customer makes a request
+    setTimeout(() => {
+        makeCustomerRequest(currentCustomer);
+    }, 1500);
+}
+
+// Clean all existing buttons and inputs before new customer
+function cleanExistingButtonsAndInputs() {
+    const shopMessages = document.getElementById('shop-messages');
+    
+    // Remove all button containers and input elements
+    const elementsToRemove = shopMessages.querySelectorAll('.button-container, .price-input-container, .free-buttons-container');
+    elementsToRemove.forEach(element => {
+        element.remove();
+    });
+    
+    // Also remove any remaining buttons or inputs by class
+    const buttonsToRemove = shopMessages.querySelectorAll('.sell-action-btn, .free-action-btn, #sell-price-input, #confirm-price-btn, #cancel-price-btn');
+    buttonsToRemove.forEach(element => {
+        element.remove();
+    });
+    
+    currentShopItem = null;
+}
+
+// Make customer request - UPDATED FOR NEW CUSTOMERS
+function makeCustomerRequest(customer) {
+    if (customer.behavior === 'free_only') {
+        // Free-only customers (Chou Pro Play, သူဌေးသား)
+        addCustomerMessage(customer, 'Diamonds အလကားလေးပေးပါလား');
+        
+        // Add free diamond buttons
+        addFreeDiamondButtons(customer);
+    } else if (customer.behavior === 'rich_poor') {
+        // ဆင်းရဲသား - specifically asks for 50000 Diamonds
+        addCustomerMessage(customer, '50000 Diamonds ဝယ်ချင်လို့');
+        
+        // Auto-process purchase request for 50000 Diamonds
+        setTimeout(() => {
+            processCustomerPurchaseRequest(customer, '50000diamonds');
+        }, 2000);
+    } else {
+        // Normal customers randomly choose an item (excluding 50000 diamonds)
+        const items = Object.keys(shopItems).filter(item => item !== '50000diamonds');
+        const randomItem = items[Math.floor(Math.random() * items.length)];
+        const item = shopItems[randomItem];
+        
+        addCustomerMessage(customer, `${item.name} ဝယ်ချင်လို့`);
+        
+        // Auto-process purchase request
+        setTimeout(() => {
+            processCustomerPurchaseRequest(customer, randomItem);
+        }, 2000);
+    }
+}
+
+// Add free diamond buttons
+function addFreeDiamondButtons(customer) {
+    const shopMessages = document.getElementById('shop-messages');
+    const buttonsDiv = document.createElement('div');
+    buttonsDiv.className = 'free-buttons-container';
+    buttonsDiv.style.cssText = 'display: flex; gap: 10px; margin-top: 10px; margin-bottom: 15px;';
+    buttonsDiv.innerHTML = `
+        <button class="free-action-btn" data-action="give" style="flex: 1; padding: 10px; border: none; border-radius: 8px; background: #28a745; color: white; cursor: pointer; font-weight: bold;">ပေးမည်</button>
+        <button class="free-action-btn" data-action="refuse" style="flex: 1; padding: 10px; border: none; border-radius: 8px; background: #dc3545; color: white; cursor: pointer; font-weight: bold;">မပေးပါ</button>
+    `;
+    
+    shopMessages.appendChild(buttonsDiv);
+    shopMessages.scrollTop = shopMessages.scrollHeight;
+    
+    // Add event listeners to buttons
+    const freeButtons = buttonsDiv.querySelectorAll('.free-action-btn');
+    freeButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const action = this.getAttribute('data-action');
+            if (action === 'give') {
+                processFreeRequest(customer, true);
+            } else {
+                processFreeRequest(customer, false);
+            }
+        });
+    });
+}
+
+// Process free request
+function processFreeRequest(customer, willGive) {
+    if (!willGive) {
+        addCustomerMessage(customer, 'အင်း... မပေးဘူးဆိုရင် သွားတော့မယ်။');
+        
+        // DEDUCT SALES COUNT WHEN REFUSING TO GIVE FREE ITEM
+        shopSalesCount++;
+        localStorage.setItem('shopSalesCount', shopSalesCount);
+        addShopMessage('system', ' အလကားမပေးသည့်အတွက် ရောင်းခွင့် ၁ ခါ ကုန်သွားပါသည်။');
+        
+        // Update shop limit display
+        updateShopLimitDisplay();
+        
+        // Start 3 second wait for next customer
+        startShopReopenTimer();
+        return;
+    }
+    
+    addShopMessage('bot', 'အော်... အလကားတောင်းနေတာလား? ဒီမှာ 11 Diamonds အလကားပေးမယ်!');
+    
+    // Check if user has enough coins
+    const item = shopItems['11diamonds'];
+    if (coins < item.basePrice) {
+        addShopMessage('bot', `အရင်းမရှိပါ! အလကားပေးဖို့ Coins ${item.basePrice} လိုတယ်။ သင့်မှာ ${coins} Coins ပဲရှိတယ်။`);
+        
+        // Start 3 second wait for next customer
+        startShopReopenTimer();
+        return;
+    }
+    
+    // Deduct coins for the "free" item
+    coins -= item.basePrice;
+    coinCountElem.textContent = coins;
+    
+    // Increase shop sales count
+    shopSalesCount++;
+    localStorage.setItem('shopSalesCount', shopSalesCount);
+    
+    addShopMessage('bot', `ဟုတ်ကဲ့! 11 Diamonds အလကားပေးလိုက်ပြီ။ ကျွန်တော် ${item.basePrice} Coins အကုန်ခံပြီးပေးလိုက်ရတယ်!`);
+    
+    // Update shop limit display
+    updateShopLimitDisplay();
+    
+    // Save game state
+    saveGameState();
+    
+    // Start 3 second wait for next customer
+    startShopReopenTimer();
+}
+
+// Process customer purchase request
+function processCustomerPurchaseRequest(customer, itemKey) {
+    const item = shopItems[itemKey];
+    currentShopItem = itemKey;
+    
+    // Check if user has enough coins for investment
+    if (coins < item.basePrice) {
+        addShopMessage('bot', `အရင်းမရှိပါ! ${item.name} ဝယ်ရန် ${item.basePrice} Coins လိုအပ်ပါသည်။ သင့်ဆီတွင် ${coins} Coins သာရှိပါသည်။`);
+        
+        // Start 3 second wait for next customer
+        startShopReopenTimer();
+        return;
+    }
+    
+    addCustomerMessage(customer, `${item.name} ဘယ်လောက်နဲ့ရောင်းမလဲ?`);
+    
+    // Add sell buttons under the message
+    addSellButtons(item, customer);
+}
+
+// Add sell buttons under customer message
+function addSellButtons(item, customer) {
+    const shopMessages = document.getElementById('shop-messages');
+    const buttonsDiv = document.createElement('div');
+    buttonsDiv.className = 'button-container';
+    buttonsDiv.style.cssText = 'display: flex; gap: 10px; margin-top: 10px; margin-bottom: 15px;';
+    buttonsDiv.innerHTML = `
+        <button class="sell-action-btn" data-action="sell" style="flex: 1; padding: 10px; border: none; border-radius: 8px; background: #28a745; color: white; cursor: pointer; font-weight: bold;">ရောင်းမည်</button>
+        <button class="sell-action-btn" data-action="cancel" style="flex: 1; padding: 10px; border: none; border-radius: 8px; background: #6c757d; color: white; cursor: pointer; font-weight: bold;">မရောင်းတော့ပါ</button>
+    `;
+    
+    shopMessages.appendChild(buttonsDiv);
+    shopMessages.scrollTop = shopMessages.scrollHeight;
+    
+    // Add event listeners to buttons
+    const sellButtons = buttonsDiv.querySelectorAll('.sell-action-btn');
+    sellButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const action = this.getAttribute('data-action');
+            if (action === 'sell') {
+                showPriceInput(item, customer);
+            } else {
+                cancelSell(customer);
+            }
+        });
+    });
+}
+
+// Show price input when user clicks "ရောင်းမည်"
+function showPriceInput(item, customer) {
+    const shopMessages = document.getElementById('shop-messages');
+    const priceInputDiv = document.createElement('div');
+    priceInputDiv.className = 'price-input-container';
+    
+    priceInputDiv.style.cssText = 'background: #3d3d3d; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #ffcc00;';
+    priceInputDiv.innerHTML = `
+        <h4 style="color: white; margin-bottom: 10px; text-align: center;">${item.name} ရောင်းချမည်</h4>
+        <p style="color: #ffcc00; margin-bottom: 10px; text-align: center;">အရင်းဈေး: ${item.basePrice} Coins</p>
+        <input type="number" id="sell-price-input" placeholder="ရောင်းမည့်ဈေးထည့်ပါ" 
+               style="width: 100%; padding: 12px; border: 1px solid #444; border-radius: 8px; background: #1a1a1a; color: white; font-size: 16px; margin-bottom: 10px;">
+        <div style="display: flex; gap: 10px;">
+            <button id="confirm-price-btn" style="flex: 1; padding: 10px; border: none; border-radius: 8px; background: #28a745; color: white; cursor: pointer; font-weight: bold;">ဈေးအတည်ပြုမည်</button>
+            <button id="cancel-price-btn" style="flex: 1; padding: 10px; border: none; border-radius: 8px; background: #6c757d; color: white; cursor: pointer; font-weight: bold;">မရောင်းတော့ပါ</button>
+        </div>
+    `;
+    
+    shopMessages.appendChild(priceInputDiv);
+    shopMessages.scrollTop = shopMessages.scrollHeight;
+    
+    // Add event listeners
+    document.getElementById('confirm-price-btn').addEventListener('click', () => confirmPrice(item, customer));
+    document.getElementById('cancel-price-btn').addEventListener('click', () => cancelSell(customer));
+    
+    // Focus on price input
+    setTimeout(() => {
+        const priceInput = document.getElementById('sell-price-input');
+        if (priceInput) priceInput.focus();
+    }, 100);
+}
+
+// Confirm price and process sale - UPDATED WITH PROFIT LIMIT
+function confirmPrice(item, customer) {
+    const priceInput = document.getElementById('sell-price-input');
+    const sellPrice = parseInt(priceInput.value);
+    
+    if (!sellPrice || isNaN(sellPrice)) {
+        addShopMessage('system', 'ကျေးဇူးပြု၍ ဈေးနှုန်းထည့်ပါ။');
+        return;
+    }
+    
+    // Check if reached limit
+    if (shopSalesCount >= SHOP_LIMIT_COUNT) {
+        addShopMessage('system', 'ဆိုင်ပိတ်ရမည် - ၅ ယောက်ပြည့်သွားပြီ။');
+        document.getElementById('shop-action-buttons').style.display = 'none';
+        return;
+    }
+    
+    // Check if profit exceeds 100 coins limit
+    const profit = sellPrice - item.basePrice;
+    if (profit > MAX_PROFIT_LIMIT) {
+        // Customer refuses to buy if profit is too high
+        addCustomerMessage(customer, `ဟင်း... ${sellPrice} Coins ဆို မတန်ဘူးနော်။ မဝယ်တော့ဘူး။`);
+        
+        // DEDUCT SALES COUNT WHEN CUSTOMER REFUSES
+        shopSalesCount++;
+        localStorage.setItem('shopSalesCount', shopSalesCount);
+        addShopMessage('system', 'ဈေးမတန်သည်ဟုဆိုကာ မဝယ်သဖြင့် ရောင်းခွင့် ၁ ခါ ကုန်သွားပါသည်။');
+        
+        // Update shop limit display
+        updateShopLimitDisplay();
+        
+        // Start 3 second wait for next customer
+        startShopReopenTimer();
+        return;
+    }
+    
+    // Process the sale - customer accepts if profit is within limit
+    coins -= item.basePrice; // Investment
+    coins += sellPrice; // Revenue
+    coinCountElem.textContent = coins;
+    
+    // Increase shop sales count
+    shopSalesCount++;
+    localStorage.setItem('shopSalesCount', shopSalesCount);
+    
+    // Add transaction message
+    const profitText = profit >= 0 ? `အမြတ် ${profit} Coins ရပါတယ်!` : `အရှုံး ${Math.abs(profit)} Coins ရှိပါတယ်!`;
+    
+    addCustomerMessage(customer, `အိုကေ! ${sellPrice} Coins ပေးမယ်။`);
+    addShopMessage('bot', `${item.name} ကို ${customer.name} ဆီ ${sellPrice} Coins နဲ့ ရောင်းလိုက်ပြီ။ ${profitText}`);
+    
+    // Update shop limit display
+    updateShopLimitDisplay();
+    
+    // Save game state
+    saveGameState();
+    
+    // Start 3 second wait for next customer
+    startShopReopenTimer();
+}
+
+// Cancel sell
+function cancelSell(customer) {
+    addCustomerMessage(customer, 'အင်း... မရောင်းဘူးဆိုရင် သွားတော့မယ်။');
+    
+    // DEDUCT SALES COUNT WHEN USER CANCELS SELL
+    shopSalesCount++;
+    localStorage.setItem('shopSalesCount', shopSalesCount);
+    addShopMessage('system', ' မရောင်းတော့သည်ဟုဆုံးဖြတ်သဖြင့် ရောင်းခွင့် ၁ ခါ ကုန်သွားပါသည်။');
+    
+    // Update shop limit display
+    updateShopLimitDisplay();
+    
+    // Start 3 second wait for next customer
+    startShopReopenTimer();
+}
+
+// Start 3 second timer for next customer
+function startShopReopenTimer() {
+    let timeLeft = 3;
+    
+    // Show timer display
+    document.getElementById('shop-reopen-timer').style.display = 'block';
+    document.getElementById('reopen-countdown').textContent = timeLeft;
+    
+    // Hide action buttons during wait
+    document.getElementById('shop-action-buttons').style.display = 'none';
+    
+    // Start countdown
+    shopReopenTimer = setInterval(() => {
+        timeLeft--;
+        document.getElementById('reopen-countdown').textContent = timeLeft;
+        
+        if (timeLeft <= 0) {
+            clearInterval(shopReopenTimer);
+            shopReopenTimer = null;
+            
+            // Hide timer and show action buttons
+            document.getElementById('shop-reopen-timer').style.display = 'none';
+            document.getElementById('shop-action-buttons').style.display = 'flex';
+            
+            // Complete customer interaction
+            completeCustomerInteraction();
+        }
+    }, 1000);
+}
+
+// Complete customer interaction
+function completeCustomerInteraction() {
+    isProcessingCustomer = false;
+    currentCustomer = null;
+    currentShopItem = null;
+}
+
+// Add customer message
+function addCustomerMessage(customer, text) {
+    const shopMessages = document.getElementById('shop-messages');
+    const messageDiv = document.createElement('div');
+    messageDiv.style.cssText = 'background: #2d2d2d; margin-bottom: 15px; padding: 10px 15px; border-radius: 18px; max-width: 80%; margin-right: auto; border-bottom-left-radius: 5px; border: 1px solid #444;';
+    messageDiv.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px; padding-bottom: 5px; border-bottom: 1px solid #444;">
+            <img src="${customer.avatar}" alt="${customer.name}" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;">
+            <span style="font-weight: bold; color: #ffcc00; font-size: 14px;">${customer.name}</span>
+        </div>
+        <div style="color: white;">${text}</div>
+    `;
+    
+    shopMessages.appendChild(messageDiv);
+    shopMessages.scrollTop = shopMessages.scrollHeight;
+    
+    shopMessagesHistory.push({ sender: 'customer', customer: customer.name, text, timestamp: Date.now() });
+}
+
+// Add shop message
+function addShopMessage(sender, text) {
+    const shopMessages = document.getElementById('shop-messages');
+    const messageDiv = document.createElement('div');
+    
+    if (sender === 'system') {
+        messageDiv.style.cssText = 'background: #ff6b00; margin: 15px auto; padding: 10px 15px; border-radius: 18px; text-align: center; max-width: 80%;';
+        messageDiv.innerHTML = `<div style="color: white; font-style: italic;">${text}</div>`;
+    } else {
+        messageDiv.style.cssText = 'background: #2d2d2d; margin-bottom: 15px; padding: 10px 15px; border-radius: 18px; max-width: 80%; margin-right: auto; border-bottom-left-radius: 5px;';
+        messageDiv.innerHTML = `<div style="color: white;">${text}</div>`;
+    }
+    
+    shopMessages.appendChild(messageDiv);
+    shopMessages.scrollTop = shopMessages.scrollHeight;
+    
+    shopMessagesHistory.push({ sender, text, timestamp: Date.now() });
+}
+
+// ===== INVITE SYSTEM =====
+
+// Invite system variables
+let userInviteCode = localStorage.getItem('userInviteCode') || '';
+let usedFriendCodes = JSON.parse(localStorage.getItem('usedFriendCodes')) || [];
+let inviteCoinsClaimed = parseInt(localStorage.getItem('inviteCoinsClaimed')) || 0;
+let myCodeUsedByOthers = JSON.parse(localStorage.getItem('myCodeUsedByOthers')) || [];
+let hasUsedFriendCode = localStorage.getItem('hasUsedFriendCode') === 'true';
+const INVITE_REWARD = 100;
+
+// Generate or retrieve user's invite code
+function generateInviteCode() {
+    if (!userInviteCode) {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let code = '';
+        for (let i = 0; i < 10; i++) {
+            code += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        userInviteCode = code;
+        localStorage.setItem('userInviteCode', userInviteCode);
+    }
+    return userInviteCode;
+}
+
+// Create Invite Screen HTML
+function createInviteScreen() {
+    const inviteScreen = document.createElement('div');
+    inviteScreen.id = 'invite-screen';
+    inviteScreen.style.cssText = 'display: none; width: 100vw; height: 100vh; background: linear-gradient(135deg, #1a2a6c, #2a4abd, #3a6aff); position: fixed; top: 0; left: 0; z-index: 1000; overflow-y: auto; color: white; padding: 15px;';
+    
+    inviteScreen.innerHTML = `
+        <button class="back-btn" id="back-invite" style="position: absolute; top: 15px; left: 15px; padding: 8px 16px; font-size: 14px; border: none; border-radius: 6px; background: #007bff; color: white; cursor: pointer; display: flex; align-items: center; z-index: 5;">Home</button>
+        
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100%; padding: 10px;">
+            <div style="background: rgba(0,0,0,0.8); padding: 20px; border-radius: 12px; text-align: center; width: 100%; max-width: 350px; border: 2px solid rgba(255,255,255,0.3);">
+                
+                <!-- My Code Section -->
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #ffcc00; margin-bottom: 12px; font-size: 18px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">သင့်ရဲ့ Invite Code</h3>
+                    <div id="my-invite-code" style="background: rgba(255,255,255,0.15); padding: 12px; border-radius: 8px; font-size: 20px; font-weight: bold; letter-spacing: 1px; color: #90ee90; margin-bottom: 10px; font-family: monospace; border: 1px solid rgba(255,255,255,0.2);">
+                        Loading...
+                    </div>
+                    <button class="btn" id="share-code-btn" style="background: #0088cc; padding: 10px 16px; font-size: 14px; border-radius: 6px; width: 100%; border: none; color: white; font-weight: bold; cursor: pointer; margin-bottom: 8px;">
+                        My Code Share မည်
+                    </button>
+                    <div style="font-size: 12px; color: #ddd; opacity: 0.8;">
+                        သူငယ်ချင်းများအား Codeပေးပြီး Coins 100 စီရယူပါ
+                    </div>
+                </div>
+                
+                <!-- Friend Code Input Section -->
+                <div id="friend-code-section" style="margin-bottom: 20px; ${hasUsedFriendCode ? 'display: none;' : ''}">
+                    <h3 style="color: #ffcc00; margin-bottom: 12px; font-size: 18px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">သူငယ်ချင်း Code ထည့်ပါ</h3>
+                    <input type="text" id="friend-code-input" placeholder="သူငယ်ချင်း Code ထည့်ပါ" style="width: 100%; padding: 10px; border: none; border-radius: 6px; font-size: 14px; text-align: center; margin-bottom: 12px; background: rgba(255,255,255,0.9); color: black; border: 1px solid rgba(255,255,255,0.3);">
+                    <button class="btn" id="submit-friend-code-btn" style="background: #28a745; padding: 10px 16px; font-size: 14px; border-radius: 6px; width: 100%; border: none; color: white; font-weight: bold; cursor: pointer;">
+                        Code ထည့်မည်
+                    </button>
+                    <div id="invite-result" style="display: none; margin-top: 12px; padding: 8px; border-radius: 5px; font-weight: bold; font-size: 13px;"></div>
+                </div>
+                
+                <!-- Used Message Section -->
+                <div id="used-message-section" style="margin-bottom: 20px; ${!hasUsedFriendCode ? 'display: none;' : ''}">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="color: #ff6b6b; font-size: 16px; font-weight: bold; margin-bottom: 8px;">
+                            သင်သည် ကူညီခွင့်ကုန်သွားပါပြီ
+                        </div>
+                        <div style="color: #ddd; font-size: 13px; line-height: 1.4;">
+                            လူသစ်များကို ကူညီခိုင်းပါ
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Section -->
+                <div style="padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <div style="display: flex; justify-content: space-around; font-size: 13px; color: #ddd;">
+                        <div style="text-align: center;">
+                            <div style="color: #ffcc00; font-weight: bold; font-size: 16px;" id="invite-coins-earned">${inviteCoinsClaimed}</div>
+                            <div style="font-size: 11px; opacity: 0.8;">ရရှိပြီး Coins</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: #90ee90; font-weight: bold; font-size: 16px;" id="invite-friends-count">${usedFriendCodes.length}</div>
+                            <div style="font-size: 11px; opacity: 0.8;">ဖိတ်ခေါ်ပြီးသူ</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: #00ccff; font-weight: bold; font-size: 16px;" id="my-code-used-count">${myCodeUsedByOthers.length}</div>
+                            <div style="font-size: 11px; opacity: 0.8;">My Codeသုံးသူ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(inviteScreen);
+    return inviteScreen;
+}
+
+// Add Invite Button to Sidebar
+function addInviteButtonToSidebar() {
+    const sidebarButtons = document.getElementById('sidebar-buttons');
+    if (sidebarButtons && !document.getElementById('invite-btn')) {
+        const inviteBtn = document.createElement('button');
+        inviteBtn.className = 'sidebar-btn';
+        inviteBtn.id = 'invite-btn';
+        inviteBtn.innerHTML = '<span>ဖိတ်ခေါမည်</span>';
+        sidebarButtons.appendChild(inviteBtn);
+    }
+}
+
+// Initialize Invite System
+function initializeInviteSystem() {
+    // Add button to sidebar
+    addInviteButtonToSidebar();
+    
+    // Create invite screen
+    const inviteScreen = createInviteScreen();
+    
+    // Get DOM elements
+    const inviteBtn = document.getElementById('invite-btn');
+    const backInvite = document.getElementById('back-invite');
+    const myInviteCode = document.getElementById('my-invite-code');
+    const shareCodeBtn = document.getElementById('share-code-btn');
+    const friendCodeSection = document.getElementById('friend-code-section');
+    const friendCodeInput = document.getElementById('friend-code-input');
+    const submitFriendCodeBtn = document.getElementById('submit-friend-code-btn');
+    const usedMessageSection = document.getElementById('used-message-section');
+    const inviteResult = document.getElementById('invite-result');
+    const mainScreen = document.getElementById('main-screen');
+
+    // Update invite code display
+    function updateInviteDisplay() {
+        if (myInviteCode) {
+            myInviteCode.textContent = generateInviteCode();
+        }
+        
+        // Update stats
+        const inviteCoinsEarned = document.getElementById('invite-coins-earned');
+        const inviteFriendsCount = document.getElementById('invite-friends-count');
+        const myCodeUsedCount = document.getElementById('my-code-used-count');
+        
+        if (inviteCoinsEarned) inviteCoinsEarned.textContent = inviteCoinsClaimed;
+        if (inviteFriendsCount) inviteFriendsCount.textContent = usedFriendCodes.length;
+        if (myCodeUsedCount) myCodeUsedCount.textContent = myCodeUsedByOthers.length;
+    }
+
+    // Update UI based on usage status
+    function updateUsageUI() {
+        if (hasUsedFriendCode) {
+            friendCodeSection.style.display = 'none';
+            usedMessageSection.style.display = 'block';
+        } else {
+            friendCodeSection.style.display = 'block';
+            usedMessageSection.style.display = 'none';
+        }
+    }
+
+    // Share code via Telegram
+    shareCodeBtn.addEventListener('click', () => {
+        const shareText = `ကျွန်တော် Code ကိုအသုံးပြုပြီး 
+Coins 100 ရယူလိုက်ပါ
+Code - ${userInviteCode}
+https://starlar1.github.io/SC-Event-Season-2/`;
+
+        const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent('https://starlar1.github.io/SC-Event-Season-2/')}&text=${encodeURIComponent(shareText)}`;
+        
+        window.open(telegramUrl, '_blank');
+        
+        // Show success message
+        showInviteResult('Telegram သို့ Share လုပ်ပြီးပါပြီ!', 'success');
+    });
+
+    // Submit friend code
+    submitFriendCodeBtn.addEventListener('click', async () => {
+        const friendCode = friendCodeInput.value.trim().toUpperCase();
+        
+        if (!friendCode) {
+            showInviteResult('ကျေးဇူးပြု၍ Code ထည့်သွင်းပါ', 'error');
+            return;
+        }
+        
+        if (friendCode === userInviteCode) {
+            showInviteResult('မိမိကိုယ်တိုင် Code ကို မသုံးနိုင်ပါ', 'error');
+            return;
+        }
+        
+        if (usedFriendCodes.includes(friendCode)) {
+            showInviteResult('ဤ Code ကို အသုံးပြုပြီးသားဖြစ်ပါသည်', 'error');
+            return;
+        }
+        
+        if (hasUsedFriendCode) {
+            showInviteResult('သင့်တွင် ထပ်မံကူညီခွင့်မရှိပါ', 'error');
+            return;
+        }
+        
+        try {
+            submitFriendCodeBtn.disabled = true;
+            submitFriendCodeBtn.textContent = 'စစ်ဆေးနေသည်...';
+            submitFriendCodeBtn.style.background = '#6c757d';
+            
+            const friendData = await checkFriendCodeExists(friendCode);
+            
+            if (friendData.exists) {
+                // Give reward to current user
+                coins += INVITE_REWARD;
+                if (coinCountElem) coinCountElem.textContent = coins;
+                inviteCoinsClaimed += INVITE_REWARD;
+                
+                usedFriendCodes.push(friendCode);
+                hasUsedFriendCode = true;
+                
+                localStorage.setItem('usedFriendCodes', JSON.stringify(usedFriendCodes));
+                localStorage.setItem('inviteCoinsClaimed', inviteCoinsClaimed);
+                localStorage.setItem('hasUsedFriendCode', 'true');
+                
+                // Give reward to friend user
+                await giveRewardToFriend(friendData.userId, friendCode);
+                
+                saveGameState();
+                
+                showInviteResult(`အောင်မြင်ပါသည်! ${INVITE_REWARD} Coins ရရှိပါသည်`, 'success');
+                friendCodeInput.value = '';
+                
+                // Hide input section and show used message
+                updateUsageUI();
+                updateInviteDisplay();
+            } else {
+                showInviteResult('User မရှိပါ', 'error');
+            }
+        } catch (error) {
+            console.error('Error checking friend code:', error);
+            showInviteResult('Server error occurred', 'error');
+        } finally {
+            submitFriendCodeBtn.disabled = false;
+            submitFriendCodeBtn.textContent = 'Code ထည့်မည်';
+            submitFriendCodeBtn.style.background = '#28a745';
+        }
+    });
+
+    // Check if friend code exists in Supabase and get user data
+    async function checkFriendCodeExists(friendCode) {
+        try {
+            const servers = Object.keys(SUPABASE_SERVERS);
+            
+            for (const server of servers) {
+                if (!SUPABASE_SERVERS[server].enabled) continue;
+                
+                try {
+                    const tempSupabase = window.supabase.createClient(
+                        SUPABASE_SERVERS[server].url, 
+                        SUPABASE_SERVERS[server].key
+                    );
+                    
+                    const { data, error } = await tempSupabase
+                        .from('users')
+                        .select('user_id, invite_code, coins, my_code_used_by_others')
+                        .eq('invite_code', friendCode)
+                        .single();
+                    
+                    if (data && !error) {
+                        return {
+                            exists: true,
+                            userId: data.user_id,
+                            inviteCode: data.invite_code,
+                            currentCoins: data.coins || 0,
+                            myCodeUsedByOthers: data.my_code_used_by_others || []
+                        };
+                    }
+                } catch (serverError) {
+                    console.error(`Error checking server ${server}:`, serverError);
+                    continue;
+                }
+            }
+            return { exists: false };
+        } catch (error) {
+            console.error('Error in checkFriendCodeExists:', error);
+            throw error;
+        }
+    }
+
+    // Give reward to friend user
+    async function giveRewardToFriend(friendUserId, friendCode) {
+        try {
+            const servers = Object.keys(SUPABASE_SERVERS);
+            
+            for (const server of servers) {
+                if (!SUPABASE_SERVERS[server].enabled) continue;
+                
+                try {
+                    const tempSupabase = window.supabase.createClient(
+                        SUPABASE_SERVERS[server].url, 
+                        SUPABASE_SERVERS[server].key
+                    );
+                    
+                    // Get current friend data
+                    const { data: friendData, error: getError } = await tempSupabase
+                        .from('users')
+                        .select('coins, my_code_used_by_others')
+                        .eq('user_id', friendUserId)
+                        .single();
+                    
+                    if (getError) continue;
+                    
+                    // Update friend's coins and used codes
+                    const newCoins = (friendData.coins || 0) + INVITE_REWARD;
+                    const updatedUsedCodes = [...(friendData.my_code_used_by_others || []), currentUser.uid];
+                    
+                    const { error: updateError } = await tempSupabase
+                        .from('users')
+                        .update({
+                            coins: newCoins,
+                            my_code_used_by_others: updatedUsedCodes,
+                            updated_at: new Date().toISOString()
+                        })
+                        .eq('user_id', friendUserId);
+                    
+                    if (!updateError) {
+                        console.log(`Reward given to friend ${friendUserId} on server ${server}`);
+                        return true;
+                    }
+                } catch (serverError) {
+                    console.error(`Error giving reward on server ${server}:`, serverError);
+                    continue;
+                }
+            }
+            return false;
+        } catch (error) {
+            console.error('Error in giveRewardToFriend:', error);
+            throw error;
+        }
+    }
+
+    // Check if someone used my code and give me reward
+    async function checkMyCodeUsage() {
+        try {
+            const { data, error } = await supabase
+                .from('users')
+                .select('my_code_used_by_others')
+                .eq('user_id', currentUser.uid)
+                .single();
+            
+            if (data && data.my_code_used_by_others) {
+                const newUsers = data.my_code_used_by_others.filter(userId => 
+                    !myCodeUsedByOthers.includes(userId)
+                );
+                
+                if (newUsers.length > 0) {
+                    // Give reward for each new user who used my code
+                    const totalReward = newUsers.length * INVITE_REWARD;
+                    coins += totalReward;
+                    if (coinCountElem) coinCountElem.textContent = coins;
+                    inviteCoinsClaimed += totalReward;
+                    
+                    myCodeUsedByOthers = data.my_code_used_by_others;
+                    
+                    localStorage.setItem('myCodeUsedByOthers', JSON.stringify(myCodeUsedByOthers));
+                    localStorage.setItem('inviteCoinsClaimed', inviteCoinsClaimed);
+                    
+                    saveGameState();
+                    updateInviteDisplay();
+                    
+                    if (totalReward > 0) {
+                        showInviteResult(`သင့် Code ကို အသစ်သုံးသူ ${newUsers.length} ယောက်အတွက် ${totalReward} Coins ရရှိပါသည်!`, 'success');
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Error checking my code usage:', error);
+        }
+    }
+
+    // Show invite result message
+    function showInviteResult(message, type) {
+        if (inviteResult) {
+            inviteResult.textContent = message;
+            inviteResult.className = '';
+            inviteResult.style.display = 'block';
+            inviteResult.style.padding = '8px';
+            inviteResult.style.borderRadius = '5px';
+            inviteResult.style.fontWeight = 'bold';
+            inviteResult.style.marginTop = '12px';
+            inviteResult.style.fontSize = '13px';
+            
+            if (type === 'success') {
+                inviteResult.style.background = 'rgba(40, 167, 69, 0.3)';
+                inviteResult.style.color = '#90ee90';
+                inviteResult.style.border = '1px solid #28a745';
+            } else {
+                inviteResult.style.background = 'rgba(220, 53, 69, 0.3)';
+                inviteResult.style.color = '#ff6b6b';
+                inviteResult.style.border = '1px solid #dc3545';
+            }
+            
+            setTimeout(() => {
+                inviteResult.style.display = 'none';
+            }, 5000);
+        }
+    }
+
+    // Navigation
+    inviteBtn.addEventListener('click', () => {
+        if (mainScreen) mainScreen.style.display = 'none';
+        inviteScreen.style.display = 'block';
+        updateInviteDisplay();
+        updateUsageUI();
+        checkMyCodeUsage(); // Check for new rewards when opening screen
+    });
+
+    backInvite.addEventListener('click', () => {
+        inviteScreen.style.display = 'none';
+        if (mainScreen) mainScreen.style.display = 'block';
+    });
+
+    // Initialize invite code in user data
+    function initializeUserInviteCode() {
+        if (currentUser && !currentUser.inviteCode) {
+            currentUser.inviteCode = generateInviteCode();
+            saveUserData();
+        }
+    }
+
+    // Initialize on load
+    setTimeout(() => {
+        initializeUserInviteCode();
+        updateInviteDisplay();
+        updateUsageUI();
+        // Check for rewards every 30 seconds
+        setInterval(checkMyCodeUsage, 30000);
+    }, 1000);
+}
+
+// Update saveUserToSupabase function to include invite system data
+const originalSaveUserToSupabase = window.saveUserToSupabase;
+window.saveUserToSupabase = async function(userData) {
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .upsert({
+                user_id: userData.uid,
+                display_name: userData.displayName,
+                photo_url: userData.photoURL,
+                tokens: userData.tokens,
+                coins: userData.coins,
+                crystals: userData.crystals,
+                completed_tasks: userData.completedTasks,
+                last_token_time: userData.lastTokenTime,
+                battle_try: userData.battleTry,
+                last_battle_time: userData.lastBattleTime,
+                share_count: userData.shareCount,
+                share10_count: userData.share10Count,
+                frame_id: currentUserFrame,
+                server: userData.server || currentServer,
+                invite_code: userData.inviteCode || userInviteCode,
+                my_code_used_by_others: myCodeUsedByOthers,
+                last_login: userData.lastLogin,
+                updated_at: new Date().toISOString()
+            }, {
+                onConflict: 'user_id'
+            });
+
+        if (error) throw error;
+        console.log('User saved to Supabase Server:', currentServer);
+        return data;
+    } catch (error) {
+        console.error('Error saving user to Supabase:', error);
+        throw error;
+    }
+};
+
+// Update getUserFromSupabase to include invite system data
+const originalGetUserFromSupabase = window.getUserFromSupabase;
+window.getUserFromSupabase = async function(userId) {
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .select('*')
+            .eq('user_id', userId)
+            .single();
+
+        if (error && error.code !== 'PGRST116') throw error;
+        
+        if (data) {
+            // Update local invite data from Supabase
+            if (data.my_code_used_by_others) {
+                myCodeUsedByOthers = data.my_code_used_by_others;
+                localStorage.setItem('myCodeUsedByOthers', JSON.stringify(myCodeUsedByOthers));
+            }
+            
+            return {
+                uid: data.user_id,
+                displayName: data.display_name,
+                photoURL: data.photo_url,
+                tokens: data.tokens,
+                coins: data.coins,
+                crystals: data.crystals || 0,
+                completedTasks: data.completed_tasks,
+                lastTokenTime: data.last_token_time,
+                battleTry: data.battle_try,
+                lastBattleTime: data.last_battle_time,
+                shareCount: data.share_count,
+                share10Count: data.share10_count,
+                frameId: data.frame_id || 'default',
+                inviteCode: data.invite_code,
+                lastLogin: data.last_login,
+                createdAt: data.created_at,
+                updatedAt: data.updated_at
+            };
+        }
+        return null;
+    } catch (error) {
+        console.error('Error getting user from Supabase:', error);
+        return null;
+    }
+};
+
+// Initialize invite system when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        initializeInviteSystem();
+    }, 2000);
+});
+
+
+// ===== LOCAL ACCOUNT SYSTEM =====
+
+// DOM Elements for Local Account
+const localAccountBtn = document.getElementById('local-account-btn');
+
+// Local Account Button Click Event
+localAccountBtn.addEventListener('click', function() {
+  // Check if there's a local account
+  const savedUser = localStorage.getItem('currentUser');
+  
+  if (savedUser) {
+    // Load existing local account
+    try {
+      currentUser = JSON.parse(savedUser);
+      
+      // Set current server from saved data or default
+      currentServer = currentUser.server || 'server2';
+      localStorage.setItem('currentServer', currentServer);
+      
+      // Switch to appropriate Supabase client
+      if (SUPABASE_SERVERS[currentServer] && SUPABASE_SERVERS[currentServer].enabled) {
+        switchSupabaseClient(currentServer);
+      } else {
+        // If saved server is disabled, use default
+        switchSupabaseClient('server2');
+      }
+      
+      // Hide login screen
+      loginScreen.style.display = 'none';
+      
+      // Update profile circle
+      updateProfileCircle();
+      
+      // Initialize game with user data
+      initializeGameWithUser(currentUser);
+      
+      // Show main screen
+      const mainScreen = document.getElementById('main-screen');
+      if (mainScreen) {
+        mainScreen.style.display = 'block';
+      }
+      
+      console.log('Loaded local account:', currentUser.uid);
+      
+    } catch (error) {
+      console.error('Error loading local account:', error);
+      alert('Local account ဖတ်ရာတွင် အမှားတစ်ခုဖြစ်နေပါသည်။');
+    }
+  } else {
+    // No local account found, create one
+    createLocalAccount();
+  }
+});
+
+// Function to create local account (without Supabase)
+function createLocalAccount() {
+  const userName = "Local User " + Math.floor(Math.random() * 10000);
+  const userId = generate10DigitId();
+  
+  const userData = {
+    uid: userId,
+    displayName: userName,
+    photoURL: null,
+    createdAt: new Date().toISOString(),
+    lastLogin: new Date().toISOString(),
+    tokens: 5, // Starting tokens
+    coins: 100, // Starting coins
+    crystals: 0,
+    completedTasks: {
+      '3hour': false,
+      'channel1': false,
+      'channel2': false,
+      'channel3': false,
+      'channel4': false,
+      'youtube': false,
+      'share': false,
+      'moonton': false,
+      'share10': false,
+      'lily': false,
+      'maxdiamond': false,
+      'diablo': false,
+      'pot': false,
+      'starlar-studio': false
+    },
+    lastTokenTime: 0,
+    battleTry: 0,
+    lastBattleTime: Date.now(),
+    shareCount: 0,
+    share10Count: 0,
+    frameId: 'default',
+    server: 'server2',
+    isLocalAccount: true // Mark as local account
+  };
+  
+  // Save to localStorage only
+  localStorage.setItem('currentUser', JSON.stringify(userData));
+  localStorage.setItem('userServer', 'server2');
+  
+  // Set current user
+  currentUser = userData;
+  
+  // Switch to default server
+  switchSupabaseClient('server2');
+  
+  // Hide login screen
+  loginScreen.style.display = 'none';
+  
+  // Update profile circle
+  updateProfileCircle();
+  
+  // Initialize game
+  initializeGameWithUser(currentUser);
+  
+  // Show main screen
+  const mainScreen = document.getElementById('main-screen');
+  if (mainScreen) {
+    mainScreen.style.display = 'block';
+  }
+  
+  alert(`Local account created!\nUser ID: ${userId}\nYou can play offline.`);
+}
+
+// Modified save function to handle local accounts
+async function saveUserData() {
+  if (currentUser) {
+    // Update user data with current game state
+    currentUser.tokens = typeof tokens !== 'undefined' ? tokens : currentUser.tokens;
+    currentUser.coins = typeof coins !== 'undefined' ? coins : currentUser.coins;
+    currentUser.crystals = typeof crystals !== 'undefined' ? crystals : currentUser.crystals;
+    currentUser.completedTasks = typeof completedTasks !== 'undefined' ? completedTasks : currentUser.completedTasks;
+    currentUser.lastTokenTime = typeof lastTokenTime !== 'undefined' ? lastTokenTime : currentUser.lastTokenTime;
+    currentUser.battleTry = typeof battleTry !== 'undefined' ? battleTry : currentUser.battleTry;
+    currentUser.lastBattleTime = typeof lastBattleTime !== 'undefined' ? lastBattleTime : currentUser.lastBattleTime;
+    currentUser.shareCount = typeof shareCount !== 'undefined' ? shareCount : currentUser.shareCount;
+    currentUser.share10Count = typeof share10Count !== 'undefined' ? share10Count : currentUser.share10Count;
+    currentUser.frameId = currentUserFrame;
+    currentUser.lastLogin = new Date().toISOString();
+
+    // Always save to localStorage
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    
+    // Only save to Supabase if NOT a local account
+    if (!currentUser.isLocalAccount) {
+      try {
+        await saveUserToSupabase(currentUser);
+      } catch (error) {
+        console.error('Error saving to Supabase:', error);
       }
     }
   }
-  
-  typeChar();
 }
 
-  
-      
-    
+// Modified user loading to handle both account types
+document.addEventListener('DOMContentLoaded', async function() {
+  const savedUser = localStorage.getItem('currentUser');
+  const userServer = localStorage.getItem('userServer');
 
+  if (savedUser && userServer) {
+    try {
+      currentUser = JSON.parse(savedUser);
+      
+      // Check if this is a local account
+      if (currentUser.isLocalAccount) {
+        // For local accounts, always show login screen with local option
+        loginScreen.style.display = 'flex';
+        console.log('Local account detected, showing login options');
+      } else {
+        // For Supabase accounts, proceed with normal loading
+        if (SUPABASE_SERVERS[userServer] && SUPABASE_SERVERS[userServer].enabled) {
+          switchSupabaseClient(userServer);
+          console.log('Loaded Supabase user from:', userServer);
+        } else {
+          console.log('Original server disabled, migrating user...');
+          await migrateUserToNewServer(currentUser);
+        }
+        
+        // Try to sync with Supabase
+        try {
+          const supabaseUser = await getUserFromSupabase(currentUser.uid);
+          if (supabaseUser) {
+            currentUser = {
+              ...currentUser,
+              ...supabaseUser
+            };
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            if (supabaseUser.frameId && supabaseUser.frameId !== 'default') {
+              currentUserFrame = supabaseUser.frameId;
+              localStorage.setItem('currentUserFrame', currentUserFrame);
+            }
+          }
+        } catch (supabaseError) {
+          console.log('Using local data, Supabase sync failed:', supabaseError);
+        }
+        
+        updateProfileCircle();
+        initializeGameWithUser(currentUser);
+      }
+      
+    } catch (error) {
+      console.error('Error loading user data:', error);
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('userServer');
+      loginScreen.style.display = 'flex';
+    }
+  } else {
+    // No saved user, show login screen
+    loginScreen.style.display = 'flex';
+  }
+});
+
+
+
+
+  
 </script>
 </body>
 </html>

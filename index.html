@@ -4803,21 +4803,8 @@ const SUPABASE_SERVERS = {
     maxUsers: 100,
     enabled: true,
     newUsers: true
-  },
-  server5: {
-    url: 'https://qhymuppxnbzioryulfwg.supabase.co',
-    key: 'sb_publishable_a2DTXqjYGF3UgIJZju5OoA_yBCd5Ql3',
-    maxUsers: 100,
-    enabled: true,
-    newUsers: true
-  },
-  server6: {
-    url: 'https://nqhzlwwqkhzdxzsaitcf.supabase.co',
-    key: 'sb_publishable_6lntFGpP7rvFbsUre53-PQ_CL4wX5dJ',
-    maxUsers: 100,
-    enabled: true,
-    newUsers: true
-  }  
+  }
+  
 };
 // Server selection variables
 let currentServer = localStorage.getItem('currentServer') || 'server2';
@@ -4826,8 +4813,6 @@ let userCounts = JSON.parse(localStorage.getItem('userCounts')) || {
   server2: 0,
   server3: 0,
   server4: 0,
-  server5: 0,
-  server6: 0,
   
 };
 

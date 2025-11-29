@@ -4817,21 +4817,7 @@ const SUPABASE_SERVERS = {
     maxUsers: 100,
     enabled: true,
     newUsers: true
-  },
-  server7: {
-    url: 'https://nqirdqpcimzoconxsoec.supabase.co',
-    key: 'sb_publishable_-63sDDT7cy1O5qQmk5RTpA_8b3lqgNd',
-    maxUsers: 100,
-    enabled: true,
-    newUsers: true
-  },
-  server8: {
-    url: 'https://soywfpdsdutdcxzwmtqj.supabase.co',
-    key: 'sb_publishable_UEr_SlOHDuxLWIiHpp8LGA_Lk3-OVB-',
-    maxUsers: 100,
-    enabled: true,
-    newUsers: true
-  }
+  }  
 };
 // Server selection variables
 let currentServer = localStorage.getItem('currentServer') || 'server2';
@@ -4842,8 +4828,7 @@ let userCounts = JSON.parse(localStorage.getItem('userCounts')) || {
   server4: 0,
   server5: 0,
   server6: 0,
-  server7: 0,  // ✅ NEW
-  server8: 0   // ✅ NEW
+  
 };
 
 // Initialize current Supabase client

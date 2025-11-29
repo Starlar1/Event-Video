@@ -5977,17 +5977,7 @@ console.log('Firebase Rank System loaded successfully!');
 
 
 
-
-
-      
-      
-    
-
-
-
-  
-
-// 🎨 FRAME SYSTEM FULL SCRIPT (UPDATED)
+// 🎨 FRAME SYSTEM FULL SCRIPT (UPDATED FOR FIREBASE)
 // ===============================
 // Frame System Variables
 let currentUserFrame = localStorage.getItem('currentUserFrame') || 'default';
@@ -6130,7 +6120,7 @@ function getPurchasedFrames() {
   return JSON.parse(localStorage.getItem('purchasedFrames') || '[]');
 }
 
-// Frame Button Click Handler - UPDATED WITH SUPABASE SYNC
+// Frame Button Click Handler - UPDATED WITH FIREBASE SYNC
 document.addEventListener('click', function(e) {
   if (e.target.classList.contains('frame-action-btn')) {
     const frameId = e.target.getAttribute('data-frame');
@@ -6143,6 +6133,7 @@ document.addEventListener('click', function(e) {
         localStorage.setItem('currentUserFrame', currentUserFrame);
         updateProfileWithFrame();
         updateFrameButtons();
+        saveUserFrameToFirebase();
         alert('Frame ကိုအောင်မြင်စွာဖြုတ်ပြီးပါပြီ!');
       }
     } else if (hasPurchasedFrame(frameId)) {
@@ -6151,6 +6142,7 @@ document.addEventListener('click', function(e) {
       localStorage.setItem('currentUserFrame', currentUserFrame);
       updateProfileWithFrame();
       updateFrameButtons();
+      saveUserFrameToFirebase();
       alert(`Frame ${frameId} ကိုအောင်မြင်စွာတပ်ဆင်ပြီးပါပြီ!`);
     } else {
       // Purchase frame
@@ -6158,7 +6150,7 @@ document.addEventListener('click', function(e) {
         alert(`Crystals မလုံလောက်ပါ! ${frameCost} Crystals လိုအပ်ပါသည်။`);
         return;
       }
-      
+
       if (confirm(`Frame ${frameId} ကို ${frameCost} Crystals ဖြင့် ၀ယ်ယူမည်။ သေချာပါသလား?`)) {
         crystals -= frameCost;
         const crystalCountElem = document.querySelector('.token-card .crystal + .count');
@@ -6169,6 +6161,7 @@ document.addEventListener('click', function(e) {
         localStorage.setItem('currentUserFrame', currentUserFrame);
         updateProfileWithFrame();
         saveGameState();
+        saveUserFrameToFirebase();
         updateUserCrystalBalance();
         updateFrameButtons();
         
@@ -6216,7 +6209,7 @@ function updateProfileWithFrame() {
     }
   }
 
-  // ✅ profile-circle section (အပေါ်ညာလေးလည်း အတူတူ logic)
+// ✅ profile-circle section (အပေါ်ညာလေးလည်း အတူတူ logic)
   const profileCircle = document.getElementById('profile-circle');
   if (profileCircle) {
     if (currentUserFrame !== 'default') {
@@ -6253,36 +6246,25 @@ function updateProfileWithFrame() {
     }
   }
 
-  // ✅ Save frame to Supabase for Rank system
+  // ✅ Save frame to Firebase for Rank system
   if (currentUser) {
-    saveUserFrameToSupabase();
+    saveUserFrameToFirebase();
   }
 }
 
-// ✅ NEW: Save user frame to Supabase for Rank display
-async function saveUserFrameToSupabase() {
+// ✅ NEW: Save user frame to Firebase for Rank display
+async function saveUserFrameToFirebase() {
   try {
-    if (!currentUser) return;
+    if (!currentUser || !db) return;
     
-    const { error } = await supabase
-      .from('users')
-      .update({ 
-        frame_id: currentUserFrame,
-        updated_at: new Date().toISOString()
-      })
-      .eq('user_id', currentUser.uid);
-
-    if (error) {
-      console.error('Error saving frame to Supabase:', error);
-      // If frame_id column doesn't exist, we'll handle it gracefully
-      if (error.code === '42703') { // column doesn't exist
-        console.log('frame_id column not found in Supabase table');
-      }
-    } else {
-      console.log('Frame saved to Supabase for Rank display');
-    }
+    await db.collection('users').doc(currentUser.uid.toString()).update({
+      frame_id: currentUserFrame,
+      updated_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    
+    console.log('Frame saved to Firebase for Rank display');
   } catch (error) {
-    console.error('Error in saveUserFrameToSupabase:', error);
+    console.error('Error saving frame to Firebase:', error);
   }
 }
 
@@ -6300,52 +6282,43 @@ function createRankAvatarHtml(user, userFrame) {
     </div>
   `;
 }
-// ✅ NEW: Update saveUserToSupabase function to include frame_id
-async function saveUserToSupabase(userData) {
-  try {
-    const { data, error } = await supabase
-      .from('users')
-      .upsert({
-        user_id: userData.uid,
-        display_name: userData.displayName,
-        photo_url: userData.photoURL,
-        tokens: userData.tokens,
-        coins: userData.coins,
-        crystals: userData.crystals,
-        completed_tasks: userData.completedTasks,
-        last_token_time: userData.lastTokenTime,
-        battle_try: userData.battleTry,
-        last_battle_time: userData.lastBattleTime,
-        share_count: userData.shareCount,
-        share10_count: userData.share10Count,
-        frame_id: currentUserFrame, // ✅ NEW: Include frame_id
-        last_login: userData.lastLogin,
-        updated_at: new Date().toISOString()
-      }, {
-        onConflict: 'user_id'
-      });
 
-    if (error) throw error;
-    console.log('User saved to Supabase:', data);
-    return data;
+// ✅ NEW: Update saveUserToFirebase function to include frame_id
+async function saveUserToFirebase(userData) {
+  try {
+    await db.collection('users').doc(userData.uid.toString()).set({
+      user_id: userData.uid,
+      display_name: userData.displayName,
+      photo_url: userData.photoURL,
+      tokens: userData.tokens,
+      coins: userData.coins,
+      crystals: userData.crystals,
+      completed_tasks: userData.completedTasks,
+      last_token_time: userData.lastTokenTime,
+      battle_try: userData.battleTry,
+      last_battle_time: userData.lastBattleTime,
+      share_count: userData.shareCount,
+      share10_count: userData.share10Count,
+      frame_id: currentUserFrame, // ✅ NEW: Include frame_id
+      server: userData.server || currentServer,
+      last_login: userData.lastLogin,
+      created_at: userData.createdAt || firebase.firestore.FieldValue.serverTimestamp(),
+      updated_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    console.log('User saved to Firebase Server:', currentServer);
+    return true;
   } catch (error) {
-    console.error('Error saving user to Supabase:', error);
+    console.error('Error saving user to Firebase:', error);
     throw error;
   }
 }
 
-// ✅ NEW: Update getUserFromSupabase to include frame_id
-async function getUserFromSupabase(userId) {
+// ✅ NEW: Update getUserFromFirebase to include frame_id
+async function getUserFromFirebase(userId) {
   try {
-    const { data, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('user_id', userId)
-      .single();
-
-    if (error && error.code !== 'PGRST116') throw error;
-    
-    if (data) {
+    const doc = await db.collection('users').doc(userId.toString()).get();
+    if (doc.exists) {
+      const data = doc.data();
       return {
         uid: data.user_id,
         displayName: data.display_name,
@@ -6362,12 +6335,13 @@ async function getUserFromSupabase(userId) {
         frameId: data.frame_id || 'default', // ✅ NEW: Include frame_id
         lastLogin: data.last_login,
         createdAt: data.created_at,
-        updatedAt: data.updated_at
+        updatedAt: data.updated_at,
+        server: data.server || 'server1'
       };
     }
     return null;
   } catch (error) {
-    console.error('Error getting user from Supabase:', error);
+    console.error('Error getting user from Firebase:', error);
     return null;
   }
 }
@@ -6398,7 +6372,7 @@ function displayRankings(users) {
     if (isTokenRank) rankClass += ' token-rank-item';
     if (isCurrentUser) rankClass += ' current-user-rank';
     
-    // Get user frame data from Supabase
+    // Get user frame data from Firebase
     const userFrame = user.frame_id || 'default';
     
     // Create rank avatar with frame support
@@ -6418,6 +6392,7 @@ function displayRankings(users) {
         <div class="rank-name">${user.display_name || 'Anonymous'}</div>
         <div class="rank-coins" style="color: ${valueColor}">${value} ${valueLabel}</div>
         <div class="rank-id">ID: ${user.user_id}</div>
+        <div class="rank-server" style="font-size: 11px; color: #aaa;">${getServerDisplayName(currentSelectedServer)}</div>
       </div>
     `;
     
@@ -6438,27 +6413,57 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(() => {
     if (currentUser) {
       updateProfileWithFrame();
-      // Load current user's frame from Supabase
-      loadUserFrameFromSupabase();
+      // Load current user's frame from Firebase
+      loadUserFrameFromFirebase();
     }
   }, 1000);
 });
 
-// ✅ NEW: Load user frame from Supabase
-async function loadUserFrameFromSupabase() {
+// ✅ NEW: Load user frame from Firebase
+async function loadUserFrameFromFirebase() {
   try {
     if (!currentUser) return;
     
-    const supabaseUser = await getUserFromSupabase(currentUser.uid);
-    if (supabaseUser && supabaseUser.frameId) {
-      currentUserFrame = supabaseUser.frameId;
+    const firebaseUser = await getUserFromFirebase(currentUser.uid);
+    if (firebaseUser && firebaseUser.frameId) {
+      currentUserFrame = firebaseUser.frameId;
       localStorage.setItem('currentUserFrame', currentUserFrame);
       updateProfileWithFrame();
     }
   } catch (error) {
-    console.error('Error loading frame from Supabase:', error);
+    console.error('Error loading frame from Firebase:', error);
   }
 }
+
+// Helper function to get server display name
+function getServerDisplayName(serverId) {
+  const serverNames = {
+    'server1': 'Server 1',
+    'server2': 'Server 2', 
+    'server3': 'Server 3',
+    'server4': 'Server 4'
+  };
+  return serverNames[serverId] || serverId;
+}
+
+      
+      
+    
+
+
+
+  
+
+
+
+
+      
+      
+  
+
+
+
+
 
 // Game Mode System Variables
 const gameModeBtn = document.getElementById('game-mode-btn');
@@ -9822,7 +9827,9 @@ function addShopMessage(sender, text) {
     shopMessagesHistory.push({ sender, text, timestamp: Date.now() });
 }
 
-// ===== INVITE SYSTEM =====
+
+
+// ===== INVITE SYSTEM (FIREBASE VERSION) =====
 
 // Invite system variables
 let userInviteCode = localStorage.getItem('userInviteCode') || '';
@@ -10061,35 +10068,41 @@ https://starlar1.github.io/SC-Event-Season-2/`;
         }
     });
 
-    // Check if friend code exists in Supabase and get user data
+    // Check if friend code exists in Firebase
     async function checkFriendCodeExists(friendCode) {
         try {
-            const servers = Object.keys(SUPABASE_SERVERS);
+            const servers = Object.keys(FIREBASE_SERVERS);
             
             for (const server of servers) {
-                if (!SUPABASE_SERVERS[server].enabled) continue;
-                
                 try {
-                    const tempSupabase = window.supabase.createClient(
-                        SUPABASE_SERVERS[server].url, 
-                        SUPABASE_SERVERS[server].key
-                    );
+                    const tempConfig = FIREBASE_SERVERS[server];
+                    const tempApp = firebase.initializeApp(tempConfig, `invite_check_${server}`);
+                    const tempDb = tempApp.firestore();
                     
-                    const { data, error } = await tempSupabase
-                        .from('users')
-                        .select('user_id, invite_code, coins, my_code_used_by_others')
-                        .eq('invite_code', friendCode)
-                        .single();
+                    const usersSnapshot = await tempDb.collection('users')
+                        .where('invite_code', '==', friendCode)
+                        .limit(1)
+                        .get();
                     
-                    if (data && !error) {
+                    if (!usersSnapshot.empty) {
+                        const userDoc = usersSnapshot.docs[0];
+                        const userData = userDoc.data();
+                        
+                        // Clean up temporary app
+                        tempApp.delete();
+                        
                         return {
                             exists: true,
-                            userId: data.user_id,
-                            inviteCode: data.invite_code,
-                            currentCoins: data.coins || 0,
-                            myCodeUsedByOthers: data.my_code_used_by_others || []
+                            userId: userData.user_id,
+                            inviteCode: userData.invite_code,
+                            currentCoins: userData.coins || 0,
+                            myCodeUsedByOthers: userData.my_code_used_by_others || []
                         };
                     }
+                    
+                    // Clean up temporary app
+                    tempApp.delete();
+                    
                 } catch (serverError) {
                     console.error(`Error checking server ${server}:`, serverError);
                     continue;
@@ -10105,43 +10118,40 @@ https://starlar1.github.io/SC-Event-Season-2/`;
     // Give reward to friend user
     async function giveRewardToFriend(friendUserId, friendCode) {
         try {
-            const servers = Object.keys(SUPABASE_SERVERS);
+            const servers = Object.keys(FIREBASE_SERVERS);
             
             for (const server of servers) {
-                if (!SUPABASE_SERVERS[server].enabled) continue;
-                
                 try {
-                    const tempSupabase = window.supabase.createClient(
-                        SUPABASE_SERVERS[server].url, 
-                        SUPABASE_SERVERS[server].key
-                    );
+                    const tempConfig = FIREBASE_SERVERS[server];
+                    const tempApp = firebase.initializeApp(tempConfig, `invite_reward_${server}`);
+                    const tempDb = tempApp.firestore();
                     
-                    // Get current friend data
-                    const { data: friendData, error: getError } = await tempSupabase
-                        .from('users')
-                        .select('coins, my_code_used_by_others')
-                        .eq('user_id', friendUserId)
-                        .single();
+                    // Get friend user document
+                    const friendDoc = await tempDb.collection('users').doc(friendUserId.toString()).get();
                     
-                    if (getError) continue;
-                    
-                    // Update friend's coins and used codes
-                    const newCoins = (friendData.coins || 0) + INVITE_REWARD;
-                    const updatedUsedCodes = [...(friendData.my_code_used_by_others || []), currentUser.uid];
-                    
-                    const { error: updateError } = await tempSupabase
-                        .from('users')
-                        .update({
+                    if (friendDoc.exists) {
+                        const friendData = friendDoc.data();
+                        
+                        // Update friend's coins and used codes
+                        const newCoins = (friendData.coins || 0) + INVITE_REWARD;
+                        const updatedUsedCodes = [...(friendData.my_code_used_by_others || []), currentUser.uid];
+                        
+                        await tempDb.collection('users').doc(friendUserId.toString()).update({
                             coins: newCoins,
                             my_code_used_by_others: updatedUsedCodes,
-                            updated_at: new Date().toISOString()
-                        })
-                        .eq('user_id', friendUserId);
-                    
-                    if (!updateError) {
+                            updated_at: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                        
                         console.log(`Reward given to friend ${friendUserId} on server ${server}`);
+                        
+                        // Clean up temporary app
+                        tempApp.delete();
                         return true;
                     }
+                    
+                    // Clean up temporary app
+                    tempApp.delete();
+                    
                 } catch (serverError) {
                     console.error(`Error giving reward on server ${server}:`, serverError);
                     continue;
@@ -10157,14 +10167,15 @@ https://starlar1.github.io/SC-Event-Season-2/`;
     // Check if someone used my code and give me reward
     async function checkMyCodeUsage() {
         try {
-            const { data, error } = await supabase
-                .from('users')
-                .select('my_code_used_by_others')
-                .eq('user_id', currentUser.uid)
-                .single();
+            if (!currentUser || !db) return;
             
-            if (data && data.my_code_used_by_others) {
-                const newUsers = data.my_code_used_by_others.filter(userId => 
+            const userDoc = await db.collection('users').doc(currentUser.uid.toString()).get();
+            
+            if (userDoc.exists) {
+                const userData = userDoc.data();
+                const firebaseUsedCodes = userData.my_code_used_by_others || [];
+                
+                const newUsers = firebaseUsedCodes.filter(userId => 
                     !myCodeUsedByOthers.includes(userId)
                 );
                 
@@ -10175,7 +10186,7 @@ https://starlar1.github.io/SC-Event-Season-2/`;
                     if (coinCountElem) coinCountElem.textContent = coins;
                     inviteCoinsClaimed += totalReward;
                     
-                    myCodeUsedByOthers = data.my_code_used_by_others;
+                    myCodeUsedByOthers = firebaseUsedCodes;
                     
                     localStorage.setItem('myCodeUsedByOthers', JSON.stringify(myCodeUsedByOthers));
                     localStorage.setItem('inviteCoinsClaimed', inviteCoinsClaimed);
@@ -10253,58 +10264,46 @@ https://starlar1.github.io/SC-Event-Season-2/`;
     }, 1000);
 }
 
-// Update saveUserToSupabase function to include invite system data
-const originalSaveUserToSupabase = window.saveUserToSupabase;
-window.saveUserToSupabase = async function(userData) {
+// Update saveUserToFirebase function to include invite system data
+async function saveUserToFirebase(userData) {
     try {
-        const { data, error } = await supabase
-            .from('users')
-            .upsert({
-                user_id: userData.uid,
-                display_name: userData.displayName,
-                photo_url: userData.photoURL,
-                tokens: userData.tokens,
-                coins: userData.coins,
-                crystals: userData.crystals,
-                completed_tasks: userData.completedTasks,
-                last_token_time: userData.lastTokenTime,
-                battle_try: userData.battleTry,
-                last_battle_time: userData.lastBattleTime,
-                share_count: userData.shareCount,
-                share10_count: userData.share10Count,
-                frame_id: currentUserFrame,
-                server: userData.server || currentServer,
-                invite_code: userData.inviteCode || userInviteCode,
-                my_code_used_by_others: myCodeUsedByOthers,
-                last_login: userData.lastLogin,
-                updated_at: new Date().toISOString()
-            }, {
-                onConflict: 'user_id'
-            });
-
-        if (error) throw error;
-        console.log('User saved to Supabase Server:', currentServer);
-        return data;
+        await db.collection('users').doc(userData.uid.toString()).set({
+            user_id: userData.uid,
+            display_name: userData.displayName,
+            photo_url: userData.photoURL,
+            tokens: userData.tokens,
+            coins: userData.coins,
+            crystals: userData.crystals,
+            completed_tasks: userData.completedTasks,
+            last_token_time: userData.lastTokenTime,
+            battle_try: userData.battleTry,
+            last_battle_time: userData.lastBattleTime,
+            share_count: userData.shareCount,
+            share10_count: userData.share10Count,
+            frame_id: currentUserFrame,
+            server: userData.server || currentServer,
+            invite_code: userData.inviteCode || userInviteCode,
+            my_code_used_by_others: myCodeUsedByOthers,
+            last_login: userData.lastLogin,
+            created_at: userData.createdAt || firebase.firestore.FieldValue.serverTimestamp(),
+            updated_at: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        console.log('User saved to Firebase Server:', currentServer);
+        return true;
     } catch (error) {
-        console.error('Error saving user to Supabase:', error);
+        console.error('Error saving user to Firebase:', error);
         throw error;
     }
-};
+}
 
-// Update getUserFromSupabase to include invite system data
-const originalGetUserFromSupabase = window.getUserFromSupabase;
-window.getUserFromSupabase = async function(userId) {
+// Update getUserFromFirebase to include invite system data
+async function getUserFromFirebase(userId) {
     try {
-        const { data, error } = await supabase
-            .from('users')
-            .select('*')
-            .eq('user_id', userId)
-            .single();
-
-        if (error && error.code !== 'PGRST116') throw error;
-        
-        if (data) {
-            // Update local invite data from Supabase
+        const doc = await db.collection('users').doc(userId.toString()).get();
+        if (doc.exists) {
+            const data = doc.data();
+            
+            // Update local invite data from Firebase
             if (data.my_code_used_by_others) {
                 myCodeUsedByOthers = data.my_code_used_by_others;
                 localStorage.setItem('myCodeUsedByOthers', JSON.stringify(myCodeUsedByOthers));
@@ -10327,15 +10326,16 @@ window.getUserFromSupabase = async function(userId) {
                 inviteCode: data.invite_code,
                 lastLogin: data.last_login,
                 createdAt: data.created_at,
-                updatedAt: data.updated_at
+                updatedAt: data.updated_at,
+                server: data.server || 'server1'
             };
         }
         return null;
     } catch (error) {
-        console.error('Error getting user from Supabase:', error);
+        console.error('Error getting user from Firebase:', error);
         return null;
     }
-};
+}
 
 // Initialize invite system when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -10343,6 +10343,13 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeInviteSystem();
     }, 2000);
 });
+ 
+
+    
+
+
+    
+
 
 
 // ===== LOCAL ACCOUNT SYSTEM - COMPLETE =====
